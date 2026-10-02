@@ -1,0 +1,7 @@
+{
+  "plugins": ["../plugins/browser", "../plugins/files", "../plugins/terminal"],
+  "sidecars": [
+    { "repository": "../sidecars/files", "folder": "." },
+    { "repository": "../sidecars/vt", "folder": "vt-alacritty" }
+  ]
+}
