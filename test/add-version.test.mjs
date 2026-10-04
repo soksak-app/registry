@@ -21,6 +21,16 @@ function folder(t) {
 
 const sha = (text) => createHash("sha256").update(text).digest("hex");
 
+test("a plugin release records the sidecar ranges of its plugin.json dependencies", (t) => {
+  const { root, write } = folder(t);
+  write("plugin/package.json", { name: "@soksak/plugin-terminal", version: "0.0.3", description: "Terminal.", license: "MIT",
+    repository: { url: "git+https://github.com/soksak-app/plugin-terminal.git" }, engines: { soksak: "^0.0.3" } });
+  write("plugin/plugin.json", { id: "terminal", name: "터미널", dependencies: { "@soksak/sidecar-vt-alacritty": "^0.0.3" } });
+  write("dist/terminal-0.0.3.tgz", "archive");
+  const entry = JSON.parse(readFileSync(addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/terminal-0.0.3.tgz")), "utf8"));
+  assert.deepEqual(entry.versions[0].sidecars, { "@soksak/sidecar-vt-alacritty": "^0.0.3" });
+});
+
 test("a plugin release adds its version with the release asset of its repository", (t) => {
   const { root, write } = folder(t);
   write("plugin/package.json", { name: "@soksak/plugin-browser", version: "0.0.3", description: "Browser.", license: "MIT",

@@ -51,8 +51,8 @@ export function addPlugin(registry, folder, archive) {
   }, {
     version: pkg.version,
     package: { url: `${repository}/releases/download/v${pkg.version}/${asset}`, sha256: sha256(archive) },
-    // 기본값: sidecar 를 쓰지 않는 plugin 은 package.json 에 soksak 이 없고 sidecar 범위도 없다.
-    engines: { soksak: pkg.engines?.soksak }, sidecars: pkg.soksak?.sidecars ?? {},
+    // 기본값: sidecar 를 쓰지 않는 plugin 의 plugin.json 에는 dependencies 가 없고 sidecar 범위도 없다.
+    engines: { soksak: pkg.engines?.soksak }, sidecars: manifest.dependencies ?? {},
   });
 }
 
