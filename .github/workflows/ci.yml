@@ -1,0 +1,34 @@
+name: ci
+# build-machine: skip build reason=the registry has no build of its own; the publish workflow builds the index
+# build-machine: skip smoke reason=the registry is data; the applications read it on their first run
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      # registry.json 은 형제 폴더의 plugin repository 를 가리킨다(docs/spec/plugins.md#repositories 의 배치).
+      - uses: actions/checkout@v4
+        with:
+          path: registry
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/plugin-browser
+          path: plugins/browser
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/plugin-files
+          path: plugins/files
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/plugin-terminal
+          path: plugins/terminal
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: registry/.node-version
+      - name: Test
+        run: make -C registry test
