@@ -1,0 +1,5 @@
+# 항목 파일은 그 저장소의 소유자가 pull request 로 바꾸고 merge workflow 가 merge 한다. 나머지 경로는 registry 관리자가
+# 바꾼다(core docs/spec/registry.md#files).
+*            @min-median-max
+/plugins/
+/sidecars/

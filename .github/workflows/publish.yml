@@ -1,67 +1,46 @@
 name: publish
-# build-machine: skip test reason=the ci workflow tests the tagged commit on main before the tag is pushed
+# build-machine: skip test reason=the ci and validate workflows test the registry before it reaches main
 # build-machine: skip smoke reason=the registry is data; the applications read it on their first run
 
+# commit 한 항목 파일로 index 를 만들어 GitHub Pages 에 배포한다(core docs/spec/registry.md#merge-and-publication).
 on:
   push:
-    tags: ['v*']
+    branches: [main]
+  workflow_call:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+env:
+  # 검사와 게시의 sok 은 이 core release 의 것이다.
+  CORE_RELEASE: v0.0.3
+
 jobs:
   publish:
-    runs-on: macos-15
+    runs-on: ubuntu-26.04-arm
     environment:
       name: github-pages
     steps:
-      # 같은 version tag 의 component 를 형제 배치로 받고, 그 release asset 으로 index 를 만든다.
+      # merge 가 부른 실행에서도 merge 한 뒤의 main 을 받는다.
       - uses: actions/checkout@v4
         with:
+          ref: main
           path: registry
       - uses: actions/checkout@v4
         with:
           repository: soksak-app/core
-          ref: ${{ github.ref_name }}
+          ref: ${{ env.CORE_RELEASE }}
           path: core
-      - uses: actions/checkout@v4
-        with:
-          repository: soksak-app/plugin-browser
-          ref: ${{ github.ref_name }}
-          path: plugins/browser
-      - uses: actions/checkout@v4
-        with:
-          repository: soksak-app/plugin-files
-          ref: ${{ github.ref_name }}
-          path: plugins/files
-      - uses: actions/checkout@v4
-        with:
-          repository: soksak-app/plugin-terminal
-          ref: ${{ github.ref_name }}
-          path: plugins/terminal
-      - uses: actions/checkout@v4
-        with:
-          repository: soksak-app/sidecar-files
-          ref: ${{ github.ref_name }}
-          path: sidecars/files
-      - uses: actions/checkout@v4
-        with:
-          repository: soksak-app/sidecar-vt
-          ref: ${{ github.ref_name }}
-          path: sidecars/vt
       - uses: actions/setup-go@v5
         with:
           go-version-file: core/packages/sok/wailsv3/go.mod
       - name: Build sok
         run: go build -C core/packages/sok/wailsv3 -o "$RUNNER_TEMP/sok" ./src/cmd/sok
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: registry/.node-version
       - name: Build the index
         run: |
-          node registry/scripts/build.mjs --sok "$RUNNER_TEMP/sok" --published --platform darwin-arm64
+          make -C registry build SOK="$RUNNER_TEMP/sok"
           mkdir site
           cp registry/index.json site/index.json
       - uses: actions/upload-pages-artifact@v3

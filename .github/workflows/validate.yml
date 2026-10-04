@@ -1,0 +1,57 @@
+name: validate
+# build-machine: skip build reason=the registry has no build of its own; the check builds the index of the pull request
+# build-machine: skip smoke reason=the registry is data; the applications read it on their first run
+
+# pull request 의 항목을 검사한다(core docs/spec/registry.md#check). 읽기 권한만 가지며, base branch 의 script 로
+# pull request 의 파일을 데이터로 읽고 pull request 의 파일은 실행하지 않는다.
+on: pull_request
+
+permissions:
+  contents: read
+
+env:
+  CORE_RELEASE: v0.0.3
+
+jobs:
+  validate:
+    runs-on: ubuntu-26.04-arm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: head
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/core
+          ref: ${{ env.CORE_RELEASE }}
+          path: core
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: core/packages/sok/wailsv3/go.mod
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: base/.node-version
+      - name: Build sok
+        run: go build -C core/packages/sok/wailsv3 -o "$RUNNER_TEMP/sok" ./src/cmd/sok
+      - name: Check the pull request
+        env:
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: node base/scripts/validate.mjs --base base --head head --author "$AUTHOR" --sok "$RUNNER_TEMP/sok"
+      # merge workflow 는 이 기록으로 검사한 pull request 와 commit 을 확인한다.
+      - name: Record the checked commit
+        env:
+          NUMBER: ${{ github.event.pull_request.number }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          mkdir validation
+          printf '{"number": %s, "head": "%s"}\n' "$NUMBER" "$HEAD" > validation/pull.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: validation
+          path: validation

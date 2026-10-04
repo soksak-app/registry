@@ -2,16 +2,13 @@
 
 [한국어](README.ko.md)
 
-The public plugin registry of soksak. The applications read its index at `https://soksak-app.github.io/registry/index.json` on their first start. `registry.json` declares the plugin and sidecar repositories, `packs/` holds the plugin packs, and `revoked.json` lists the versions that must not be installed. The [plugin installation formats](https://github.com/soksak-app/core/blob/main/docs/spec/installation.md) define the files.
+The public plugin registry of soksak. The applications read its index at `https://soksak-app.github.io/registry/index.json` on their first start. Each plugin and sidecar has one entry file, `plugins/<id>.json` or `sidecars/<file name>.json`, that names its GitHub repository and the release assets of each version; `packs/` holds the plugin packs and `revoked.json` the versions that must not be installed. The [public registry specification](https://github.com/soksak-app/core/blob/main/docs/spec/registry.md) defines the rules, and [CONTRIBUTING.md](CONTRIBUTING.md) lists the steps to add an entry.
 
-A `v*` tag runs `.github/workflows/publish.yml`: it checks out every component repository at that tag, builds the index from their GitHub release assets and deploys it to GitHub Pages.
-
-A local registry for development builds each component from its sibling checkout:
+A pull request is checked by `validate.yml`, merged by `merge.yml` when the check passes, and the merge publishes the index with `publish.yml`.
 
 ```sh
-make build SOK=<path to sok>   # writes releases/, plugins/, sidecars/ and index.json
-make test
-sok registry use "$PWD/index.json"
+make test                     # tests of the check
+make build SOK=<path to sok>  # builds index.json from the entry files, reading every archive
 ```
 
-The published build reads the release assets instead: `node scripts/build.mjs --sok <path to sok> --published --platform darwin-arm64`. The generated files are not committed. The checklist is [docs/features.md](docs/features.md).
+`index.json` is not committed. The checklist is [docs/features.md](docs/features.md).
