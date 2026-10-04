@@ -1,0 +1,70 @@
+name: publish
+# build-machine: skip test reason=the ci workflow tests the tagged commit on main before the tag is pushed
+# build-machine: skip smoke reason=the registry is data; the applications read it on their first run
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: macos-15
+    environment:
+      name: github-pages
+    steps:
+      # 같은 version tag 의 component 를 형제 배치로 받고, 그 release asset 으로 index 를 만든다.
+      - uses: actions/checkout@v4
+        with:
+          path: registry
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/core
+          ref: ${{ github.ref_name }}
+          path: core
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/plugin-browser
+          ref: ${{ github.ref_name }}
+          path: plugins/browser
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/plugin-files
+          ref: ${{ github.ref_name }}
+          path: plugins/files
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/plugin-terminal
+          ref: ${{ github.ref_name }}
+          path: plugins/terminal
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/sidecar-files
+          ref: ${{ github.ref_name }}
+          path: sidecars/files
+      - uses: actions/checkout@v4
+        with:
+          repository: soksak-app/sidecar-vt
+          ref: ${{ github.ref_name }}
+          path: sidecars/vt
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: core/packages/sok/wailsv3/go.mod
+      - name: Build sok
+        run: go build -C core/packages/sok/wailsv3 -o "$RUNNER_TEMP/sok" ./src/cmd/sok
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: registry/.node-version
+      - name: Build the index
+        run: |
+          node registry/scripts/build.mjs --sok "$RUNNER_TEMP/sok" --published --platform darwin-arm64
+          mkdir site
+          cp registry/index.json site/index.json
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - uses: actions/deploy-pages@v4
