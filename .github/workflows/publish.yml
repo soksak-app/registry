@@ -6,7 +6,6 @@ name: publish
 on:
   push:
     branches: [main]
-  workflow_call:
 
 permissions:
   contents: read
@@ -23,7 +22,6 @@ jobs:
     environment:
       name: github-pages
     steps:
-      # merge 가 부른 실행에서도 merge 한 뒤의 main 을 받는다.
       - uses: actions/checkout@v4
         with:
           ref: main

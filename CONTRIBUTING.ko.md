@@ -8,6 +8,6 @@
 2. 항목 파일을 더하거나 바꾼다. plugin은 `plugins/<id>.json`, sidecar는 `sidecars/<file name>.json`이며 형식은 [registry index](https://github.com/soksak-app/core/blob/main/docs/spec/installation.ko.md#registry-index)를 따른다. `repository`는 `https://github.com/<owner>/<repo>`이고, 각 `url`은 그 저장소의 release asset URL `https://github.com/<owner>/<repo>/releases/download/v<version>/<asset>`이다. `node scripts/add-version.mjs plugin --registry . --package <plugin 폴더> --archive <id>-<version>.tgz`나 `node scripts/add-version.mjs sidecar --registry . --package <sidecar 폴더> --asset <platform>=<archive>`가 package와 archive로 새 version을 담은 항목을 쓴다.
 3. 자기 계정으로 pull request를 연다. 항목의 저장소가 자기 계정에 속하거나, 자신이 공개 member인 조직에 속하면 그 항목의 소유자다.
 
-`validate` workflow가 pull request를 검사한다. 바뀐 경로, 항목 규칙, 게시한 version, 소유권, 그리고 모든 archive를 읽어 `sha256`을 비교하는 `sok registry build`로 registry 전체를 확인한다. 검사가 통과하면 `merge` workflow가 pull request를 merge하고 index를 게시한다. 게시한 version은 바뀌지 않는다. version을 거두려면 registry 관리자에게 `revoked.json`에 올려 달라고 요청한다.
+`validate` workflow가 pull request를 검사한다. 바뀐 경로, 항목 규칙, 게시한 version, 소유권, 그리고 모든 archive를 읽어 `sha256`을 비교하는 `sok registry build`로 registry 전체를 확인한다. registry 관리자가 검사를 통과한 pull request를 검토해 merge하고, merge가 index를 게시한다. 게시한 version은 바뀌지 않는다. version을 거두려면 registry 관리자에게 `revoked.json`에 올려 달라고 요청한다.
 
 pack, `revoked.json`, registry 자신의 파일은 registry 관리자만 바꾼다.

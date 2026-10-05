@@ -43,15 +43,3 @@ jobs:
         env:
           AUTHOR: ${{ github.event.pull_request.user.login }}
         run: node base/scripts/validate.mjs --base base --head head --author "$AUTHOR" --sok "$RUNNER_TEMP/sok"
-      # merge workflow 는 이 기록으로 검사한 pull request 와 commit 을 확인한다.
-      - name: Record the checked commit
-        env:
-          NUMBER: ${{ github.event.pull_request.number }}
-          HEAD: ${{ github.event.pull_request.head.sha }}
-        run: |
-          mkdir validation
-          printf '{"number": %s, "head": "%s"}\n' "$NUMBER" "$HEAD" > validation/pull.json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: validation
-          path: validation
