@@ -1,0 +1,16 @@
+{
+  "name": "@soksak/sidecar-files",
+  "repository": "https://github.com/soksak-app/sidecar-files",
+  "versions": [
+    {
+      "version": "0.0.3",
+      "protocol": 1,
+      "assets": {
+        "darwin-arm64": {
+          "url": "https://github.com/soksak-app/sidecar-files/releases/download/v0.0.3/soksak-sidecar-files-0.0.3-darwin-arm64.tar.gz",
+          "sha256": "82b60d0c12b3e9dcb8849e20cb199d838437bf71f7ff9e649b951811a52fa4b6"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "browser",
+  "package": "@soksak/plugin-browser",
+  "name": "브라우저",
+  "description": "Browser plugin: an address bar and a document region that shows web pages.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-browser",
+  "versions": [
+    {
+      "version": "0.0.3",
+      "package": {
+        "url": "https://github.com/soksak-app/plugin-browser/releases/download/v0.0.3/browser-0.0.3.tgz",
+        "sha256": "67d3352b420e214560780850c1800fddc387c2f72797987b619a565180b6b45f"
+      },
+      "engines": {
+        "soksak": "^0.0.3"
+      },
+      "sidecars": {}
+    }
+  ]
+}

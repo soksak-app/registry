@@ -1,0 +1,23 @@
+{
+  "id": "files",
+  "package": "@soksak/plugin-files",
+  "name": "파일",
+  "description": "Files plugin: sidebar sections for the project directory.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-files",
+  "versions": [
+    {
+      "version": "0.0.3",
+      "package": {
+        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.3/files-0.0.3.tgz",
+        "sha256": "a859e1575e1f93c660d8f2f0e2b4d93e19b8489a3501eabb4419ab0a20263efd"
+      },
+      "engines": {
+        "soksak": "^0.0.3"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": "^0.0.3"
+      }
+    }
+  ]
+}

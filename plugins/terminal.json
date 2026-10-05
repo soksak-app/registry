@@ -1,0 +1,23 @@
+{
+  "id": "terminal",
+  "package": "@soksak/plugin-terminal",
+  "name": "터미널",
+  "description": "Terminal plugin: a full-screen terminal surface connected to a VT engine session.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-terminal",
+  "versions": [
+    {
+      "version": "0.0.3",
+      "package": {
+        "url": "https://github.com/soksak-app/plugin-terminal/releases/download/v0.0.3/terminal-0.0.3.tgz",
+        "sha256": "6e13c454c01f0261e99b6bb8b8d5cc493ad67ee5fd631cc538c810f2ad2004ee"
+      },
+      "engines": {
+        "soksak": "^0.0.3"
+      },
+      "sidecars": {
+        "@soksak/sidecar-vt-alacritty": "^0.0.3"
+      }
+    }
+  ]
+}
