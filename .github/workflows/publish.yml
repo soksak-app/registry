@@ -14,7 +14,7 @@ permissions:
 
 env:
   # 검사와 게시의 sok 은 이 core release 의 것이다.
-  CORE_RELEASE: v0.0.3
+  CORE_RELEASE: v0.0.4
 
 jobs:
   publish:
