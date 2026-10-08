@@ -1,1 +1,10 @@
-{ "plugins": [], "sidecars": [] }
+{
+  "plugins": [
+    {
+      "id": "editor",
+      "version": "0.0.1",
+      "reason": "On core 0.0.7 an open editor tab makes core commands wait without end, and the Tauri application cannot load its shared modules; editor 0.0.2 requires core 0.0.8."
+    }
+  ],
+  "sidecars": []
+}
