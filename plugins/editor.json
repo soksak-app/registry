@@ -1,0 +1,23 @@
+{
+  "id": "editor",
+  "package": "@soksak/plugin-editor",
+  "name": "편집기",
+  "description": "Editor plugin: opens text files of the project in CodeMirror and saves them through the files sidecar.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-editor",
+  "versions": [
+    {
+      "version": "0.0.1",
+      "package": {
+        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.1/editor-0.0.1.tgz",
+        "sha256": "2fb5b177224cc99030697e7f818d8e81d1f58d20eba83598ead04b8aae104e1f"
+      },
+      "engines": {
+        "soksak": ">=0.0.7"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": "^0.0.4"
+      }
+    }
+  ]
+}
