@@ -10,4 +10,3 @@
 - [o] G7 — P0: plugin version의 sidecar 범위를 그 `plugin.json`의 `dependencies`에서 읽는다. `package.json` `soksak.sidecars`를 그것으로 바꾸는 core checklist 항목 F26을 위한 것이다. 2026-10-04 완료: `add-version.mjs`가 항목의 `sidecars`를 `plugin.json` `dependencies`로 쓴다. `make test`가 16/16 통과하고, 새 test는 변경 전 범위 대신 `{}`로 실패했다.
 - [o] G8 — P0: core checklist 항목 R2-4-5를 위해 registry 관리자가 pull request를 merge하고 soksak 항목을 push하게 한다. `merge.yml`과 `validate.yml`의 검사한 commit 기록을 지우고, `publish.yml`은 `main`으로의 각 push에서 게시한다. 2026-10-05 완료: `make test`가 통과한다.
 - [o] G9 — P0: shell을 UTF-8 locale로 실행하는 terminal plugin 0.0.6과 terminal service 0.0.6을 등록한다. core checklist 항목 F101.2를 위한 것이다. 2026-10-08에 완료했다. 항목은 릴리스된 archive의 sha256을 담고 그 값은 릴리스 `SHA256SUMS`와 일치한다. `make test`와 `make build`가 통과한다.
-- [o] G10 — P1: 체크리스트를 이 저장소에 관한 사실로 적는다. core checklist 항목 R3.3을 위한 것이다. 2026-10-08에 완료했다. 항목은 commit id, 누가 보고·발견·결정했는지, 결함을 보인 실행을 적지 않는다. core의 기록 검사가 이 저장소에서 보고하는 줄이 없다.
