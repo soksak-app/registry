@@ -99,6 +99,21 @@ export function checkPublishedVersions(path, before, after) {
   });
 }
 
+/** The repository that publishes the releases of core. */
+const CORE_REPOSITORY = "https://github.com/soksak-app/core";
+
+/** core.json 의 release 주소 규칙을 검사한다. 이 파일은 registry maintainer 가 바꾼다(core docs/spec/registry.md). */
+export function checkCore(core) {
+  const errors = [];
+  for (const version of Array.isArray(core.versions) ? core.versions : []) {
+    for (const [key, release] of Object.entries(version.releases ?? {})) {
+      const want = `${CORE_REPOSITORY}/releases/download/v${version.version}/soksak-${version.version}-${key}.zip`;
+      if (release?.url !== want) errors.push(`core.json: version ${version.version} ${key}: url must be ${want}`);
+    }
+  }
+  return errors;
+}
+
 /** author 가 owner 의 저장소를 소유하는지. 사용자 계정이면 같은 login, 조직이면 그 조직의 공개 member 다. */
 async function owns(github, author, owner) {
   if (owner.toLowerCase() === author.toLowerCase()) return true;
@@ -152,7 +167,7 @@ export async function validate({ base, head, author, github, build }) {
   if (errors.length) return errors;
   const work = mkdtempSync(join(tmpdir(), "soksak-registry-"));
   try {
-    for (const path of ["plugins", "sidecars", "packs", "revoked.json"]) {
+    for (const path of ["plugins", "sidecars", "packs", "revoked.json", "core.json"]) {
       if (existsSync(join(head, path))) cpSync(join(head, path), join(work, path), { recursive: true });
     }
     build(work);
@@ -164,7 +179,13 @@ export async function validate({ base, head, author, github, build }) {
   return errors;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (import.meta.url === pathToFileURL(process.argv[1]).href && process.argv[2] === "--check-core") {
+  // node scripts/validate.mjs --check-core <core.json>
+  const errors = checkCore(JSON.parse(readFileSync(process.argv[3], "utf8")));
+  for (const error of errors) console.error(error);
+  if (errors.length) process.exit(1);
+  console.log("core.json check passed");
+} else if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const option = (name) => {
     const at = process.argv.indexOf(`--${name}`);
     if (at < 0 || at + 1 >= process.argv.length) throw new Error(`--${name} is required`);

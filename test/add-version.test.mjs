@@ -6,8 +6,8 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "nod
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { addPlugin, addSidecar, githubRepository } from "../scripts/add-version.mjs";
-import { checkEntry } from "../scripts/validate.mjs";
+import { addCore, addPlugin, addSidecar, githubRepository } from "../scripts/add-version.mjs";
+import { checkCore, checkEntry } from "../scripts/validate.mjs";
 
 function folder(t) {
   const root = mkdtempSync(join(tmpdir(), "soksak-add-version-"));
@@ -73,4 +73,34 @@ test("a sidecar release adds its version with an asset per platform", (t) => {
 test("a repository outside GitHub is refused", () => {
   assert.equal(githubRepository({ repository: "https://github.com/alice/plugin-probe" }), "https://github.com/alice/plugin-probe");
   assert.throws(() => githubRepository({ repository: { url: "https://example.invalid/alice/probe.git" } }), /must be a GitHub repository/);
+});
+
+test("a core release adds its version with the application zip of each platform and host", (t) => {
+  const { root, write } = folder(t);
+  write("dist/soksak-0.0.9-darwin-arm64-wailsv3.zip", "wails bundle");
+  write("dist/soksak-0.0.9-darwin-arm64-tauriv2.zip", "tauri bundle");
+  const releases = {
+    "darwin-arm64-tauriv2": join(root, "dist/soksak-0.0.9-darwin-arm64-tauriv2.zip"),
+    "darwin-arm64-wailsv3": join(root, "dist/soksak-0.0.9-darwin-arm64-wailsv3.zip"),
+  };
+  const path = addCore(join(root, "registry"), "0.0.9", releases);
+  const core = JSON.parse(readFileSync(path, "utf8"));
+  assert.equal(path, join(root, "registry", "core.json"));
+  assert.deepEqual(core, { versions: [{ version: "0.0.9", releases: {
+    "darwin-arm64-tauriv2": { url: "https://github.com/soksak-app/core/releases/download/v0.0.9/soksak-0.0.9-darwin-arm64-tauriv2.zip", sha256: sha("tauri bundle") },
+    "darwin-arm64-wailsv3": { url: "https://github.com/soksak-app/core/releases/download/v0.0.9/soksak-0.0.9-darwin-arm64-wailsv3.zip", sha256: sha("wails bundle") },
+  } }] });
+  assert.deepEqual(checkCore(core), []);
+  // A second version is added after the first, and a version that is listed is not added again.
+  write("dist/soksak-0.0.10-darwin-arm64-wailsv3.zip", "newer");
+  addCore(join(root, "registry"), "0.0.10", { "darwin-arm64-wailsv3": join(root, "dist/soksak-0.0.10-darwin-arm64-wailsv3.zip") });
+  assert.deepEqual(JSON.parse(readFileSync(path, "utf8")).versions.map((item) => item.version), ["0.0.9", "0.0.10"]);
+  assert.throws(() => addCore(join(root, "registry"), "0.0.9", releases), /core version 0.0.9 is already listed/);
+});
+
+test("a core release archive that does not carry its name is refused", (t) => {
+  const { root, write } = folder(t);
+  write("dist/bundle.zip", "bundle");
+  assert.throws(() => addCore(join(root, "registry"), "0.0.9", { "darwin-arm64-wailsv3": join(root, "dist/bundle.zip") }),
+    /the darwin-arm64-wailsv3 archive must be named soksak-0.0.9-darwin-arm64-wailsv3.zip/);
 });

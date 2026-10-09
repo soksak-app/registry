@@ -73,6 +73,30 @@ export function addSidecar(registry, folder, assets) {
     { version: pkg.version, protocol: sidecar.protocol, releases: urls });
 }
 
+/** The repository that publishes the releases of core. */
+export const CORE_REPOSITORY = "https://github.com/soksak-app/core";
+
+/**
+ * core.json 에 core version 하나를 더한다. releases 는 `<platform>-<host>` 마다의 응용 프로그램 번들 zip 이다
+ * (core docs/spec/installation.md#application-update).
+ */
+export function addCore(registry, version, releases) {
+  if (Object.keys(releases).length === 0) throw new Error("a core version needs at least one --release <platform>-<host>=<zip>");
+  const path = join(registry, "core.json");
+  const core = existsSync(path) ? read(path) : { versions: [] };
+  if (core.versions.some((item) => item.version === version)) throw new Error(`${path}: core version ${version} is already listed`);
+  const urls = {};
+  for (const [key, archive] of Object.entries(releases)) {
+    const name = `soksak-${version}-${key}.zip`;
+    if (basename(archive) !== name) throw new Error(`${archive}: the ${key} archive must be named ${name}`);
+    urls[key] = { url: `${CORE_REPOSITORY}/releases/download/v${version}/${name}`, sha256: sha256(archive) };
+  }
+  core.versions.push({ version, releases: urls });
+  mkdirSync(registry, { recursive: true });
+  writeFileSync(path, `${JSON.stringify(core, null, 2)}\n`);
+  return path;
+}
+
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const [kind, ...rest] = process.argv.slice(2);
   const values = (name) => rest.flatMap((value, index) => (rest[index - 1] === `--${name}` ? [value] : []));
@@ -91,8 +115,15 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
       return [value.slice(0, at), value.slice(at + 1)];
     }));
     path = addSidecar(one("registry"), one("package"), assets);
+  } else if (kind === "core") {
+    const releases = Object.fromEntries(values("release").map((value) => {
+      const at = value.indexOf("=");
+      if (at <= 0) throw new Error(`--release must be <platform>-<host>=<zip>: ${value}`);
+      return [value.slice(0, at), value.slice(at + 1)];
+    }));
+    path = addCore(one("registry"), one("version"), releases);
   } else {
-    throw new Error("usage: add-version.mjs plugin|sidecar --registry <dir> --package <dir> (--archive <tgz> | --asset <platform>=<tar.gz>...)");
+    throw new Error("usage: add-version.mjs plugin|sidecar|core --registry <dir> (--package <dir> (--archive <tgz> | --asset <platform>=<tar.gz>...) | --version <version> --release <platform>-<host>=<zip>...)");
   }
   console.log(path);
 }

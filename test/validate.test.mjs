@@ -5,7 +5,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "nod
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { validate } from "../scripts/validate.mjs";
+import { checkCore, validate } from "../scripts/validate.mjs";
 
 const SHA = "a".repeat(64);
 
@@ -162,4 +162,35 @@ test("the GitHub API answers decide the account type and the public membership",
   assert.equal(await github.isPublicMember("acme", "mallory"), false);
   await assert.rejects(github.isPublicMember("acme", "limited"), new RegExp(`^Error: ${api}/orgs/acme/public_members/limited: HTTP 403$`));
   await assert.rejects(github.accountType("nobody"), new RegExp(`^Error: ${api}/users/nobody: HTTP 404$`));
+});
+
+const CORE_URL = (version, key) => `https://github.com/soksak-app/core/releases/download/v${version}/soksak-${version}-${key}.zip`;
+
+test("the core releases follow the release rules of the core repository", () => {
+  const good = { versions: [{ version: "0.0.9", releases: { "darwin-arm64-wailsv3": { url: CORE_URL("0.0.9", "darwin-arm64-wailsv3"), sha256: SHA } } }] };
+  assert.deepEqual(checkCore(good), []);
+  const other = structuredClone(good);
+  other.versions[0].releases["darwin-arm64-wailsv3"].url = "https://example.invalid/soksak-0.0.9-darwin-arm64-wailsv3.zip";
+  assert.deepEqual(checkCore(other), [`core.json: version 0.0.9 darwin-arm64-wailsv3: url must be ${CORE_URL("0.0.9", "darwin-arm64-wailsv3")}`]);
+  const unlisted = structuredClone(good);
+  unlisted.versions[0].releases["darwin-arm64-wailsv3"].url = CORE_URL("0.0.9", "darwin-arm64-tauriv2");
+  assert.equal(checkCore(unlisted).length, 1);
+});
+
+test("core.json is a registry maintainer path and its releases reach the build", async () => {
+  const base = mkdtempSync(join(tmpdir(), "soksak-core-base-"));
+  const head = mkdtempSync(join(tmpdir(), "soksak-core-head-"));
+  try {
+    writeFileSync(join(head, "core.json"), JSON.stringify({ versions: [] }));
+    const built = [];
+    const errors = await validate({ base, head, author: "alice", github: {}, build: (dir) => built.push(readFileSync(join(dir, "core.json"), "utf8")) });
+    // A pull request does not change core.json, and the build still gets the file of an unchanged registry.
+    assert.deepEqual(errors, ["core.json: only registry maintainers change this path"]);
+    writeFileSync(join(base, "core.json"), JSON.stringify({ versions: [] }));
+    assert.deepEqual(await validate({ base, head, author: "alice", github: {}, build: (dir) => built.push(readFileSync(join(dir, "core.json"), "utf8")) }), []);
+    assert.deepEqual(built, ['{"versions":[]}']);
+  } finally {
+    rmSync(base, { recursive: true, force: true });
+    rmSync(head, { recursive: true, force: true });
+  }
 });
