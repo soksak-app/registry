@@ -22,3 +22,4 @@
 - [o] G20 — P1: 검사와 게시의 `sok`을 commit이 아니라 core의 tag `v0.0.9`로 build한다. core 체크리스트 항목 F117.8.5를 위한 항목이다. 2026-10-09 완료: 두 workflow의 `CORE_REF`가 `release`와 `releases`를 읽는 core의 가장 오래된 release인 `v0.0.9`다.
 - [o] G21 — P1: terminal plugin 0.0.8을 나열한다. core 체크리스트 항목 F124.2를 위한 항목이다. 2026-10-09 완료: `add-version.mjs`가 GitHub release로 버전을 썼고, core의 `sok`으로 한 `make build`가 archive를 받아 `sha256`을 확인한다.
 - [o] G22 — P0: terminal plugin 0.0.9를 나열한다. core 체크리스트 항목 F144.3을 위한 항목이다. 2026-10-09 완료: `add-version.mjs`가 GitHub release로 버전을 썼고, core의 `sok`으로 한 `make build`가 archive를 받아 `sha256`을 확인한다.
+- [o] G23 — P0: sidecar vt 0.0.8을 나열한다. core 체크리스트 항목 F144.5를 위한 항목이다. 2026-10-09 완료: `add-version.mjs`가 GitHub release로 버전을 썼고, core의 `sok`으로 한 `make build`가 archive를 받아 `sha256`을 확인한다.
