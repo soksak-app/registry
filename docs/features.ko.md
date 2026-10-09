@@ -20,3 +20,4 @@
 - [o] G18 — P0: sidecar vt 0.0.7과 terminal plugin 0.0.7을 나열한다. core 체크리스트 항목 F117.8.1과 F117.8.2를 위한 항목이다. 2026-10-09 완료: `add-version.mjs`가 각각의 GitHub release로 버전을 썼고, core의 `sok`으로 한 `make build`가 항목을 읽고 archive를 받아 `sha256`을 확인한다.
 - [o] G19 — P0: core release 0.0.9를 나열한다. core 체크리스트 항목 F117.8.5를 위한 항목이다. 2026-10-09 완료: `add-version.mjs core`가 release의 파일 `soksak-0.0.9-darwin-arm64-wailsv3.zip`과 `soksak-0.0.9-darwin-arm64-tauriv2.zip`을 썼고, 두 번들은 0.0.9를 선언하며, `validate.mjs --check-core`와 `make build`가 통과한다.
 - [o] G20 — P1: 검사와 게시의 `sok`을 commit이 아니라 core의 tag `v0.0.9`로 build한다. core 체크리스트 항목 F117.8.5를 위한 항목이다. 2026-10-09 완료: 두 workflow의 `CORE_REF`가 `release`와 `releases`를 읽는 core의 가장 오래된 release인 `v0.0.9`다.
+- [o] G21 — P1: terminal plugin 0.0.8을 나열한다. core 체크리스트 항목 F124.2를 위한 항목이다. 2026-10-09 완료: `add-version.mjs`가 GitHub release로 버전을 썼고, core의 `sok`으로 한 `make build`가 archive를 받아 `sha256`을 확인한다.
