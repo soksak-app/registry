@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 env:
-  CORE_REF: da5ab0f22ea336e42353e1efdbcf2f2aefa398c4
+  CORE_REF: v0.0.9
 
 jobs:
   validate:

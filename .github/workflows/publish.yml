@@ -13,8 +13,8 @@ permissions:
   id-token: write
 
 env:
-  # 검사와 게시의 sok 은 이 core 커밋의 것이다. 새 형식(release, releases)을 읽는 core release 가 아직 없으므로 그 형식을 읽는 core 의 커밋을 쓰고, 그 release 가 나오면 release 의 tag 로 바꾼다(core 체크리스트 F117.8).
-  CORE_REF: da5ab0f22ea336e42353e1efdbcf2f2aefa398c4
+  # 검사와 게시의 sok 은 이 core release 의 tag 로 build 한다. release, releases 형식을 읽는 가장 오래된 core release 는 v0.0.9 다.
+  CORE_REF: v0.0.9
 
 jobs:
   publish:
