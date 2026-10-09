@@ -8,7 +8,7 @@
   "versions": [
     {
       "version": "0.0.1",
-      "package": {
+      "release": {
         "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.1/editor-0.0.1.tgz",
         "sha256": "2fb5b177224cc99030697e7f818d8e81d1f58d20eba83598ead04b8aae104e1f"
       },
@@ -21,7 +21,7 @@
     },
     {
       "version": "0.0.2",
-      "package": {
+      "release": {
         "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.2/editor-0.0.2.tgz",
         "sha256": "c5f75a5b0406917dfd3848ab98b85bdcfa82c7f2111175d17fab0eca805a25b1"
       },

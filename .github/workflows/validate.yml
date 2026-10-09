@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 env:
-  CORE_RELEASE: v0.0.6
+  CORE_REF: 73afa308c8a212d77973654e383888a4f629c080
 
 jobs:
   validate:
@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: soksak-app/core
-          ref: ${{ env.CORE_RELEASE }}
+          ref: ${{ env.CORE_REF }}
           path: core
       - uses: actions/setup-go@v5
         with:

@@ -14,7 +14,7 @@ function plugin(owner = "alice", repo = "plugin-probe", versions = ["0.1.0"]) {
     id: "probe", package: "@alice/plugin-probe", name: "Probe", description: "Probe.", license: "MIT",
     repository: `https://github.com/${owner}/${repo}`,
     versions: versions.map((version) => ({
-      version, package: { url: `https://github.com/${owner}/${repo}/releases/download/v${version}/probe-${version}.tgz`, sha256: SHA },
+      version, release: { url: `https://github.com/${owner}/${repo}/releases/download/v${version}/probe-${version}.tgz`, sha256: SHA },
       engines: { soksak: "^0.0.3" }, sidecars: {},
     })),
   };
@@ -23,7 +23,7 @@ function plugin(owner = "alice", repo = "plugin-probe", versions = ["0.1.0"]) {
 function sidecar(owner = "acme", repo = "sidecar-worker") {
   return {
     name: "@acme/sidecar-worker", repository: `https://github.com/${owner}/${repo}`,
-    versions: [{ version: "0.1.0", protocol: 1, assets: {
+    versions: [{ version: "0.1.0", protocol: 1, releases: {
       "darwin-arm64": { url: `https://github.com/${owner}/${repo}/releases/download/v0.1.0/acme-sidecar-worker-0.1.0-darwin-arm64.tar.gz`, sha256: SHA },
     } }],
   };
@@ -82,11 +82,11 @@ test("an entry cannot move to a repository of its author", async (t) => {
 
 test("an archive must be a release asset of the entry's repository", async (t) => {
   const entry = plugin();
-  entry.versions[0].package.url = "https://example.invalid/probe-0.1.0.tgz";
+  entry.versions[0].release.url = "https://example.invalid/probe-0.1.0.tgz";
   const { errors } = await check(t, {}, { "plugins/probe.json": entry });
-  assert.deepEqual(errors, ["plugins/probe.json: version 0.1.0: package url must be https://github.com/alice/plugin-probe/releases/download/v0.1.0/probe-0.1.0.tgz"]);
+  assert.deepEqual(errors, ["plugins/probe.json: version 0.1.0: release url must be https://github.com/alice/plugin-probe/releases/download/v0.1.0/probe-0.1.0.tgz"]);
   const other = sidecar();
-  other.versions[0].assets["darwin-arm64"].url = other.versions[0].assets["darwin-arm64"].url.replace("acme/sidecar-worker", "acme/other");
+  other.versions[0].releases["darwin-arm64"].url = other.versions[0].releases["darwin-arm64"].url.replace("acme/sidecar-worker", "acme/other");
   const { errors: sidecarErrors } = await check(t, {}, { "sidecars/acme-sidecar-worker.json": other });
   assert.match(sidecarErrors[0], /^sidecars\/acme-sidecar-worker\.json: version 0\.1\.0 darwin-arm64: url must be https:\/\/github\.com\/acme\/sidecar-worker\/releases/);
 });
@@ -106,7 +106,7 @@ test("a new version is added and a published version stays as it is", async (t) 
   const { errors } = await check(t, { "plugins/probe.json": plugin() }, { "plugins/probe.json": plugin("alice", "plugin-probe", ["0.1.0", "0.2.0"]) });
   assert.deepEqual(errors, []);
   const changed = plugin();
-  changed.versions[0].package.sha256 = "b".repeat(64);
+  changed.versions[0].release.sha256 = "b".repeat(64);
   const { errors: changedErrors } = await check(t, { "plugins/probe.json": plugin() }, { "plugins/probe.json": changed });
   assert.deepEqual(changedErrors, ["plugins/probe.json: published version 0.1.0 is changed"]);
   const { errors: removedErrors } = await check(t, { "plugins/probe.json": plugin("alice", "plugin-probe", ["0.1.0", "0.2.0"]) }, { "plugins/probe.json": plugin() });

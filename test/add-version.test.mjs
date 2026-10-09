@@ -44,7 +44,7 @@ test("a plugin release adds its version with the release asset of its repository
     repository: "https://github.com/soksak-app/plugin-browser",
     versions: [{
       version: "0.0.3",
-      package: { url: "https://github.com/soksak-app/plugin-browser/releases/download/v0.0.3/browser-0.0.3.tgz", sha256: sha("archive") },
+      release: { url: "https://github.com/soksak-app/plugin-browser/releases/download/v0.0.3/browser-0.0.3.tgz", sha256: sha("archive") },
       engines: { soksak: "^0.0.3" }, sidecars: {},
     }],
   });
@@ -64,7 +64,7 @@ test("a sidecar release adds its version with an asset per platform", (t) => {
     { "darwin-arm64": join(root, "dist/soksak-sidecar-vt-alacritty-0.0.3-darwin-arm64.tar.gz") });
   const entry = JSON.parse(readFileSync(path, "utf8"));
   assert.equal(path, join(root, "registry/sidecars/soksak-sidecar-vt-alacritty.json"));
-  assert.deepEqual(entry.versions, [{ version: "0.0.3", protocol: 1, assets: { "darwin-arm64": {
+  assert.deepEqual(entry.versions, [{ version: "0.0.3", protocol: 1, releases: { "darwin-arm64": {
     url: "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.3/soksak-sidecar-vt-alacritty-0.0.3-darwin-arm64.tar.gz", sha256: sha("mac") } } }]);
   assert.deepEqual(checkEntry("sidecars/soksak-sidecar-vt-alacritty.json", entry), []);
   assert.throws(() => addSidecar(join(root, "registry"), join(root, "sidecar"), {}), /at least one --asset/);

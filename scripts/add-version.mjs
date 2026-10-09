@@ -50,7 +50,7 @@ export function addPlugin(registry, folder, archive) {
     id: manifest.id, package: pkg.name, name: manifest.name, description: pkg.description, license: pkg.license, repository, versions: [],
   }, {
     version: pkg.version,
-    package: { url: `${repository}/releases/download/v${pkg.version}/${asset}`, sha256: sha256(archive) },
+    release: { url: `${repository}/releases/download/v${pkg.version}/${asset}`, sha256: sha256(archive) },
     // 기본값: sidecar 를 쓰지 않는 plugin 의 plugin.json 에는 dependencies 가 없고 sidecar 범위도 없다.
     engines: { soksak: pkg.engines?.soksak }, sidecars: manifest.dependencies ?? {},
   });
@@ -70,7 +70,7 @@ export function addSidecar(registry, folder, assets) {
     urls[platform] = { url: `${repository}/releases/download/v${pkg.version}/${asset}`, sha256: sha256(archive) };
   }
   return addVersion(join(registry, "sidecars", `${file}.json`), { name: pkg.name, repository, versions: [] },
-    { version: pkg.version, protocol: sidecar.protocol, assets: urls });
+    { version: pkg.version, protocol: sidecar.protocol, releases: urls });
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {

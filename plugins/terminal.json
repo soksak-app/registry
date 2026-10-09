@@ -8,7 +8,7 @@
   "versions": [
     {
       "version": "0.0.3",
-      "package": {
+      "release": {
         "url": "https://github.com/soksak-app/plugin-terminal/releases/download/v0.0.3/terminal-0.0.3.tgz",
         "sha256": "6e13c454c01f0261e99b6bb8b8d5cc493ad67ee5fd631cc538c810f2ad2004ee"
       },
@@ -21,7 +21,7 @@
     },
     {
       "version": "0.0.4",
-      "package": {
+      "release": {
         "url": "https://github.com/soksak-app/plugin-terminal/releases/download/v0.0.4/terminal-0.0.4.tgz",
         "sha256": "8e290fd14f4c706f31aed77e917404c6638007a85a3153a070892d55097f5354"
       },
@@ -34,7 +34,7 @@
     },
     {
       "version": "0.0.5",
-      "package": {
+      "release": {
         "url": "https://github.com/soksak-app/plugin-terminal/releases/download/v0.0.5/terminal-0.0.5.tgz",
         "sha256": "84580532b04967e728cf1f626145f2903b330c899d43ed98eee152db02076751"
       },
@@ -47,7 +47,7 @@
     },
     {
       "version": "0.0.6",
-      "package": {
+      "release": {
         "url": "https://github.com/soksak-app/plugin-terminal/releases/download/v0.0.6/terminal-0.0.6.tgz",
         "sha256": "91a72619b112aeee53ed9495e7a0c8f14474ee923e81397011797e973922f53a"
       },

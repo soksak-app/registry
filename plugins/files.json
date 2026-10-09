@@ -8,7 +8,7 @@
   "versions": [
     {
       "version": "0.0.3",
-      "package": {
+      "release": {
         "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.3/files-0.0.3.tgz",
         "sha256": "a859e1575e1f93c660d8f2f0e2b4d93e19b8489a3501eabb4419ab0a20263efd"
       },
@@ -21,7 +21,7 @@
     },
     {
       "version": "0.0.4",
-      "package": {
+      "release": {
         "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.4/files-0.0.4.tgz",
         "sha256": "85125e7cef11551f5c4956d2528865437fc3e1bde6921e99592d716d1de10c5d"
       },
@@ -34,7 +34,7 @@
     },
     {
       "version": "0.0.5",
-      "package": {
+      "release": {
         "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.5/files-0.0.5.tgz",
         "sha256": "71acf6aacf15b0b72efebd41ef3d18ac3f3f57e4207e871d8912db0b3f83ce12"
       },

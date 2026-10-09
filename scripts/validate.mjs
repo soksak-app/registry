@@ -74,13 +74,13 @@ export function checkEntry(path, entry) {
     if (file !== `${entry.id}.json`) errors.push(`${path}: the file name must be ${entry.id}.json`);
     for (const version of versions) {
       const want = `${release(version.version)}${entry.id}-${version.version}.tgz`;
-      if (version.package?.url !== want) errors.push(`${path}: version ${version.version}: package url must be ${want}`);
+      if (version.release?.url !== want) errors.push(`${path}: version ${version.version}: release url must be ${want}`);
     }
   } else {
     const name = typeof entry.name === "string" ? sidecarFileName(entry.name) : null;
     if (file !== `${name}.json`) errors.push(`${path}: the file name must be ${name}.json`);
     for (const version of versions) {
-      for (const [platform, asset] of Object.entries(version.assets ?? {})) {
+      for (const [platform, asset] of Object.entries(version.releases ?? {})) {
         const want = `${release(version.version)}${name}-${version.version}-${platform}.tar.gz`;
         if (asset?.url !== want) errors.push(`${path}: version ${version.version} ${platform}: url must be ${want}`);
       }
