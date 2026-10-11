@@ -3,7 +3,7 @@
 
 SOK ?= sok
 
-# commit 한 항목 파일로 index.json 을 만든다. 모든 archive 를 받아 sha256 과 내용을 확인한다.
+# commit 한 항목 파일로 index.json 을 만든다. 모든 release 를 받아 sha256 과 내용을 확인한다.
 build:
 	$(SOK) registry build .
 
