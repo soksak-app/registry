@@ -80,7 +80,7 @@ test("an entry cannot move to a repository of its author", async (t) => {
   assert.ok(errors.includes("plugins/probe.json: alice does not own https://github.com/bob/plugin-probe (the base entry)"), errors.join("\n"));
 });
 
-test("an archive must be a release asset of the entry's repository", async (t) => {
+test("a release must be published by the entry's repository", async (t) => {
   const entry = plugin();
   entry.versions[0].release.url = "https://example.invalid/probe-0.1.0.tgz";
   const { errors } = await check(t, {}, { "plugins/probe.json": entry });

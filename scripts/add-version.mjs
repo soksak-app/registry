@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // component release 의 version 을 registry 항목에 더한다(core docs/spec/registry.md). plugin 은 package.json 과
-// plugin.json 을, sidecar 는 package.json 과 sidecar.json 을 읽고, archive 의 sha256 과 그 저장소의 GitHub release
-// asset 주소로 새 version 을 쓴다. 항목 파일이 없으면 만든다. 게시한 version 은 바뀌지 않으므로 이미 있는 version 은
+// plugin.json 을, sidecar 는 package.json 과 sidecar.json 을 읽고, release 파일의 sha256 과 그 저장소의 GitHub
+// release 주소로 새 version 을 쓴다. 항목 파일이 없으면 만든다. 게시한 version 은 바뀌지 않으므로 이미 있는 version 은
 // 오류다.
 //
-//   node scripts/add-version.mjs plugin --registry <dir> --package <plugin dir> --archive <tgz>
-//   node scripts/add-version.mjs sidecar --registry <dir> --package <sidecar dir> --asset <platform>=<tar.gz>...
+//   node scripts/add-version.mjs plugin --registry <dir> --package <plugin dir> --release <tgz>
+//   node scripts/add-version.mjs sidecar --registry <dir> --package <sidecar dir> --release <platform>=<tar.gz>...
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
@@ -39,35 +39,35 @@ function addVersion(path, created, version) {
   return path;
 }
 
-/** plugin 폴더와 그 archive 로 plugins/<id>.json 에 version 을 더한다. */
-export function addPlugin(registry, folder, archive) {
+/** plugin 폴더와 그 release 파일로 plugins/<id>.json 에 version 을 더한다. */
+export function addPlugin(registry, folder, release) {
   const pkg = read(join(folder, "package.json"));
   const manifest = read(join(folder, "plugin.json"));
   const repository = githubRepository(pkg);
-  const asset = `${manifest.id}-${pkg.version}.tgz`;
-  if (basename(archive) !== asset) throw new Error(`${archive}: the plugin archive must be named ${asset}`);
+  const name = `${manifest.id}-${pkg.version}.tgz`;
+  if (basename(release) !== name) throw new Error(`${release}: the plugin release must be named ${name}`);
   return addVersion(join(registry, "plugins", `${manifest.id}.json`), {
     id: manifest.id, package: pkg.name, name: manifest.name, description: pkg.description, license: pkg.license, repository, versions: [],
   }, {
     version: pkg.version,
-    release: { url: `${repository}/releases/download/v${pkg.version}/${asset}`, sha256: sha256(archive) },
+    release: { url: `${repository}/releases/download/v${pkg.version}/${name}`, sha256: sha256(release) },
     // 기본값: sidecar 를 쓰지 않는 plugin 의 plugin.json 에는 dependencies 가 없고 sidecar 범위도 없다.
     engines: { soksak: pkg.engines?.soksak }, sidecars: manifest.dependencies ?? {},
   });
 }
 
-/** sidecar 폴더와 platform 마다의 archive 로 sidecars/<file name>.json 에 version 을 더한다. */
-export function addSidecar(registry, folder, assets) {
+/** sidecar 폴더와 platform 마다의 release 파일로 sidecars/<file name>.json 에 version 을 더한다. */
+export function addSidecar(registry, folder, releases) {
   const pkg = read(join(folder, "package.json"));
   const sidecar = read(join(folder, "sidecar.json"));
   const repository = githubRepository(pkg);
   const file = fileName(pkg.name);
-  if (Object.keys(assets).length === 0) throw new Error("a sidecar version needs at least one --asset <platform>=<archive>");
+  if (Object.keys(releases).length === 0) throw new Error("a sidecar version needs at least one --release <platform>=<tar.gz>");
   const urls = {};
-  for (const [platform, archive] of Object.entries(assets)) {
-    const asset = `${file}-${pkg.version}-${platform}.tar.gz`;
-    if (basename(archive) !== asset) throw new Error(`${archive}: the ${platform} archive must be named ${asset}`);
-    urls[platform] = { url: `${repository}/releases/download/v${pkg.version}/${asset}`, sha256: sha256(archive) };
+  for (const [platform, release] of Object.entries(releases)) {
+    const name = `${file}-${pkg.version}-${platform}.tar.gz`;
+    if (basename(release) !== name) throw new Error(`${release}: the ${platform} release must be named ${name}`);
+    urls[platform] = { url: `${repository}/releases/download/v${pkg.version}/${name}`, sha256: sha256(release) };
   }
   return addVersion(join(registry, "sidecars", `${file}.json`), { name: pkg.name, repository, versions: [] },
     { version: pkg.version, protocol: sidecar.protocol, releases: urls });
@@ -86,10 +86,10 @@ export function addCore(registry, version, releases) {
   const core = existsSync(path) ? read(path) : { versions: [] };
   if (core.versions.some((item) => item.version === version)) throw new Error(`${path}: core version ${version} is already listed`);
   const urls = {};
-  for (const [key, archive] of Object.entries(releases)) {
+  for (const [key, release] of Object.entries(releases)) {
     const name = `soksak-${version}-${key}.zip`;
-    if (basename(archive) !== name) throw new Error(`${archive}: the ${key} archive must be named ${name}`);
-    urls[key] = { url: `${CORE_REPOSITORY}/releases/download/v${version}/${name}`, sha256: sha256(archive) };
+    if (basename(release) !== name) throw new Error(`${release}: the ${key} release must be named ${name}`);
+    urls[key] = { url: `${CORE_REPOSITORY}/releases/download/v${version}/${name}`, sha256: sha256(release) };
   }
   core.versions.push({ version, releases: urls });
   mkdirSync(registry, { recursive: true });
@@ -107,14 +107,14 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   };
   let path;
   if (kind === "plugin") {
-    path = addPlugin(one("registry"), one("package"), one("archive"));
+    path = addPlugin(one("registry"), one("package"), one("release"));
   } else if (kind === "sidecar") {
-    const assets = Object.fromEntries(values("asset").map((value) => {
+    const releases = Object.fromEntries(values("release").map((value) => {
       const at = value.indexOf("=");
-      if (at <= 0) throw new Error(`--asset must be <platform>=<archive>: ${value}`);
+      if (at <= 0) throw new Error(`--release must be <platform>=<tar.gz>: ${value}`);
       return [value.slice(0, at), value.slice(at + 1)];
     }));
-    path = addSidecar(one("registry"), one("package"), assets);
+    path = addSidecar(one("registry"), one("package"), releases);
   } else if (kind === "core") {
     const releases = Object.fromEntries(values("release").map((value) => {
       const at = value.indexOf("=");
@@ -123,7 +123,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     }));
     path = addCore(one("registry"), one("version"), releases);
   } else {
-    throw new Error("usage: add-version.mjs plugin|sidecar|core --registry <dir> (--package <dir> (--archive <tgz> | --asset <platform>=<tar.gz>...) | --version <version> --release <platform>-<host>=<zip>...)");
+    throw new Error("usage: add-version.mjs plugin|sidecar|core --registry <dir> (--package <dir> --release (<tgz> | <platform>=<tar.gz>...) | --version <version> --release <platform>-<host>=<zip>...)");
   }
   console.log(path);
 }
