@@ -1,0 +1,23 @@
+{
+  "id": "hwp",
+  "package": "@soksak/plugin-hwp",
+  "name": "한글 문서",
+  "description": "HWP plugin: opens HWP and HWPX documents of the project in rhwp-studio, the editor of rhwp, and saves them through the files sidecar.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-hwp",
+  "versions": [
+    {
+      "version": "0.0.1",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-hwp/releases/download/v0.0.1/hwp-0.0.1.tgz",
+        "sha256": "31d1807de09dda1ecbb2eeeb8494fe270f862d9acfb52eb465deee22338f53d5"
+      },
+      "engines": {
+        "soksak": ">=0.0.12"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.5"
+      }
+    }
+  ]
+}
