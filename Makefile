@@ -7,5 +7,11 @@ SOK ?= sok
 build:
 	$(SOK) registry build .
 
-test:
+node_modules: package.json
+	pnpm install
+	touch node_modules
+
+# The tests of the scripts and the record check of core (soksak-records of @soksak/plugin-api).
+test: node_modules
 	node --test test/
+	pnpm exec soksak-records
