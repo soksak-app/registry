@@ -9,6 +9,7 @@ A pull request is checked by `validate.yml` and merged by the registry maintaine
 ```sh
 make test                     # tests of the check
 make build SOK=<path to sok>  # builds index.json from the entry files, reading every release
+make hooks                    # once after cloning: check commit messages and records at commit time
 ```
 
 `index.json` is not committed. The checklist is [docs/features.md](docs/features.md).

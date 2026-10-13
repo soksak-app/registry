@@ -1,5 +1,5 @@
 # 공개 registry 의 검사와 index build(core docs/spec/registry.md). build 는 core 의 sok 를 쓴다.
-.PHONY: build test
+.PHONY: build test hooks
 
 SOK ?= sok
 
@@ -15,3 +15,7 @@ node_modules: package.json
 test: node_modules
 	node --test test/
 	pnpm exec soksak-records
+
+# Sets this repository to use .githooks, which checks commit messages and records at commit time.
+hooks:
+	@git config core.hooksPath .githooks

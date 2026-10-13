@@ -9,6 +9,7 @@ pull request는 `validate.yml`이 검사하고 registry 관리자가 검토한 �
 ```sh
 make test                     # 검사의 테스트
 make build SOK=<sok 경로>      # 모든 release를 읽어 항목 파일로 index.json을 만든다
+make hooks                    # clone 후 한 번: commit 때 commit message와 record를 검사
 ```
 
 `index.json`은 commit하지 않는다. Checklist는 [docs/features.ko.md](docs/features.ko.md)다.
