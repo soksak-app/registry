@@ -41,3 +41,4 @@
 - [o] G39 — P1: terminal plugin 0.0.13을 나열한다. drawn preedit in `terminal.cursor`(P45)를 담으며, terminal 체크리스트 항목 P46을 위한 항목이다. 2026-10-14 완료: `add-version.mjs`가 GitHub release의 `terminal-0.0.13.tgz`로 버전을 썼고, 그 `sha256`은 release의 파일과 같다. `make test`가 20개 중 20개 통과하고 record 검사(파일 26개)가 통과한다.
 - [o] G40 — P1: 연결 plugin의 image region을 제공하는 애플리케이션 sidecar 0.0.1을 올린다. `add-version.mjs`가 GitHub release `soksak-sidecar-app-0.0.1-darwin-arm64.tar.gz`에서 버전을 썼고, 그 `sha256`은 release 파일과 같다.
 - [o] G41 — P1: `appview.surface`로 연결 plugin의 공유 embed page를 주고 core 0.0.15를 요구하는 plugin appview 0.0.2를 올린다. `add-version.mjs`가 GitHub release `appview-0.0.2.tgz`에서 버전을 썼고, 그 `sha256`은 release 파일과 같다.
+- [o] G42 — P1: plugin appview 0.0.2를 철회한다: embed page는 각 연결 plugin이 자기 surface에 mount하는 core의 함수이므로, appview는 쓸모가 없고 어떤 plugin도 그것에 의존하지 않는다.
