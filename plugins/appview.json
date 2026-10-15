@@ -1,0 +1,21 @@
+{
+  "id": "appview",
+  "package": "@soksak/plugin-appview",
+  "name": "애플리케이션",
+  "description": "Application plugin: provides the embed page that each connector plugin mounts in its own surface, through the extension point appview.surface.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-appview",
+  "versions": [
+    {
+      "version": "0.0.2",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-appview/releases/download/v0.0.2/appview-0.0.2.tgz",
+        "sha256": "b50b1f636df78a92700a7b34394b79aaf7bc7fbf3617e9498c5f084e03575a1d"
+      },
+      "engines": {
+        "soksak": ">=0.0.15"
+      },
+      "sidecars": {}
+    }
+  ]
+}
