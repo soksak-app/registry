@@ -11,5 +11,11 @@
       "reason": "The plugin has no use: the embed page is a function of core 0.0.16 that each connector plugin mounts in its own surface, so no plugin depends on appview."
     }
   ],
-  "sidecars": []
+  "sidecars": [
+    {
+      "name": "@soksak/sidecar-app",
+      "version": "0.0.1",
+      "reason": "The external application surface is retired, so no plugin uses the application sidecar."
+    }
+  ]
 }

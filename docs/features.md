@@ -42,3 +42,4 @@
 - [o] G40 — P1: List the application sidecar 0.0.1, which serves the image region of connector plugins. `add-version.mjs` wrote the version from its GitHub release `soksak-sidecar-app-0.0.1-darwin-arm64.tar.gz`, whose `sha256` matches the file of the release.
 - [o] G41 — P1: List the plugin appview 0.0.2, which provides the shared embed page of connector plugins through `appview.surface` and requires core 0.0.15. `add-version.mjs` wrote the version from its GitHub release `appview-0.0.2.tgz`, whose `sha256` matches the file of the release.
 - [o] G42 — P1: Revoke the plugin appview 0.0.2: the embed page is a function of core that each connector plugin mounts in its own surface, so appview has no use and no plugin depends on it.
+- [o] G43 — P1: Revoke the application sidecar 0.0.1: the external application surface is retired, so no plugin uses it.
