@@ -46,3 +46,4 @@
 - [o] G44 — P0: sidecar vt 0.0.11을 나열한다. sidecar vt 체크리스트 항목 S63.3을 위한 항목이다. 2026-10-18 완료: `add-version.mjs`가 GitHub release의 `soksak-sidecar-vt-alacritty-0.0.11-darwin-arm64.tar.gz`로 버전을 썼고, 그 `sha256`은 release의 `SHA256SUMS`와 같다. `make test`가 통과한다.
 - [o] G45 — P1: sidecar files 0.0.6을 나열한다. sidecar files 체크리스트 항목 S24를 위한 항목이다. 2026-10-18 완료: `add-version.mjs`가 GitHub release의 `soksak-sidecar-files-0.0.6-darwin-arm64.tar.gz`로 버전을 썼고, 그 `sha256`은 release의 `SHA256SUMS`와 같다. `make test`가 통과한다.
 - [o] G46 — P0: plugin terminal 0.0.14를 나열한다. terminal plugin 체크리스트 항목 P47을 위한 항목이다. 2026-10-18 완료: `add-version.mjs`가 sidecar vt `^0.0.11`을 요구하는 GitHub release `terminal-0.0.14.tgz`로 버전을 썼다. `make test`가 통과한다.
+- [o] G47 — P0: plugin browser  나열한다. browser plugin 체크리스트 항목  위한 항목이다. 2026-10-19 완료: `add-version.mjs`가 GitHub release의 `browser-0.0.6.tgz`로 버전을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make test`가 통과한다.
