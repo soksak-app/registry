@@ -44,3 +44,4 @@
 - [o] G42 — P1: plugin appview 0.0.2를 철회한다: embed page는 각 연결 plugin이 자기 surface에 mount하는 core의 함수이므로, appview는 쓸모가 없고 어떤 plugin도 그것에 의존하지 않는다.
 - [o] G43 — P1: 애플리케이션 sidecar 0.0.1을 철회한다: 외부 애플리케이션 표면이 폐기되어 어떤 plugin도 그것을 쓰지 않는다.
 - [o] G44 — P0: sidecar vt 0.0.11을 나열한다. sidecar vt 체크리스트 항목 S63.3을 위한 항목이다. 2026-10-18 완료: `add-version.mjs`가 GitHub release의 `soksak-sidecar-vt-alacritty-0.0.11-darwin-arm64.tar.gz`로 버전을 썼고, 그 `sha256`은 release의 `SHA256SUMS`와 같다. `make test`가 통과한다.
+- [o] G45 — P1: sidecar files 0.0.6을 나열한다. sidecar files 체크리스트 항목 S24를 위한 항목이다. 2026-10-18 완료: `add-version.mjs`가 GitHub release의 `soksak-sidecar-files-0.0.6-darwin-arm64.tar.gz`로 버전을 썼고, 그 `sha256`은 release의 `SHA256SUMS`와 같다. `make test`가 통과한다.

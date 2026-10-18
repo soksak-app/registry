@@ -44,3 +44,4 @@
 - [o] G42 — P1: Revoke the plugin appview 0.0.2: the embed page is a function of core that each connector plugin mounts in its own surface, so appview has no use and no plugin depends on it.
 - [o] G43 — P1: Revoke the application sidecar 0.0.1: the external application surface is retired, so no plugin uses it.
 - [o] G44 — P0: List the sidecar vt 0.0.11, for the sidecar vt checklist item S63.3. Done on 2026-10-18: `add-version.mjs` wrote the version from its GitHub release `soksak-sidecar-vt-alacritty-0.0.11-darwin-arm64.tar.gz`, whose `sha256` matches the `SHA256SUMS` of the release; `make test` passes.
+- [o] G45 — P1: List the sidecar files 0.0.6, for the sidecar files checklist item S24. Done on 2026-10-18: `add-version.mjs` wrote the version from its GitHub release `soksak-sidecar-files-0.0.6-darwin-arm64.tar.gz`, whose `sha256` matches the `SHA256SUMS` of the release; `make test` passes.
