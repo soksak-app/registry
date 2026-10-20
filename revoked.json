@@ -4,18 +4,7 @@
       "id": "editor",
       "version": "0.0.1",
       "reason": "On core 0.0.7 an open editor tab makes core commands wait without end, and the Tauri application cannot load its shared modules; editor 0.0.2 requires core 0.0.8."
-    },
-    {
-      "id": "appview",
-      "version": "0.0.2",
-      "reason": "The plugin has no use: the embed page is a function of core 0.0.16 that each connector plugin mounts in its own surface, so no plugin depends on appview."
     }
   ],
-  "sidecars": [
-    {
-      "name": "@soksak/sidecar-app",
-      "version": "0.0.1",
-      "reason": "The external application surface is retired, so no plugin uses the application sidecar."
-    }
-  ]
+  "sidecars": []
 }
