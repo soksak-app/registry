@@ -49,3 +49,4 @@
 - [o] G47 — P0: plugin browser  나열한다. browser plugin 체크리스트 항목  위한 항목이다. 2026-10-19 완료: `add-version.mjs`가 GitHub release의 `browser-0.0.6.tgz`로 버전을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make test`가 통과한다.
 - [o] G48 — P0: plugin editor  나열한다. editor plugin 체크리스트 항목  위한 항목이다. 2026-10-19 완료: `add-version.mjs`가 GitHub release의 `editor-0.0.4.tgz`로 버전을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make test`가 통과한다.
 - [o] G49 — P0: plugin hwp  나열한다. hwp plugin 체크리스트 항목  위한 항목이다. 2026-10-19 완료: `add-version.mjs`가 GitHub release의 `hwp-0.0.2.tgz`로 버전을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make test`가 통과한다.
+- [o] G50 — P2: 새 커밋의 작성자는 바뀐 계정 이름 `min-0-max <max@blue.tools>`다. `.mailmap`은 이전 이름 `min-median-max`의 커밋을 새 이름으로 보여 주며, 게시된 커밋은 다시 쓰지 않는다. 완료 2026-10-20: `.mailmap`에 `min-0-max <max@blue.tools> min-median-max <max@blue.tools>` 줄이 있다.
