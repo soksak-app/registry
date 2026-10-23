@@ -1,0 +1,9 @@
+{
+  "name": "@soksak/plugin-api",
+  "version": "0.0.21",
+  "type": "module",
+  "main": "./private-api.js",
+  "exports": {
+    ".": "./public-api.js"
+  }
+}

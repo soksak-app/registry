@@ -14,6 +14,8 @@
 
 `make released-manifest-check INDEX=<registry index>`는 core v0.0.20의 immutable released SDK fixture로 같은 release를 분류한다. 이 검사는 public entry나 철회 항목을 바꾸지 않는다. Development와 released SDK 검사는 서로 다른 package dependency를 사용하며 각자 자신의 manifest reader에 대한 호환성만 보고한다.
 
+`make candidate-manifest-check INDEX=<registry index> CORE_PLUGIN_API_DIR=<plugin-api package directory> CANDIDATE_VERSION=<version>`는 local core SDK candidate를 검사한다. 명령은 package의 `exports["."]`가 선언한 root만 읽고 `package.json` version이 `CANDIDATE_VERSION`과 일치해야 한다. 이 검사는 고정 development SDK 및 released v0.0.20 SDK와 분리된다. Local candidate index만 검사하며 public entry나 철회 항목은 바꾸지 않는다.
+
 registry 관리자는 검사를 통과한 pull request를 검토해 merge하고, merge가 index를 게시한다. 게시한 version은 바뀌지 않는다. version을 철회하려면 registry 관리자에게 `revoked.json`에 올려 달라고 요청한다.
 
 pack, `revoked.json`, registry 자신의 파일은 registry 관리자만 바꾼다.

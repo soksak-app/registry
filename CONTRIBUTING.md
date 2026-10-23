@@ -14,6 +14,8 @@ Run `make development-manifest-check INDEX=<registry index>` to check every unre
 
 Run `make released-manifest-check INDEX=<registry index>` to classify those releases with the immutable released SDK fixture pinned to core v0.0.20. This is a read-only compatibility check; it does not change public entries or revocations. The development and released SDK checks use separate package dependencies and report compatibility only for their own manifest readers.
 
+Run `make candidate-manifest-check INDEX=<registry index> CORE_PLUGIN_API_DIR=<plugin-api package directory> CANDIDATE_VERSION=<version>` to check a local core SDK candidate. The command reads only the package root declared by `exports["."]` and requires its `package.json` version to match `CANDIDATE_VERSION`. This check is separate from both the pinned development SDK and the released v0.0.20 SDK. It validates a local candidate index and does not change public entries or revocations.
+
 The registry maintainers review a pull request whose check passes and merge it, and the merge publishes the index. A published version does not change; ask the registry maintainers to revoke a version in `revoked.json`.
 
 Packs, `revoked.json` and the registry's own files are changed only by the registry maintainers.

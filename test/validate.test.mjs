@@ -7,7 +7,7 @@ import { createRequire } from "node:module";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import test from "node:test";
 import { validateManifest } from "@soksak/plugin-api";
 import { checkCore, validate } from "../scripts/validate.mjs";
@@ -226,6 +226,38 @@ test("the released core 0.0.20 reader accepts its published surface and state mo
   });
   assert.equal(releasedVersion, "0.0.20");
   assert.deepEqual(result, { checked: 1, errors: [] });
+});
+
+test("the candidate checker resolves the explicit SDK package root and version", { timeout: 10000 }, async (t) => {
+  const { candidateManifestErrors } = await import("../scripts/check-candidate-plugin-manifests.mjs");
+  const apiDir = fileURLToPath(new URL("./candidate-sdk/", import.meta.url));
+  const current = {
+    id: "probe", name: "Probe", description: "Sample.", mark: "P", icon: "<svg></svg>",
+    surface: { composition: { kind: "view", page: "ui/page.html" } },
+  };
+  const legacy = { ...current, surface: { ...current.surface, module: "ui/plugin.js" } };
+  const currentRelease = pluginRelease(t, current);
+  const legacyRelease = pluginRelease(t, legacy);
+  const releases = new Map([["current", currentRelease.bytes], ["legacy", legacyRelease.bytes]]);
+  const index = {
+    plugins: [{ id: "probe", versions: [
+      { version: "0.1.0", release: { url: "current", sha256: currentRelease.sha256 }, engines: { soksak: "^0.0.21" }, sidecars: {} },
+      { version: "0.1.1", release: { url: "legacy", sha256: legacyRelease.sha256 }, engines: { soksak: "^0.0.21" }, sidecars: {} },
+      { version: "0.1.2", release: { url: "current", sha256: currentRelease.sha256 }, engines: { soksak: "^0.0.20" }, sidecars: {} },
+      { version: "0.1.3", release: { url: "legacy", sha256: legacyRelease.sha256 }, engines: { soksak: "^0.0.21" }, sidecars: {} },
+    ] }],
+    revoked: { plugins: [{ id: "probe", version: "0.1.3", reason: "Fixture revocation." }], sidecars: [] },
+  };
+  const result = await candidateManifestErrors(index, {
+    apiDir, version: "0.0.21", fetchRelease: async (url) => releases.get(url),
+  });
+  assert.deepEqual(result, {
+    version: "0.0.21", checked: 2,
+    errors: ["plugin probe 0.1.1: surface.module is not supported by this SDK"],
+  });
+  await assert.rejects(candidateManifestErrors(index, {
+    apiDir, version: "0.0.20", fetchRelease: async (url) => releases.get(url),
+  }), /candidate SDK package version 0\.0\.21 differs from requested 0\.0\.20/);
 });
 
 test("the GitHub API answers decide the account type and the public membership", async (t) => {
