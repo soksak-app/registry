@@ -12,6 +12,8 @@
 
 `make development-manifest-check INDEX=<registry index>`는 이 repository가 고정한 development SDK version이 `engines.soksak`에 포함되는 철회되지 않은 모든 plugin release를 검사한다. 이 명령은 development `@soksak/plugin-api` manifest reader를 사용한다. 결과는 해당 development commit과의 호환성만 나타내며 released core tag와의 호환성을 입증하지 않는다. 특히 같은 version 번호라도 development SDK와 released core tag의 manifest contract가 다를 수 있다. Development 호환성 결과를 release 검사와 분리하고, 공개 entry나 철회를 바꾸기 전에 다음 SDK release identity와 사용자 영향을 해결한다.
 
+`make released-manifest-check INDEX=<registry index>`는 core v0.0.20의 immutable released SDK fixture로 같은 release를 분류한다. 이 검사는 public entry나 철회 항목을 바꾸지 않는다. Development와 released SDK 검사는 서로 다른 package dependency를 사용하며 각자 자신의 manifest reader에 대한 호환성만 보고한다.
+
 registry 관리자는 검사를 통과한 pull request를 검토해 merge하고, merge가 index를 게시한다. 게시한 version은 바뀌지 않는다. version을 철회하려면 registry 관리자에게 `revoked.json`에 올려 달라고 요청한다.
 
 pack, `revoked.json`, registry 자신의 파일은 registry 관리자만 바꾼다.

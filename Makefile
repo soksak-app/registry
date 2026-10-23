@@ -1,5 +1,5 @@
 # 공개 registry 의 검사와 index build(core docs/spec/registry.md). build 는 core 의 sok 를 쓴다.
-.PHONY: build test development-manifest-check hooks
+.PHONY: build test development-manifest-check released-sdk-fixture released-manifest-check hooks
 
 SOK ?= sok
 
@@ -13,12 +13,19 @@ development-manifest-check: node_modules
 	@test -n "$(INDEX)" || { echo "development-manifest-check needs INDEX=<registry index>" >&2; exit 2; }
 	node scripts/check-plugin-manifests.mjs --index "$(INDEX)"
 
+released-sdk-fixture:
+	pnpm --dir test/released-core-v0.0.20 install --frozen-lockfile
+
+released-manifest-check: released-sdk-fixture
+	@test -n "$(INDEX)" || { echo "released-manifest-check needs INDEX=<registry index>" >&2; exit 2; }
+	node scripts/check-released-plugin-manifests.mjs --index "$(INDEX)"
+
 node_modules: package.json
 	pnpm install
 	touch node_modules
 
 # The tests of the scripts and the record check of core (soksak-records of @soksak/plugin-api).
-test: node_modules
+test: node_modules released-sdk-fixture
 	node --test test/
 	pnpm exec soksak-records
 

@@ -3,10 +3,13 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
+import { createRequire } from "node:module";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { pathToFileURL } from "node:url";
 import test from "node:test";
+import { validateManifest } from "@soksak/plugin-api";
 import { checkCore, validate } from "../scripts/validate.mjs";
 
 const SHA = "a".repeat(64);
@@ -193,6 +196,36 @@ test("the compatibility check validates the current form and skips revoked or ou
     "plugin probe 0.1.2: plugin probe: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)",
     "plugin probe 0.1.3: plugin probe: state is removed; a plugin keeps project data through its host (docs/spec/plugins.md#project-data)",
   ]);
+});
+
+test("the released core 0.0.20 reader accepts its published surface and state module form", { timeout: 10000 }, async (t) => {
+  const { registryManifestErrors } = await import("../scripts/check-plugin-manifests.mjs");
+  const releaseRequire = createRequire(new URL("../test/released-core-v0.0.20/package.json", import.meta.url));
+  const releasedEntry = releaseRequire.resolve("@soksak/plugin-api");
+  const releasedApi = await import(pathToFileURL(releasedEntry).href);
+  const releasedVersion = JSON.parse(readFileSync(join(dirname(releasedEntry), "package.json"), "utf8")).version;
+  const legacy = {
+    id: "probe", name: "Probe", description: "Sample.", mark: "P", icon: "<svg></svg>",
+    surface: {
+      module: "ui/plugin.js",
+      composition: { kind: "hybrid", regions: [{ name: "document", kind: "document", input: "native" }], overlays: [] },
+    },
+    state: { module: "ui/state.js" }, sections: [],
+  };
+  assert.throws(() => validateManifest(legacy), /state is removed/);
+  const { bytes, sha256 } = pluginRelease(t, legacy);
+  const result = await registryManifestErrors({
+    plugins: [{ id: "probe", versions: [{
+      version: "0.1.0", release: { url: "fixture", sha256 }, engines: { soksak: ">=0.0.20" }, sidecars: {},
+    }] }],
+    revoked: { plugins: [], sidecars: [] },
+  }, async () => bytes, {
+    version: releasedVersion,
+    rangeContains: releasedApi.rangeContains,
+    validateManifest: releasedApi.validateManifest,
+  });
+  assert.equal(releasedVersion, "0.0.20");
+  assert.deepEqual(result, { checked: 1, errors: [] });
 });
 
 test("the GitHub API answers decide the account type and the public membership", async (t) => {

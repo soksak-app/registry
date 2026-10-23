@@ -1,0 +1,8 @@
+{
+  "name": "registry-released-core-v0.0.20",
+  "private": true,
+  "packageManager": "pnpm@11.24.0",
+  "devDependencies": {
+    "@soksak/plugin-api": "git+https://github.com/soksak-app/core.git#v0.0.20&path:/packages/plugin-api"
+  }
+}
