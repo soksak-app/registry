@@ -9,16 +9,23 @@ importers:
   .:
     devDependencies:
       '@soksak/plugin-api':
-        specifier: git+https://github.com/soksak-app/core.git#v0.0.11&path:/packages/plugin-api
-        version: https://codeload.github.com/soksak-app/core/tar.gz/26e7ddb8171315f8ffff643c0e82e5cc278f9570#path:/packages/plugin-api
+        specifier: git+https://github.com/soksak-app/core.git#6dc6ec00bb0bbcdda8980035e702edf74af3f78b&path:/packages/plugin-api
+        version: https://codeload.github.com/soksak-app/core/tar.gz/6dc6ec00bb0bbcdda8980035e702edf74af3f78b#path:/packages/plugin-api
 
 packages:
 
-  '@soksak/plugin-api@https://codeload.github.com/soksak-app/core/tar.gz/26e7ddb8171315f8ffff643c0e82e5cc278f9570#path:/packages/plugin-api':
-    resolution: {gitHosted: true, path: /packages/plugin-api, tarball: https://codeload.github.com/soksak-app/core/tar.gz/26e7ddb8171315f8ffff643c0e82e5cc278f9570}
-    version: 0.0.11
+  '@soksak/plugin-api@https://codeload.github.com/soksak-app/core/tar.gz/6dc6ec00bb0bbcdda8980035e702edf74af3f78b#path:/packages/plugin-api':
+    resolution: {gitHosted: true, integrity: sha512-vK8O7PJFAF0soyrnsim3m1yEYDuSK2hl2uUD+S4B3IRBi3Z613NLgjghrTofdziSq72oxa3V6cRZDNNialSOLg==, path: /packages/plugin-api, tarball: https://codeload.github.com/soksak-app/core/tar.gz/6dc6ec00bb0bbcdda8980035e702edf74af3f78b}
+    version: 0.0.20
     hasBin: true
+
+  es-module-lexer@3.0.4:
+    resolution: {integrity: sha512-BldNY5mwkVu+cQ5Ymn3e6hB9Sx8XHx4ZevWbiUyZbfKxJxYO27Hf0wfzkxIaD5CAJMaGl3YspKELj0ff/7nCMA==}
 
 snapshots:
 
-  '@soksak/plugin-api@https://codeload.github.com/soksak-app/core/tar.gz/26e7ddb8171315f8ffff643c0e82e5cc278f9570#path:/packages/plugin-api': {}
+  '@soksak/plugin-api@https://codeload.github.com/soksak-app/core/tar.gz/6dc6ec00bb0bbcdda8980035e702edf74af3f78b#path:/packages/plugin-api':
+    dependencies:
+      es-module-lexer: 3.0.4
+
+  es-module-lexer@3.0.4: {}

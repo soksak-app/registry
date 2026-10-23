@@ -5,6 +5,6 @@
   "license": "MIT",
   "packageManager": "pnpm@11.24.0",
   "devDependencies": {
-    "@soksak/plugin-api": "git+https://github.com/soksak-app/core.git#v0.0.11&path:/packages/plugin-api"
+    "@soksak/plugin-api": "git+https://github.com/soksak-app/core.git#6dc6ec00bb0bbcdda8980035e702edf74af3f78b&path:/packages/plugin-api"
   }
 }

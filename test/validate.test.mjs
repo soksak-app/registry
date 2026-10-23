@@ -1,6 +1,8 @@
 // pull request 검사(scripts/validate.mjs)를 core docs/spec/registry.md 의 규칙마다 검사한다. GitHub API 와
 // `sok registry build` 는 검사가 주는 가짜다.
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -54,8 +56,25 @@ const github = {
 async function check(t, baseFiles, headFiles, author = "alice") {
   const dirs = registries(t, baseFiles, headFiles);
   const built = [];
-  const errors = await validate({ ...dirs, author, github, build: (dir) => built.push(readFileSync(join(dir, "plugins/probe.json"), "utf8")) });
+  const errors = await validate({ ...dirs, author, github, build: (dir) => {
+    const entry = readFileSync(join(dir, "plugins/probe.json"), "utf8");
+    built.push(entry);
+    writeFileSync(join(dir, "index.json"), JSON.stringify({
+      plugins: [JSON.parse(entry)], revoked: { plugins: [], sidecars: [] },
+    }));
+  } });
   return { errors, built };
+}
+
+function pluginRelease(t, manifest) {
+  const root = mkdtempSync(join(tmpdir(), "soksak-registry-plugin-release-"));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const manifestPath = join(root, "plugin.json");
+  const archivePath = join(root, "probe-0.1.0.tgz");
+  writeFileSync(manifestPath, JSON.stringify(manifest));
+  execFileSync("tar", ["-czf", archivePath, "-C", root, "plugin.json"]);
+  const bytes = readFileSync(archivePath);
+  return { bytes, sha256: createHash("sha256").update(bytes).digest("hex") };
 }
 
 test("an owner adds a plugin entry and the whole registry is built", async (t) => {
@@ -137,6 +156,43 @@ test("a failed registry build fails the check with its reason", async (t) => {
   const dirs = registries(t, {}, { "plugins/probe.json": plugin() });
   const errors = await validate({ ...dirs, author: "alice", github, build: () => { throw new Error("sha256 differs"); } });
   assert.deepEqual(errors, ["sok registry build: sha256 differs"]);
+});
+
+test("the compatibility check validates the current form and skips revoked or out-of-range releases", { timeout: 10000 }, async (t) => {
+  const { registryManifestErrors } = await import("../scripts/check-plugin-manifests.mjs");
+  assert.equal(typeof registryManifestErrors, "function");
+  const base = {
+    id: "probe", name: "Probe", description: "Sample.", mark: "P", icon: "<svg></svg>",
+    surface: { composition: { kind: "view", page: "ui/page.html" } },
+  };
+  const bytes = new Map([
+    ["current", pluginRelease(t, base).bytes],
+    ["module", pluginRelease(t, { ...base, surface: { ...base.surface, module: "ui/plugin.js" } }).bytes],
+    ["state", pluginRelease(t, { ...base, state: {} }).bytes],
+    ["old", pluginRelease(t, { ...base, surface: { module: "ui/plugin.js" } }).bytes],
+    ["revoked", pluginRelease(t, { ...base, surface: { module: "ui/plugin.js" } }).bytes],
+  ]);
+  const versions = ["current", "module", "state", "old", "revoked"].map((key, index) => ({
+    version: `0.1.${index + 1}`,
+    release: { url: key, sha256: createHash("sha256").update(bytes.get(key)).digest("hex") },
+    engines: { soksak: key === "old" ? "^0.0.11" : ">=0.0.20" },
+    sidecars: {},
+  }));
+  const index = {
+    plugins: [{ id: "probe", versions }],
+    revoked: { plugins: [{ id: "probe", version: "0.1.5", reason: "Fixture revocation." }], sidecars: [] },
+  };
+  const requested = [];
+  const result = await registryManifestErrors(index, async (key) => {
+    requested.push(key);
+    return bytes.get(key);
+  });
+  assert.equal(result.checked, 3);
+  assert.deepEqual(requested.sort(), ["current", "module", "state"]);
+  assert.deepEqual(result.errors, [
+    "plugin probe 0.1.2: plugin probe: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)",
+    "plugin probe 0.1.3: plugin probe: state is removed; a plugin keeps project data through its host (docs/spec/plugins.md#project-data)",
+  ]);
 });
 
 test("the GitHub API answers decide the account type and the public membership", async (t) => {
