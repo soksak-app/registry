@@ -1,5 +1,5 @@
 # 공개 registry 의 검사와 index build(core docs/spec/registry.md). build 는 core 의 sok 를 쓴다.
-.PHONY: build test development-manifest-check released-sdk-fixture released-manifest-check candidate-manifest-check hooks
+.PHONY: build test development-manifest-check released-sdk-fixture released-manifest-check candidate-manifest-check candidate-release hooks
 
 SOK ?= sok
 
@@ -25,6 +25,14 @@ candidate-manifest-check: node_modules
 	@test -n "$(CORE_PLUGIN_API_DIR)" || { echo "candidate-manifest-check needs CORE_PLUGIN_API_DIR=<plugin-api package directory>" >&2; exit 2; }
 	@test -n "$(CANDIDATE_VERSION)" || { echo "candidate-manifest-check needs CANDIDATE_VERSION=<version>" >&2; exit 2; }
 	CORE_PLUGIN_API_DIR="$(CORE_PLUGIN_API_DIR)" CANDIDATE_VERSION="$(CANDIDATE_VERSION)" node scripts/check-candidate-plugin-manifests.mjs --index "$(INDEX)"
+
+# Builds a private candidate index and proof. It never publishes the index.
+candidate-release: node_modules
+	@test -n "$(CANDIDATE_ENTRIES)" || { echo "candidate-release needs CANDIDATE_ENTRIES=<registry declarations>" >&2; exit 2; }
+	@test -n "$(CORE_SOURCE_DIR)" || { echo "candidate-release needs CORE_SOURCE_DIR=<core checkout>" >&2; exit 2; }
+	@test -n "$(CORE_PLUGIN_API_DIR)" || { echo "candidate-release needs CORE_PLUGIN_API_DIR=<plugin-api package>" >&2; exit 2; }
+	@test -n "$(OUT)" || { echo "candidate-release needs OUT=<private output directory>" >&2; exit 2; }
+	node scripts/build-candidate-release.mjs --entries "$(CANDIDATE_ENTRIES)" --core "$(CORE_SOURCE_DIR)" --api "$(CORE_PLUGIN_API_DIR)" --sok "$(SOK)" --out "$(OUT)"
 
 node_modules: package.json
 	pnpm install

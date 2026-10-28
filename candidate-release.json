@@ -1,0 +1,44 @@
+{
+  "format": 1,
+  "candidateCore": {
+    "version": "0.0.21",
+    "sourceRevision": "25b3f123043ff9fbe82165543affdf6f69c1c35b",
+    "apiVersion": "0.0.21",
+    "apiTree": "cf119515b4006e6a254390ff6e1fbc60e2ed8748"
+  },
+  "replacementPlugins": [
+    { "id": "browser", "version": "0.0.7" },
+    { "id": "editor", "version": "0.0.7" },
+    { "id": "files", "version": "0.0.8" },
+    { "id": "hwp", "version": "0.0.5" },
+    { "id": "terminal", "version": "0.0.21" }
+  ],
+  "replacementSidecars": [
+    { "name": "@soksak/sidecar-files", "version": "0.0.8" },
+    { "name": "@soksak/sidecar-vt-alacritty", "version": "0.0.17" }
+  ],
+  "additionalPluginRevocations": [
+    { "id": "browser", "version": "0.0.4", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "browser", "version": "0.0.5", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "browser", "version": "0.0.6", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "editor", "version": "0.0.2", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "editor", "version": "0.0.3", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "editor", "version": "0.0.4", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "files", "version": "0.0.4", "reason": "Core 0.0.21 rejects this release's removed state field." },
+    { "id": "files", "version": "0.0.5", "reason": "Core 0.0.21 rejects this release's removed state field." },
+    { "id": "files", "version": "0.0.6", "reason": "Core 0.0.21 rejects this release's removed state field." },
+    { "id": "hwp", "version": "0.0.1", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "hwp", "version": "0.0.2", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.4", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.5", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.6", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.7", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.8", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.9", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.10", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.11", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.12", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.13", "reason": "Core 0.0.21 rejects this release's removed surface module field." },
+    { "id": "terminal", "version": "0.0.14", "reason": "Core 0.0.21 rejects this release's removed surface module field." }
+  ]
+}

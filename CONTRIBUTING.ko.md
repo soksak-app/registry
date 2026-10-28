@@ -16,6 +16,8 @@
 
 `make candidate-manifest-check INDEX=<registry index> CORE_PLUGIN_API_DIR=<plugin-api package directory> CANDIDATE_VERSION=<version>`는 local core SDK candidate를 검사한다. 명령은 package의 `exports["."]`가 선언한 root만 읽고 `package.json` version이 `CANDIDATE_VERSION`과 일치해야 한다. 이 검사는 고정 development SDK 및 released v0.0.20 SDK와 분리된다. Local candidate index만 검사하며 public entry나 철회 항목은 바꾸지 않는다.
 
+선언된 component release가 모두 존재한 뒤에만 `make candidate-release CANDIDATE_ENTRIES=<registry declarations> CORE_SOURCE_DIR=<core checkout> CORE_PLUGIN_API_DIR=<plugin-api package> OUT=<private output directory> SOK=<sok>`을 실행한다. Candidate entry directory에는 `plugins/`와 `sidecars/` JSON entry만 둔다. 명령은 `candidate-release.json`의 정확한 projection과 revocation delta를 읽고 registry 및 core SDK source revision을 확인한 뒤 `sok registry build`로 임시 registry를 만들고 선언된 revocation 전후의 manifest 호환성을 검사한다. `index.json`과 `proof.json`은 private output directory에만 쓰며 registry declaration을 바꾸거나 index를 게시하지 않는다.
+
 registry 관리자는 검사를 통과한 pull request를 검토해 merge하고, merge가 index를 게시한다. 게시한 version은 바뀌지 않는다. version을 철회하려면 registry 관리자에게 `revoked.json`에 올려 달라고 요청한다.
 
 pack, `revoked.json`, registry 자신의 파일은 registry 관리자만 바꾼다.

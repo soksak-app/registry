@@ -16,6 +16,8 @@ Run `make released-manifest-check INDEX=<registry index>` to classify those rele
 
 Run `make candidate-manifest-check INDEX=<registry index> CORE_PLUGIN_API_DIR=<plugin-api package directory> CANDIDATE_VERSION=<version>` to check a local core SDK candidate. The command reads only the package root declared by `exports["."]` and requires its `package.json` version to match `CANDIDATE_VERSION`. This check is separate from both the pinned development SDK and the released v0.0.20 SDK. It validates a local candidate index and does not change public entries or revocations.
 
+Run `make candidate-release CANDIDATE_ENTRIES=<registry declarations> CORE_SOURCE_DIR=<core checkout> CORE_PLUGIN_API_DIR=<plugin-api package> OUT=<private output directory> SOK=<sok>` only after the declared component releases exist. The candidate entry directory holds only `plugins/` and `sidecars/` JSON entries. The command reads the exact projection and revocation delta from `candidate-release.json`, checks the registry and core SDK source revisions, builds a temporary registry with `sok registry build`, and checks manifest compatibility before and after the declared revocations. It writes `index.json` and `proof.json` only to the private output directory; it does not modify the registry declarations or publish the index.
+
 The registry maintainers review a pull request whose check passes and merge it, and the merge publishes the index. A published version does not change; ask the registry maintainers to revoke a version in `revoked.json`.
 
 Packs, `revoked.json` and the registry's own files are changed only by the registry maintainers.
