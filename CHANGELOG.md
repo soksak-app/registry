@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- G53.5 updates the candidate SDK source revision and API tree after the
+  package changed. The declaration test caught the stale identity; all eight
+  candidate-release owner tests pass. The source is not claimed as publicly
+  fetchable, and no candidate artifact was generated or published.
 - G53.4 preserves the current optional core revocation list shape. The
   projection accepts an omitted list, treats its empty list as equivalent to
   the index builder's canonical omission, and rejects loss of nonempty core

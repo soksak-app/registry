@@ -2,9 +2,9 @@
   "format": 1,
   "candidateCore": {
     "version": "0.0.21",
-    "sourceRevision": "25b3f123043ff9fbe82165543affdf6f69c1c35b",
+    "sourceRevision": "4f82fb9c3307e3f4e6e834c3d336629275e45cac",
     "apiVersion": "0.0.21",
-    "apiTree": "cf119515b4006e6a254390ff6e1fbc60e2ed8748"
+    "apiTree": "be339bee7795107ad61794f6b10874f218e3c835"
   },
   "replacementPlugins": [
     { "id": "browser", "version": "0.0.7" },
