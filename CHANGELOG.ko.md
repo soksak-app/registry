@@ -2,6 +2,10 @@
 
 ## 미출시
 
+- G53.4는 선택적인 core revocation 목록 형식을 보존한다. Projection은
+  목록 생략을 허용하고, 빈 목록은 index builder의 정규 생략 형식과 같게
+  처리하며, 비어 있지 않은 core revocation이 사라지는 것은 거부한다.
+  Candidate-release owner test 7개가 통과하고 registry schema와 public data는 바뀌지 않는다.
 - G53.3은 하나의 registry 선언에서 비공개 candidate index와 proof를 만든다.
   Proof는 candidate SDK API tree가 선언된 source commit 및 현재 checkout과
   모두 일치하는지, 대체 plugin 호환성 검사가 비어 있지 않고 정확한지 요구한다.

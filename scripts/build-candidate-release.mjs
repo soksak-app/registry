@@ -131,8 +131,8 @@ export function projectCandidateDeclarations({ base, additions, plan }) {
     throw new Error(`candidate core ${plan.candidateCore.version} already has registry assets`);
   }
   const existingRevocations = base.revoked?.plugins;
-  if (!Array.isArray(existingRevocations) || !Array.isArray(base.revoked.sidecars) || !Array.isArray(base.revoked.core)) {
-    throw new Error("registry revoked.json must declare plugin, sidecar and core arrays");
+  if (!Array.isArray(existingRevocations) || !Array.isArray(base.revoked.sidecars) || (Object.hasOwn(base.revoked, "core") && !Array.isArray(base.revoked.core))) {
+    throw new Error("registry revoked.json must declare plugin and sidecar arrays and an optional core array");
   }
   const existingKeys = uniqueIdentities(existingRevocations, "id", "existing plugin revocations");
   for (const item of pluginDelta) {
@@ -235,6 +235,16 @@ function equalIdentities(left, right, field) {
   return JSON.stringify(keys(left)) === JSON.stringify(keys(right));
 }
 
+function sameRevocations(left, right) {
+  if (left === null || typeof left !== "object" || right === null || typeof right !== "object") return false;
+  const withoutEmptyCore = (value) => {
+    const normalized = clone(value);
+    if (Array.isArray(normalized.core) && normalized.core.length === 0) delete normalized.core;
+    return normalized;
+  };
+  return isDeepStrictEqual(withoutEmptyCore(left), withoutEmptyCore(right));
+}
+
 function indexProjectionErrors(index, base, declarations, plan) {
   const errors = [];
   const coreVersions = index.core?.versions?.map(({ version }) => version) ?? [];
@@ -246,7 +256,7 @@ function indexProjectionErrors(index, base, declarations, plan) {
   for (const [version, entry] of expectedCore) {
     if (!isDeepStrictEqual(actualCore.get(version), entry)) errors.push(`candidate index changes core ${version}`);
   }
-  if (!isDeepStrictEqual(index.revoked, declarations.revoked)) errors.push("candidate index changes the revocation declarations");
+  if (!sameRevocations(index.revoked, declarations.revoked)) errors.push("candidate index changes the revocation declarations");
   for (const [name, expectedEntries, actualEntries] of [
     ["plugin", declarations.plugins, index.plugins],
     ["sidecar", declarations.sidecars, index.sidecars],

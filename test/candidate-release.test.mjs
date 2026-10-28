@@ -40,7 +40,7 @@ function fixture() {
   const candidatePlugins = plan.replacementPlugins.map(({ id, version }) => entry(id, [pluginVersion(version, "^0.0.21")]));
   const sidecars = plan.replacementSidecars.map(({ name }) => sidecarEntry(name, "0.0.4"));
   const candidateSidecars = plan.replacementSidecars.map(({ name, version }) => sidecarEntry(name, version));
-  const revoked = { plugins: [{ id: "editor", version: "0.0.1", reason: "Existing revocation." }], sidecars: [], core: [] };
+  const revoked = { plugins: [{ id: "editor", version: "0.0.1", reason: "Existing revocation." }], sidecars: [] };
   const core = { versions: ["0.0.9", "0.0.10", "0.0.11"].map((version) => ({ version, releases: {} })) };
   return {
     base: { plugins, sidecars, packs: [{ name: "starter", description: "Starter", plugins: ids }], core, revoked },
@@ -78,6 +78,63 @@ test("candidate projection appends only declared components and revocations whil
     assert.ok(actual.versions.some(({ version }) => version === expected.version), `${expected.name}@${expected.version}`);
   }
   assert.deepEqual(projected.revoked.plugins.slice(base.revoked.plugins.length), plan.additionalPluginRevocations);
+});
+
+test("candidate projection preserves the optional core revocation member exactly", { timeout: 10_000 }, () => {
+  const { base, additions } = fixture();
+  const projectedWithoutCore = projectCandidateDeclarations({ base, additions, plan });
+  assert.equal(Object.hasOwn(projectedWithoutCore.revoked, "core"), false);
+
+  const withCore = structuredClone(base);
+  withCore.revoked.core = [{ version: "0.0.8", reason: "Existing core revocation." }];
+  const projectedWithCore = projectCandidateDeclarations({ base: withCore, additions, plan });
+  assert.deepEqual(projectedWithCore.revoked.core, withCore.revoked.core);
+});
+
+test("candidate proof accepts the index builder's omitted empty core revocations but preserves nonempty entries", { timeout: 10_000 }, () => {
+  const { base, additions } = fixture();
+  const baseWithEmptyCore = structuredClone(base);
+  baseWithEmptyCore.revoked.core = [];
+  const declarations = projectCandidateDeclarations({ base: baseWithEmptyCore, additions, plan });
+  const index = { ...declarations, format: 1, revoked: structuredClone(declarations.revoked) };
+  delete index.revoked.core;
+  const indexBytes = Buffer.from(`${JSON.stringify(index)}\n`);
+  const rejectedVersions = plan.additionalPluginRevocations.map(({ id, version }) => ({ id, version, field: "surface module" }));
+  const proofInput = {
+    plan,
+    registrySourceRevision: "1".repeat(40),
+    sdkIdentity: {
+      sourceRevision: plan.candidateCore.sourceRevision,
+      apiVersion: plan.candidateCore.apiVersion,
+      apiTree: plan.candidateCore.apiTree,
+    },
+    indexBytes,
+    coreBytes: Buffer.from(`${JSON.stringify(baseWithEmptyCore.core, null, 2)}\n`),
+    index,
+    base: baseWithEmptyCore,
+    declarations,
+    rejectedVersions,
+    candidateManifestChecked: plan.replacementPlugins.length,
+  };
+
+  const proof = createCandidateProof(proofInput);
+  assert.deepEqual(proof.preservedRevocations, baseWithEmptyCore.revoked);
+
+  const baseWithCoreRevocation = structuredClone(baseWithEmptyCore);
+  baseWithCoreRevocation.revoked.core = [{ version: "0.0.8", reason: "Existing core revocation." }];
+  const nonemptyDeclarations = projectCandidateDeclarations({ base: baseWithCoreRevocation, additions, plan });
+  const nonemptyIndex = { ...nonemptyDeclarations, format: 1, revoked: { ...nonemptyDeclarations.revoked } };
+  delete nonemptyIndex.revoked.core;
+  assert.throws(
+    () => createCandidateProof({
+      ...proofInput,
+      index: nonemptyIndex,
+      declarations: nonemptyDeclarations,
+      base: baseWithCoreRevocation,
+      coreBytes: Buffer.from(`${JSON.stringify(baseWithCoreRevocation.core, null, 2)}\n`),
+    }),
+    /candidate index changes the revocation declarations/,
+  );
 });
 
 test("candidate projection refuses a component version that differs from the declaration", { timeout: 10_000 }, () => {
@@ -288,6 +345,11 @@ test("candidate release uses registry build, checks both manifest projections an
   assert.equal(manifestChecks.length, 2);
   assert.deepEqual(manifestChecks.map(({ revoked }) => revoked), [base.revoked.plugins.length, base.revoked.plugins.length + plan.additionalPluginRevocations.length]);
   assert.equal(result.proofValue.indexSha256, createHash("sha256").update(readFileSync(result.index)).digest("hex"));
+  const generatedIndex = JSON.parse(readFileSync(result.index, "utf8"));
+  assert.deepEqual(generatedIndex.revoked, {
+    ...base.revoked,
+    plugins: [...base.revoked.plugins, ...plan.additionalPluginRevocations],
+  });
 
   writeFileSync(join(apiDir, "index.mjs"), "export const changedAfterCandidateCommit = true;\n");
   const laterCoreRevision = commitFixture(coreSourceDir);
