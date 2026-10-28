@@ -49,15 +49,6 @@ function fixture() {
   };
 }
 
-test("candidate release declaration pins the selected SDK source and API tree", { timeout: 10_000 }, () => {
-  assert.deepEqual(plan.candidateCore, {
-    version: "0.0.21",
-    sourceRevision: "4f82fb9c3307e3f4e6e834c3d336629275e45cac",
-    apiVersion: "0.0.21",
-    apiTree: "be339bee7795107ad61794f6b10874f218e3c835",
-  });
-});
-
 function writeJson(path, value) {
   mkdirSync(path.slice(0, path.lastIndexOf("/")), { recursive: true });
   writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`);

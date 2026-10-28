@@ -3,8 +3,9 @@
 ## 미출시
 
 - G53.5는 package 변경 후 candidate SDK source revision과 API tree를 갱신한다.
-  Declaration test가 오래된 identity를 찾았고 candidate-release owner test 8개가
-  통과한다. Source가 public fetch 가능하다고 주장하지 않으며 candidate artifact를
+  이전 8-test 실행에는 통과한 동작 test 7개와 declaration을 복사한 data-only
+  mirror assertion 1개가 포함됐다. 중복 assertion은 제거했다. Metadata 갱신은
+  동작을 바꾸지 않고 public fetchability를 주장하지 않는다. Candidate artifact를
   생성하거나 게시하지 않았다.
 - G53.4는 선택적인 core revocation 목록 형식을 보존한다. Projection은
   목록 생략을 허용하고, 빈 목록은 index builder의 정규 생략 형식과 같게
