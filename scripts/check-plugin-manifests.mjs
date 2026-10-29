@@ -1,34 +1,14 @@
 #!/usr/bin/env node
 // Checks plugin releases against the manifest reader of the SDK pinned by this registry.
 //   node scripts/check-plugin-manifests.mjs --index <registry index>
-import { createHash } from "node:crypto";
-import { execFileSync } from "node:child_process";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { rangeContains as developmentRangeContains, validateManifest as developmentValidateManifest } from "@soksak/plugin-api";
+import { fetchBytes, verifiedManifest } from "./plugin-release.mjs";
 
 const API_ENTRY = fileURLToPath(import.meta.resolve("@soksak/plugin-api"));
 export const PLUGIN_API_VERSION = JSON.parse(readFileSync(join(dirname(API_ENTRY), "package.json"), "utf8")).version;
-
-async function fetchBytes(url) {
-  if (url.startsWith("file:")) return readFileSync(fileURLToPath(url));
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
-  return Buffer.from(await response.arrayBuffer());
-}
-
-function releaseManifest(bytes) {
-  const folder = mkdtempSync(join(tmpdir(), "soksak-registry-plugin-manifest-"));
-  try {
-    const path = join(folder, "plugin.tgz");
-    writeFileSync(path, bytes);
-    return JSON.parse(execFileSync("tar", ["-xzOf", path, "plugin.json"], { encoding: "utf8" }));
-  } finally {
-    rmSync(folder, { recursive: true, force: true });
-  }
-}
 
 /** Errors for unrevoked releases whose engine range includes the pinned plugin API version. */
 export async function registryManifestErrors(index, fetchRelease = fetchBytes, reader = {}) {
@@ -44,10 +24,7 @@ export async function registryManifestErrors(index, fetchRelease = fetchBytes, r
       checked += 1;
       const where = `plugin ${plugin.id} ${version.version}`;
       try {
-        const bytes = await fetchRelease(version.release.url);
-        const digest = createHash("sha256").update(bytes).digest("hex");
-        if (digest !== version.release.sha256) throw new Error(`release sha256 ${digest} differs from the index ${version.release.sha256}`);
-        validateManifest(releaseManifest(bytes));
+        validateManifest(await verifiedManifest(version, fetchRelease));
       } catch (error) {
         errors.push(`${where}: ${error.message}`);
       }

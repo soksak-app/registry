@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G55: The pull request check and the publication check, for each listed core version, the plugin versions that installation selects for it with the SDK of that core release.
 - G53.5 updates the candidate SDK source revision and API tree after the
   package changed. The earlier eight-test run included seven passing behavior
   tests and one data-only mirror assertion, which was removed because it

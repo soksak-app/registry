@@ -31,6 +31,8 @@ jobs:
           repository: soksak-app/core
           ref: ${{ env.CORE_REF }}
           path: core
+          # The listed core check reads packages/plugin-api of the tag of each listed core version.
+          fetch-depth: 0
       - uses: actions/setup-go@v5
         with:
           go-version-file: core/packages/sok/wailsv3/go.mod
@@ -43,3 +45,13 @@ jobs:
         env:
           AUTHOR: ${{ github.event.pull_request.user.login }}
         run: node base/scripts/validate.mjs --base base --head head --author "$AUTHOR" --sok "$RUNNER_TEMP/sok"
+      # The index of the pull request is built from its data files with the sok of the core release; no file of the pull request runs.
+      - name: Check the listed core versions
+        run: |
+          registry="$RUNNER_TEMP/registry"
+          mkdir "$registry"
+          for path in plugins sidecars packs revoked.json core.json; do
+            if [ -e "head/$path" ]; then cp -R "head/$path" "$registry/"; fi
+          done
+          "$RUNNER_TEMP/sok" registry build "$registry"
+          node base/scripts/check-listed-cores.mjs --index "$registry/index.json" --core core

@@ -31,6 +31,8 @@ jobs:
           repository: soksak-app/core
           ref: ${{ env.CORE_REF }}
           path: core
+          # The listed core check reads packages/plugin-api of the tag of each listed core version.
+          fetch-depth: 0
       - uses: actions/setup-go@v5
         with:
           go-version-file: core/packages/sok/wailsv3/go.mod
@@ -46,6 +48,8 @@ jobs:
           make -C registry build SOK="$RUNNER_TEMP/sok"
           mkdir site
           cp registry/index.json site/index.json
+      - name: Check the listed core versions
+        run: node registry/scripts/check-listed-cores.mjs --index registry/index.json --core core
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

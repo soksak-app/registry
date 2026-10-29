@@ -1,0 +1,35 @@
+// Reads plugin releases for the manifest checks of the registry.
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+/** The bytes at url: an https or file URL. */
+export async function fetchBytes(url) {
+  if (url.startsWith("file:")) return readFileSync(fileURLToPath(url));
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+  return Buffer.from(await response.arrayBuffer());
+}
+
+/** plugin.json of a plugin release, a gzip tar with plugin.json at its root. */
+export function releaseManifest(bytes) {
+  const folder = mkdtempSync(join(tmpdir(), "soksak-registry-plugin-manifest-"));
+  try {
+    const path = join(folder, "plugin.tgz");
+    writeFileSync(path, bytes);
+    return JSON.parse(execFileSync("tar", ["-xzOf", path, "plugin.json"], { encoding: "utf8" }));
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
+  }
+}
+
+/** plugin.json of the release of an index version, after its bytes match the sha256 of the index. */
+export async function verifiedManifest(version, fetchRelease = fetchBytes) {
+  const bytes = await fetchRelease(version.release.url);
+  const digest = createHash("sha256").update(bytes).digest("hex");
+  if (digest !== version.release.sha256) throw new Error(`release sha256 ${digest} differs from the index ${version.release.sha256}`);
+  return releaseManifest(bytes);
+}
