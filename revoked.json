@@ -4,6 +4,116 @@
       "id": "editor",
       "version": "0.0.1",
       "reason": "On core 0.0.7 an open editor tab makes core commands wait without end, and the Tauri application cannot load its shared modules; editor 0.0.2 requires core 0.0.8."
+    },
+    {
+      "id": "browser",
+      "version": "0.0.4",
+      "reason": "Its range * contains every later core, and core 0.0.24 refuses its manifest: plugin browser: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "browser",
+      "version": "0.0.5",
+      "reason": "Its range >=0.0.11 contains every later core, and core 0.0.24 refuses its manifest: plugin browser: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "browser",
+      "version": "0.0.6",
+      "reason": "Its range >=0.0.18 contains every later core, and core 0.0.24 refuses its manifest: plugin browser: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "editor",
+      "version": "0.0.2",
+      "reason": "Its range >=0.0.8 contains every later core, and core 0.0.24 refuses its manifest: plugin editor: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "editor",
+      "version": "0.0.3",
+      "reason": "Its range >=0.0.12 contains every later core, and core 0.0.24 refuses its manifest: plugin editor: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "editor",
+      "version": "0.0.4",
+      "reason": "Its range >=0.0.18 contains every later core, and core 0.0.24 refuses its manifest: plugin editor: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "files",
+      "version": "0.0.4",
+      "reason": "Its range * contains every later core, and core 0.0.24 refuses its manifest: plugin files: state is removed; a plugin keeps project data through its host (docs/spec/plugins.md#project-data)"
+    },
+    {
+      "id": "files",
+      "version": "0.0.5",
+      "reason": "Its range >=0.0.6 contains every later core, and core 0.0.24 refuses its manifest: plugin files: state is removed; a plugin keeps project data through its host (docs/spec/plugins.md#project-data)"
+    },
+    {
+      "id": "files",
+      "version": "0.0.6",
+      "reason": "Its range >=0.0.11 contains every later core, and core 0.0.24 refuses its manifest: plugin files: state is removed; a plugin keeps project data through its host (docs/spec/plugins.md#project-data)"
+    },
+    {
+      "id": "hwp",
+      "version": "0.0.1",
+      "reason": "Its range >=0.0.12 contains every later core, and core 0.0.24 refuses its manifest: plugin hwp: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "hwp",
+      "version": "0.0.2",
+      "reason": "Its range >=0.0.18 contains every later core, and core 0.0.24 refuses its manifest: plugin hwp: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.4",
+      "reason": "Its range * contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.5",
+      "reason": "Its range * contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.6",
+      "reason": "Its range * contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.7",
+      "reason": "Its range * contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.8",
+      "reason": "Its range * contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.9",
+      "reason": "Its range * contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.10",
+      "reason": "Its range * contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.11",
+      "reason": "Its range >=0.0.11 contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.12",
+      "reason": "Its range >=0.0.11 contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.13",
+      "reason": "Its range >=0.0.11 contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
+    },
+    {
+      "id": "terminal",
+      "version": "0.0.14",
+      "reason": "Its range >=0.0.11 contains every later core, and core 0.0.24 refuses its manifest: plugin terminal: surface module is removed; a surface is a view (docs/spec/plugins.md#view-surfaces)"
     }
   ],
   "sidecars": []

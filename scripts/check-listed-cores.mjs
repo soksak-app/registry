@@ -63,6 +63,37 @@ export async function listedCoreErrors(index, loadSdk, fetchRelease = fetchBytes
   return { checked, errors };
 }
 
+/** The newest core version that core.json lists and revoked.json does not withdraw. */
+export function newestListedCore(index) {
+  // default: an index without revoked.core withdraws no core version.
+  const withdrawn = new Set((index.revoked.core ?? []).map((entry) => entry.version));
+  const listed = index.core.versions.map((entry) => entry.version).filter((version) => !withdrawn.has(version));
+  if (listed.length === 0) throw new Error("core.json lists no core version that revoked.json does not withdraw");
+  return listed.reduce((a, b) => (compareVersions(a, b) >= 0 ? a : b));
+}
+
+/**
+ * The errors of the unrevoked plugin versions whose range contains a core newer than the newest listed core that is not
+ * withdrawn: `plugin <id> <version>: range <range> contains core <core>, newer than the newest listed core <newest>`.
+ * Core releases publish before the plugin releases for them, so such a core would select that version although its manifest
+ * reader was not checked against it. Each range is probed with the next patch, minor and major version of the newest core.
+ */
+export function laterCoreErrors(index, rangeContains) {
+  const newest = newestListedCore(index);
+  const [major, minor, patch] = newest.split(".").map(Number);
+  const later = [`${major}.${minor}.${patch + 1}`, `${major}.${minor + 1}.0`, `${major + 1}.0.0`];
+  const revoked = new Set(index.revoked.plugins.map((entry) => `${entry.id}@${entry.version}`));
+  const errors = [];
+  for (const plugin of index.plugins) {
+    for (const entry of plugin.versions) {
+      if (revoked.has(`${plugin.id}@${entry.version}`)) continue;
+      const core = later.find((version) => rangeContains(entry.engines.soksak, version));
+      if (core) errors.push(`plugin ${plugin.id} ${entry.version}: range ${entry.engines.soksak} contains core ${core}, newer than the newest listed core ${newest}`);
+    }
+  }
+  return errors;
+}
+
 /** Loads packages/plugin-api of the tag v<version> of the core checkout from a folder under out. */
 export function coreSdkLoader(core, out) {
   return async (version) => {
@@ -89,7 +120,15 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const index = JSON.parse(readFileSync(values.index, "utf8"));
   const out = mkdtempSync(join(tmpdir(), "soksak-registry-core-sdks-"));
   try {
-    const { checked, errors } = await listedCoreErrors(index, coreSdkLoader(values.core, out));
+    const load = coreSdkLoader(values.core, out);
+    const { checked, errors } = await listedCoreErrors(index, load);
+    // The ranges are read with the range rule of the newest listed core.
+    const later = laterCoreErrors(index, (await load(newestListedCore(index))).rangeContains);
+    if (later.length) {
+      console.error(later.join("\n"));
+      console.error(`${later.length} unrevoked plugin versions have ranges that contain a core newer than the newest listed core`);
+      process.exit(1);
+    }
     if (errors.length) {
       console.error(errors.join("\n"));
       console.error(`${errors.length} of ${checked} plugin versions that the listed core versions install have manifests that the core rejects`);

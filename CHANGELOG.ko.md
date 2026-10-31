@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G59: listed core 검사가 범위가 가장 새 listed core보다 새 core를 포함하는 철회되지 않은 plugin version에서 실패하고, `revoked.json`이 core 0.0.24가 거부하는 그런 version 22개를 철회한다.
 - G58: registry가 core 0.0.24와 plugin release browser 0.0.8과 0.0.9, editor 0.0.8과 0.0.9, files 0.0.9와 0.0.10, hwp 0.0.6과 0.0.7, terminal 0.0.22와 0.0.23을 올린다.
 - G57: registry가 core 0.0.21을 더는 올리지 않는다. 이전 `sidecar.json` 형식의 sidecar가 설치돼 있으면 시작하지 않기 때문이다.
 - G56: registry가 core release 0.0.21을 올린다.

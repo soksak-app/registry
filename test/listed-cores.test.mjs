@@ -5,7 +5,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { listedCoreErrors, selectedVersions } from "../scripts/check-listed-cores.mjs";
+import { laterCoreErrors, listedCoreErrors, selectedVersions } from "../scripts/check-listed-cores.mjs";
 
 // A plugin release is a gzip tar with plugin.json at its root.
 function release(manifest) {
@@ -78,6 +78,22 @@ test("an SDK whose version differs from the listed core, or a release whose byte
     /the SDK of core 0\.0\.20 reports version 0\.0\.18/);
   const { errors } = await listedCoreErrors(index, async (core) => sdks[core], async () => Buffer.from("other"));
   assert.match(errors[0], /^core 0\.0\.20: plugin editor 0\.0\.4: release sha256 [0-9a-f]{64} differs from the index/);
+});
+
+test("an unrevoked plugin version whose range contains a core newer than the newest listed core is an error", { timeout: 5000 }, () => {
+  // 0.0.21 is the newest listed core that is not withdrawn; each range is probed with 0.0.22, 0.1.0 and 1.0.0.
+  assert.deepEqual(laterCoreErrors(index, atLeast), [
+    "plugin editor 0.0.4: range >=0.0.18 contains core 0.0.22, newer than the newest listed core 0.0.21",
+    "plugin editor 0.0.7: range >=0.0.21 contains core 0.0.22, newer than the newest listed core 0.0.21",
+    "plugin files 0.0.6: range * contains core 0.0.22, newer than the newest listed core 0.0.21",
+    "plugin hwp 0.0.2: range >=0.0.18 contains core 0.0.22, newer than the newest listed core 0.0.21",
+    "plugin hwp 0.0.9: range >=0.0.30 contains core 0.1.0, newer than the newest listed core 0.0.21",
+  ]);
+  // A closed range and a revoked version are no error.
+  const exact = (range, core) => range === `^${core}`;
+  const closed = { ...index, plugins: [{ id: "editor", versions: [version("editor", "0.0.8", "^0.0.21", "new"), version("editor", "0.0.4", ">=0.0.18", "old")] }],
+    revoked: { ...index.revoked, plugins: [{ id: "editor", version: "0.0.4", reason: "r" }] } };
+  assert.deepEqual(laterCoreErrors(closed, (range, core) => exact(range, core) || atLeast(range, core)), []);
 });
 
 test("the pull request check and the publication run the listed core check on a core checkout with its tags", { timeout: 5000 }, () => {
