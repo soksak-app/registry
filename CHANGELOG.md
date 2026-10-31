@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G54: The registry lists browser 0.0.7, editor 0.0.7, files 0.0.8, hwp 0.0.5, terminal 0.0.21, sidecar-files 0.0.8 and sidecar-vt 0.0.17 with the release asset and `sha256` of each published release.
 - G54.1: The release boundary of sidecar-files 0.0.8 and sidecar-vt 0.0.17 is recorded: both are listed unchanged; on core 0.0.20 a fresh files sidecar selection fails with `sidecar.json: unknown field displayName`, which the release notes state as a named exception, and vt 0.0.17 is never selected there.
 - G55: The pull request check and the publication check, for each listed core version, the plugin versions that installation selects for it with the SDK of that core release.
 - G53.5 updates the candidate SDK source revision and API tree after the
