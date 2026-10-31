@@ -70,6 +70,32 @@
       "sidecars": {
         "@soksak/sidecar-files": ">=0.0.8"
       }
+    },
+    {
+      "version": "0.0.9",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.9/files-0.0.9.tgz",
+        "sha256": "33c3ba5c8acb740b98b6ca01eb9025df3e9c34aefc4ac7e3d2d6dace153d9234"
+      },
+      "engines": {
+        "soksak": "^0.0.23"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.8"
+      }
+    },
+    {
+      "version": "0.0.10",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.10/files-0.0.10.tgz",
+        "sha256": "2353824c3446614c4b13b395d4e49934981f4062f22a3be7576a2e8273e9c7d0"
+      },
+      "engines": {
+        "soksak": "^0.0.24"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.8"
+      }
     }
   ]
 }

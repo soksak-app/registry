@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G58: The registry lists core 0.0.24 and the plugin releases browser 0.0.8 and 0.0.9, editor 0.0.8 and 0.0.9, files 0.0.9 and 0.0.10, hwp 0.0.6 and 0.0.7, and terminal 0.0.22 and 0.0.23.
 - G57: The registry no longer lists core 0.0.21, because it does not start with an installed sidecar of the earlier `sidecar.json` form.
 - G56: The registry lists the core release 0.0.21.
 - G54: The registry lists browser 0.0.7, editor 0.0.7, files 0.0.8, hwp 0.0.5, terminal 0.0.21, sidecar-files 0.0.8 and sidecar-vt 0.0.17 with the release asset and `sha256` of each published release.

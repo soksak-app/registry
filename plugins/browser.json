@@ -60,6 +60,28 @@
         "soksak": "^0.0.21"
       },
       "sidecars": {}
+    },
+    {
+      "version": "0.0.8",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-browser/releases/download/v0.0.8/browser-0.0.8.tgz",
+        "sha256": "cc20e03d984a239c02476dd3c7121b91c5bb83472aaa59c3360fe5a856b7232e"
+      },
+      "engines": {
+        "soksak": "^0.0.23"
+      },
+      "sidecars": {}
+    },
+    {
+      "version": "0.0.9",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-browser/releases/download/v0.0.9/browser-0.0.9.tgz",
+        "sha256": "050f19576b44b5ad0084f628f2434b65f523ca33bf85c4b3ec216585458bc6f8"
+      },
+      "engines": {
+        "soksak": "^0.0.24"
+      },
+      "sidecars": {}
     }
   ]
 }

@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G58: registry가 core 0.0.24와 plugin release browser 0.0.8과 0.0.9, editor 0.0.8과 0.0.9, files 0.0.9와 0.0.10, hwp 0.0.6과 0.0.7, terminal 0.0.22와 0.0.23을 올린다.
 - G57: registry가 core 0.0.21을 더는 올리지 않는다. 이전 `sidecar.json` 형식의 sidecar가 설치돼 있으면 시작하지 않기 때문이다.
 - G56: registry가 core release 0.0.21을 올린다.
 - G54: registry가 browser 0.0.7, editor 0.0.7, files 0.0.8, hwp 0.0.5, terminal 0.0.21, sidecar-files 0.0.8, sidecar-vt 0.0.17을 게시된 각 release의 asset과 `sha256`으로 올린다.
