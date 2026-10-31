@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G54.1: sidecar-files 0.0.8과 sidecar-vt 0.0.17의 release 경계를 기록했다. 둘 다 바꾸지 않고 올린다. core 0.0.20에서 files sidecar를 새로 선택하면 `sidecar.json: unknown field displayName`으로 실패하며 release note가 이를 이름 붙은 예외로 밝힌다. vt 0.0.17은 그곳에서 선택되지 않는다.
 - G55: pull request 검사와 게시는 올린 core version마다 설치가 고르는 plugin version을 그 core release의 SDK로 검사한다.
 - G53.5는 package 변경 후 candidate SDK source revision과 API tree를 갱신한다.
   이전 8-test 실행에는 통과한 동작 test 7개와 declaration을 복사한 data-only
