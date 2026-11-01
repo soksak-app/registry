@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G64 — P1: registry는 이전 version 옆에 sidecar release files 0.0.10과 VT 0.0.19를 올린다. 각 release의 `sha256`은 그 GitHub release가 밝히는 digest다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G62 — P0, core F360 연결: registry는 core 0.0.27과 그것을 위한 plugin version을 올린다. browser 0.0.12, editor 0.0.12, files 0.0.13, hwp 0.0.10, terminal 0.0.26이며 각각 `engines.soksak` `^0.0.27`이다. 이전 version은 core 0.0.26을 위해 남고, workflow는 `CORE_RELEASE` `v0.0.27`에서 `sok`와 SDK를 가져온다. 각 release의 `sha256`은 그 GitHub release가 밝히는 digest다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [ ] G63 — P1: `scripts/add-version.mjs`는 `<id>-<version>.tgz`라는 plugin release를 요구하지만 plugin release는 `pnpm pack` 파일 `soksak-plugin-<id>-<version>.tgz`이므로, 현재의 모든 release를 거부한다. 기대: `pnpm pack` release로 만든 test가 이전 이름 규칙에서 실패하고, script는 `pnpm pack` 이름을 받아 `package/package.json`과 `package/plugin.json`을 읽는다.
 - [o] G61 — P0, core F355-3-3 연결: listed core 검사는 각 listed core release의 exposure 검사를 그것이 설치하는 plugin release에 실행한다. 입력: plugin repository는 자기가 pin한 plugin API release로 소스의 exposed 이름을 core 선언과 비교했고, 그것이 repository를 core release에 묶었다. 기대: 검사는 고른 각 plugin release를 풀고, 각 listed core의 plugin API release의 `checkPluginRepository` 오류를 `core <version>: plugin <id> <version>: <error>`로 보고한다. 결과: `each listed core version checks the exposure names of the plugin releases that it installs with its own SDK`는 실패했고(Red) 통과하며(Green), `make test`가 통과하고, core 0.0.26 release로 한 게시된 index 검사가 5개 plugin version에 대해 통과한다.
