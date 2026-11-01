@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G67: registry는 core 0.0.29와 그 plugin release를 올린다.
 - G66: registry는 core 0.0.28과 core 0.0.27, 0.0.28용 plugin release를 올린다.
 - G65: registry는 VT `^0.0.19`와 함께 terminal 0.0.27을 올린다.
 - G64: registry는 sidecar release files 0.0.10과 VT 0.0.19를 올린다.

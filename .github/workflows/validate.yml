@@ -11,7 +11,7 @@ permissions:
 
 env:
   # The sok of this core release builds the index; its installer reads the release form that the registry lists.
-  CORE_RELEASE: v0.0.28
+  CORE_RELEASE: v0.0.29
 
 jobs:
   validate:

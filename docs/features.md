@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G67 — P0, linked to core F365, F366 and F367: The registry lists core 0.0.29 and browser 0.0.14, editor 0.0.15, files 0.0.15, hwp 0.0.12 and terminal 0.0.29 for it; the workflows check against `v0.0.29`. Each `sha256` is the SHA-256 of the published release file. Result: `make test` passes, and the publication run checks the index.
 - [o] G66 — P0, linked to core F362, F363 and F364: The registry lists core 0.0.28, editor 0.0.13 for core 0.0.27, and browser 0.0.13, editor 0.0.14, files 0.0.14, hwp 0.0.11 and terminal 0.0.28 for core 0.0.28; the workflows check against `v0.0.28`. Each `sha256` is the SHA-256 of the published release file. Result: `make test` passes, and the publication run checks the index.
 - [o] G65 — P1, linked to core F361: The registry lists terminal 0.0.27, which requires VT `^0.0.19`, so core 0.0.27 installs terminal with VT 0.0.19. Result: `make test` passes, and the publication run checks the index.
 - [o] G64 — P1: The registry lists the sidecar releases files 0.0.10 and VT 0.0.19 beside the earlier versions; the `sha256` of each release is the digest that its GitHub release states. Result: `make test` passes, and the publication run checks the index.

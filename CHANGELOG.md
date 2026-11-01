@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G67: The registry lists core 0.0.29 and its plugin releases.
 - G66: The registry lists core 0.0.28 and the plugin releases for core 0.0.27 and 0.0.28.
 - G65: The registry lists terminal 0.0.27 with VT `^0.0.19`.
 - G64: The registry lists the sidecar releases files 0.0.10 and VT 0.0.19.
