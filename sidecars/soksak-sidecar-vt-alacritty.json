@@ -3,92 +3,12 @@
   "repository": "https://github.com/soksak-app/sidecar-vt",
   "versions": [
     {
-      "version": "0.0.3",
+      "version": "0.0.18",
       "protocol": 1,
       "releases": {
         "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.3/soksak-sidecar-vt-alacritty-0.0.3-darwin-arm64.tar.gz",
-          "sha256": "c58cc529d02f06e74d22bc15859bc86facc9f0bc247d4b8e957f21d5af2f1f1a"
-        }
-      }
-    },
-    {
-      "version": "0.0.5",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.5/soksak-sidecar-vt-alacritty-0.0.5-darwin-arm64.tar.gz",
-          "sha256": "220b1c5aa9a7928ede6c6e9ce0e8cea98d529064e52ddc6705c36cc5c35c3496"
-        }
-      }
-    },
-    {
-      "version": "0.0.6",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.6/soksak-sidecar-vt-alacritty-0.0.6-darwin-arm64.tar.gz",
-          "sha256": "fa7840ac683fc907675988423ed821066ae9437b86947917a983a6916cca40d1"
-        }
-      }
-    },
-    {
-      "version": "0.0.7",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.7/soksak-sidecar-vt-alacritty-0.0.7-darwin-arm64.tar.gz",
-          "sha256": "27636910ba7f7f0b5966d4260fde4d76ad9337b06db716acae4bd1bc26bdb1a5"
-        }
-      }
-    },
-    {
-      "version": "0.0.8",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.8/soksak-sidecar-vt-alacritty-0.0.8-darwin-arm64.tar.gz",
-          "sha256": "5f3f59b1b3b7b1b3a22b9bd04c92e2239b1b044ce076eabb6addcc885fd5755b"
-        }
-      }
-    },
-    {
-      "version": "0.0.9",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.9/soksak-sidecar-vt-alacritty-0.0.9-darwin-arm64.tar.gz",
-          "sha256": "23bdb8527dcd92fd2e323ff9bfc6458adff9d36751ccf4a3246771398722d0c0"
-        }
-      }
-    },
-    {
-      "version": "0.0.10",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.10/soksak-sidecar-vt-alacritty-0.0.10-darwin-arm64.tar.gz",
-          "sha256": "b6ffd84421b2b089500337f39d46a43f97c13a668eb1ba3506fe358d30296cbe"
-        }
-      }
-    },
-    {
-      "version": "0.0.11",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.11/soksak-sidecar-vt-alacritty-0.0.11-darwin-arm64.tar.gz",
-          "sha256": "034aa970e8426d7db5ff98e3c625e32d4def5a74107814f1efa1a5f277d117db"
-        }
-      }
-    },
-    {
-      "version": "0.0.17",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.17/soksak-sidecar-vt-alacritty-0.0.17-darwin-arm64.tar.gz",
-          "sha256": "e0ed1dc9562c8e8110155f5e721f11d6a59274dc21c987c322a02136fbf5ab5b"
+          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.18/soksak-sidecar-vt-alacritty-0.0.18-darwin-arm64.tgz",
+          "sha256": "c2ffccdb06f22d06144d0986c8ba7159cb7fd7fec809bbb1cc510f86c54f38f1"
         }
       }
     }

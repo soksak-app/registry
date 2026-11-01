@@ -10,11 +10,12 @@ permissions:
   contents: read
 
 env:
-  CORE_REF: v0.0.9
+  # The sok of this core release builds the index; its installer reads the release form that the registry lists.
+  CORE_RELEASE: v0.0.26
 
 jobs:
   validate:
-    runs-on: ubuntu-26.04-arm
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,21 +27,16 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           path: head
           persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          repository: soksak-app/core
-          ref: ${{ env.CORE_REF }}
-          path: core
-          # The listed core check reads packages/plugin-api of the tag of each listed core version.
-          fetch-depth: 0
-      - uses: actions/setup-go@v5
-        with:
-          go-version-file: core/packages/sok/wailsv3/go.mod
       - uses: actions/setup-node@v4
         with:
           node-version-file: base/.node-version
-      - name: Build sok
-        run: go build -C core/packages/sok/wailsv3 -o "$RUNNER_TEMP/sok" ./src/cmd/sok
+      - name: Download sok
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "$CORE_RELEASE" --repo soksak-app/core --pattern "soksak-${CORE_RELEASE#v}-darwin-arm64-tauriv2.zip" --dir "$RUNNER_TEMP"
+          ditto -x -k "$RUNNER_TEMP/soksak-${CORE_RELEASE#v}-darwin-arm64-tauriv2.zip" "$RUNNER_TEMP/core"
+          ln -s "$RUNNER_TEMP/core/soksak.app/Contents/MacOS/sok" "$RUNNER_TEMP/sok"
       - name: Check the pull request
         env:
           AUTHOR: ${{ github.event.pull_request.user.login }}
@@ -54,4 +50,4 @@ jobs:
             if [ -e "head/$path" ]; then cp -R "head/$path" "$registry/"; fi
           done
           "$RUNNER_TEMP/sok" registry build "$registry"
-          node base/scripts/check-listed-cores.mjs --index "$registry/index.json" --core core
+          node base/scripts/check-listed-cores.mjs --index "$registry/index.json" --releases https://github.com/soksak-app/core/releases/download

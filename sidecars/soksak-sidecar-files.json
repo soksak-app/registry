@@ -3,52 +3,12 @@
   "repository": "https://github.com/soksak-app/sidecar-files",
   "versions": [
     {
-      "version": "0.0.3",
+      "version": "0.0.9",
       "protocol": 1,
       "releases": {
         "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-files/releases/download/v0.0.3/soksak-sidecar-files-0.0.3-darwin-arm64.tar.gz",
-          "sha256": "82b60d0c12b3e9dcb8849e20cb199d838437bf71f7ff9e649b951811a52fa4b6"
-        }
-      }
-    },
-    {
-      "version": "0.0.4",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-files/releases/download/v0.0.4/soksak-sidecar-files-0.0.4-darwin-arm64.tar.gz",
-          "sha256": "935b0b141b00c75a6985ddc8bb6c80d02877839ac958dcb42eb6ebafb096577c"
-        }
-      }
-    },
-    {
-      "version": "0.0.5",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-files/releases/download/v0.0.5/soksak-sidecar-files-0.0.5-darwin-arm64.tar.gz",
-          "sha256": "19d7d9d385a44defbbc98ea0194038b34e6aaa6d211f3e0ea71b3becdc783eee"
-        }
-      }
-    },
-    {
-      "version": "0.0.6",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-files/releases/download/v0.0.6/soksak-sidecar-files-0.0.6-darwin-arm64.tar.gz",
-          "sha256": "50de56f038d51d1ce6c7e26fb38a122a72c04fb0964499e04bad123cfb20e126"
-        }
-      }
-    },
-    {
-      "version": "0.0.8",
-      "protocol": 1,
-      "releases": {
-        "darwin-arm64": {
-          "url": "https://github.com/soksak-app/sidecar-files/releases/download/v0.0.8/soksak-sidecar-files-0.0.8-darwin-arm64.tar.gz",
-          "sha256": "936b59a37f0183d68cc0cdd9bb6ae68ca6f7f847b03c1492e3175ea81e7d4bfa"
+          "url": "https://github.com/soksak-app/sidecar-files/releases/download/v0.0.9/soksak-sidecar-files-0.0.9-darwin-arm64.tgz",
+          "sha256": "ac8d2b4cd056527a4830f7b8dc01a344d29a6dd37a8e53d6bb4cfa47d0000832"
         }
       }
     }

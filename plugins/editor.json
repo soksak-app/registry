@@ -7,94 +7,16 @@
   "repository": "https://github.com/soksak-app/plugin-editor",
   "versions": [
     {
-      "version": "0.0.1",
+      "version": "0.0.11",
       "release": {
-        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.1/editor-0.0.1.tgz",
-        "sha256": "2fb5b177224cc99030697e7f818d8e81d1f58d20eba83598ead04b8aae104e1f"
+        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.11/soksak-plugin-editor-0.0.11.tgz",
+        "sha256": "bafaa42b0e60504af3e0fa40d3d29fa0c91a7a70c177367688032a05841e0134"
       },
       "engines": {
-        "soksak": ">=0.0.7"
+        "soksak": "^0.0.26"
       },
       "sidecars": {
-        "@soksak/sidecar-files": "^0.0.4"
-      }
-    },
-    {
-      "version": "0.0.2",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.2/editor-0.0.2.tgz",
-        "sha256": "c5f75a5b0406917dfd3848ab98b85bdcfa82c7f2111175d17fab0eca805a25b1"
-      },
-      "engines": {
-        "soksak": ">=0.0.8"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": "^0.0.4"
-      }
-    },
-    {
-      "version": "0.0.3",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.3/editor-0.0.3.tgz",
-        "sha256": "b2ec72523ae8078405a1242911fb68e36f8de93ff5652bf5266f925bbde1705a"
-      },
-      "engines": {
-        "soksak": ">=0.0.12"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.4"
-      }
-    },
-    {
-      "version": "0.0.4",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.4/editor-0.0.4.tgz",
-        "sha256": "ca1b36384f43c7b6d856e85dd6d222067a0f46a51e6aeaed52c1a519f2f6b9aa"
-      },
-      "engines": {
-        "soksak": ">=0.0.18"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.4"
-      }
-    },
-    {
-      "version": "0.0.7",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.7/editor-0.0.7.tgz",
-        "sha256": "d30f4638921593e92854fef2d400793fca882e8f382973be3e71a651f3830acb"
-      },
-      "engines": {
-        "soksak": "^0.0.21"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.8"
-      }
-    },
-    {
-      "version": "0.0.8",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.8/editor-0.0.8.tgz",
-        "sha256": "3b87e4e6e7304c7993d47af94acf0c4ea661fc692d2eaf0d0bbc03c82eed77a6"
-      },
-      "engines": {
-        "soksak": "^0.0.23"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.8"
-      }
-    },
-    {
-      "version": "0.0.9",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.9/editor-0.0.9.tgz",
-        "sha256": "04ef4809145ff99b2b4f42d8e8fdb943052805aeb0f2e51e3b4cbdc24b87eacc"
-      },
-      "engines": {
-        "soksak": "^0.0.24"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.8"
+        "@soksak/sidecar-files": ">=0.0.9"
       }
     }
   ]

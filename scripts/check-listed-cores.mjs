@@ -2,12 +2,13 @@
 // Checks, for every core version that core.json lists and revoked.json does not withdraw, the plugin version that installation
 // selects for it with the manifest reader of that core release (core docs/spec/registry.md#check). Installation selects the
 // newest unrevoked version whose engines.soksak contains the core version (core docs/spec/installation.md#version-selection).
-// The SDK of a core release is packages/plugin-api of its tag v<version> in a core checkout that holds the tags.
-//   node scripts/check-listed-cores.mjs --index <registry index> --core <core checkout>
+// The SDK of a core release is its plugin API release file v<version>/soksak-plugin-api-<version>.tgz under the release
+// download address of core.
+//   node scripts/check-listed-cores.mjs --index <registry index> --releases <release download address of core>
 import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
 import { fetchBytes, verifiedManifest } from "./plugin-release.mjs";
@@ -94,17 +95,24 @@ export function laterCoreErrors(index, rangeContains) {
   return errors;
 }
 
-/** Loads packages/plugin-api of the tag v<version> of the core checkout from a folder under out. */
-export function coreSdkLoader(core, out) {
+/**
+ * Loads the plugin API of core <version> from its release file `<releases>/v<version>/soksak-plugin-api-<version>.tgz`, the pnpm
+ * pack file of the package, extracted into a folder under out.
+ */
+export function releaseSdkLoader(releases, out, fetchRelease = fetchBytes) {
   return async (version) => {
-    const folder = join(out, `v${version}`);
-    const git = (...args) => execFileSync("git", ["-C", core, ...args], { maxBuffer: 64 * 1024 * 1024 });
-    // Each file of packages/plugin-api at the tag is written under the folder; the core checkout is not changed.
-    for (const path of git("ls-tree", "-r", "-z", "--name-only", `v${version}`, "--", "packages/plugin-api").toString("utf8").split("\0").filter(Boolean)) {
-      mkdirSync(dirname(join(folder, path)), { recursive: true });
-      writeFileSync(join(folder, path), git("show", `v${version}:${path}`));
+    const url = `${releases}/v${version}/soksak-plugin-api-${version}.tgz`;
+    let bytes;
+    try {
+      bytes = await fetchRelease(url);
+    } catch (error) {
+      throw new Error(`the SDK of core ${version} at ${url}: ${error.message}`);
     }
-    const api = join(folder, "packages/plugin-api");
+    const folder = join(out, `v${version}`);
+    mkdirSync(folder, { recursive: true });
+    writeFileSync(join(folder, "plugin-api.tgz"), bytes);
+    execFileSync("tar", ["-xzf", join(folder, "plugin-api.tgz"), "-C", folder]);
+    const api = join(folder, "package");
     const manifest = JSON.parse(readFileSync(join(api, "package.json"), "utf8"));
     const sdk = await import(pathToFileURL(join(api, manifest.exports["."])).href);
     return { version: manifest.version, rangeContains: sdk.rangeContains, validateManifest: sdk.validateManifest };
@@ -112,15 +120,15 @@ export function coreSdkLoader(core, out) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const { values } = parseArgs({ options: { index: { type: "string" }, core: { type: "string" } }, strict: true });
-  if (!values.index || !values.core) {
-    console.error("usage: node scripts/check-listed-cores.mjs --index <registry index> --core <core checkout>");
+  const { values } = parseArgs({ options: { index: { type: "string" }, releases: { type: "string" } }, strict: true });
+  if (!values.index || !values.releases) {
+    console.error("usage: node scripts/check-listed-cores.mjs --index <registry index> --releases <release download address of core>");
     process.exit(2);
   }
   const index = JSON.parse(readFileSync(values.index, "utf8"));
   const out = mkdtempSync(join(tmpdir(), "soksak-registry-core-sdks-"));
   try {
-    const load = coreSdkLoader(values.core, out);
+    const load = releaseSdkLoader(values.releases, out);
     const { checked, errors } = await listedCoreErrors(index, load);
     // The ranges are read with the range rule of the newest listed core.
     const later = laterCoreErrors(index, (await load(newestListedCore(index))).rangeContains);

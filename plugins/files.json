@@ -7,94 +7,16 @@
   "repository": "https://github.com/soksak-app/plugin-files",
   "versions": [
     {
-      "version": "0.0.3",
+      "version": "0.0.12",
       "release": {
-        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.3/files-0.0.3.tgz",
-        "sha256": "a859e1575e1f93c660d8f2f0e2b4d93e19b8489a3501eabb4419ab0a20263efd"
+        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.12/soksak-plugin-files-0.0.12.tgz",
+        "sha256": "c95b7777ddd219bd4197056d43ba3c7fb5cf81e15ea3ad2f2468b76af7c0f3a6"
       },
       "engines": {
-        "soksak": "^0.0.3"
+        "soksak": "^0.0.26"
       },
       "sidecars": {
-        "@soksak/sidecar-files": "^0.0.3"
-      }
-    },
-    {
-      "version": "0.0.4",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.4/files-0.0.4.tgz",
-        "sha256": "85125e7cef11551f5c4956d2528865437fc3e1bde6921e99592d716d1de10c5d"
-      },
-      "engines": {
-        "soksak": "*"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": "^0.0.3"
-      }
-    },
-    {
-      "version": "0.0.5",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.5/files-0.0.5.tgz",
-        "sha256": "71acf6aacf15b0b72efebd41ef3d18ac3f3f57e4207e871d8912db0b3f83ce12"
-      },
-      "engines": {
-        "soksak": ">=0.0.6"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": "^0.0.4"
-      }
-    },
-    {
-      "version": "0.0.6",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.6/files-0.0.6.tgz",
-        "sha256": "5a5f77cb59ac01732716e29518c5dc8a7c9d53b5aea952060d022db0bbc9efc5"
-      },
-      "engines": {
-        "soksak": ">=0.0.11"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.4"
-      }
-    },
-    {
-      "version": "0.0.8",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.8/files-0.0.8.tgz",
-        "sha256": "c591da6a975c3516e3b0da8bd8df95619040b5831b0cd70328bb1dbab8258ea3"
-      },
-      "engines": {
-        "soksak": "^0.0.21"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.8"
-      }
-    },
-    {
-      "version": "0.0.9",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.9/files-0.0.9.tgz",
-        "sha256": "33c3ba5c8acb740b98b6ca01eb9025df3e9c34aefc4ac7e3d2d6dace153d9234"
-      },
-      "engines": {
-        "soksak": "^0.0.23"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.8"
-      }
-    },
-    {
-      "version": "0.0.10",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.10/files-0.0.10.tgz",
-        "sha256": "2353824c3446614c4b13b395d4e49934981f4062f22a3be7576a2e8273e9c7d0"
-      },
-      "engines": {
-        "soksak": "^0.0.24"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.8"
+        "@soksak/sidecar-files": ">=0.0.9"
       }
     }
   ]

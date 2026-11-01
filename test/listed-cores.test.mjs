@@ -1,18 +1,20 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { laterCoreErrors, listedCoreErrors, selectedVersions } from "../scripts/check-listed-cores.mjs";
+import { laterCoreErrors, listedCoreErrors, releaseSdkLoader, selectedVersions } from "../scripts/check-listed-cores.mjs";
+import { pathToFileURL } from "node:url";
 
-// A plugin release is a gzip tar with plugin.json at its root.
+// A plugin release is the pnpm pack file of the plugin: a gzip tar with plugin.json under package/.
 function release(manifest) {
   const folder = mkdtempSync(join(tmpdir(), "listed-cores-release-"));
   try {
-    writeFileSync(join(folder, "plugin.json"), JSON.stringify(manifest));
-    execFileSync("tar", ["-czf", join(folder, "plugin.tgz"), "-C", folder, "plugin.json"]);
+    mkdirSync(join(folder, "package"));
+    writeFileSync(join(folder, "package", "plugin.json"), JSON.stringify(manifest));
+    execFileSync("tar", ["-czf", join(folder, "plugin.tgz"), "-C", folder, "package/plugin.json"]);
     return readFileSync(join(folder, "plugin.tgz"));
   } finally {
     rmSync(folder, { recursive: true, force: true });
@@ -96,10 +98,27 @@ test("an unrevoked plugin version whose range contains a core newer than the new
   assert.deepEqual(laterCoreErrors(closed, (range, core) => exact(range, core) || atLeast(range, core)), []);
 });
 
-test("the pull request check and the publication run the listed core check on a core checkout with its tags", { timeout: 5000 }, () => {
+test("the SDK of a listed core is the plugin API release file of that core release", { timeout: 10000 }, async (t) => {
+  const root = mkdtempSync(join(tmpdir(), "listed-cores-sdk-"));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  // The release file of core 0.0.26 is the pnpm pack file of packages/plugin-api: package/package.json names its entry.
+  mkdirSync(join(root, "package"));
+  writeFileSync(join(root, "package", "package.json"), JSON.stringify({ name: "@soksak/plugin-api", version: "0.0.26", type: "module", exports: { ".": "./index.js" } }));
+  writeFileSync(join(root, "package", "index.js"), "export const rangeContains = () => true;\nexport function validateManifest() {}\n");
+  mkdirSync(join(root, "v0.0.26"));
+  execFileSync("tar", ["-czf", join(root, "v0.0.26", "soksak-plugin-api-0.0.26.tgz"), "-C", root, "package"]);
+  const load = releaseSdkLoader(pathToFileURL(root).href, join(root, "out"));
+  const sdk = await load("0.0.26");
+  assert.equal(sdk.version, "0.0.26");
+  assert.equal(sdk.rangeContains("^0.0.26", "0.0.26"), true);
+  await assert.rejects(load("0.0.27"), /soksak-plugin-api-0\.0\.27\.tgz/);
+});
+
+test("the pull request check and the publication take sok and the SDK from core releases, not from a core checkout", { timeout: 5000 }, () => {
   for (const workflow of ["validate.yml", "publish.yml"]) {
     const text = readFileSync(new URL(`../.github/workflows/${workflow}`, import.meta.url), "utf8");
-    assert.match(text, /scripts\/check-listed-cores\.mjs --index \S+ --core core/, `${workflow} runs no listed core check`);
-    assert.match(text, /path: core\n\s+# [^\n]*\n\s+fetch-depth: 0/, `${workflow} checks out core without its tags`);
+    assert.match(text, /scripts\/check-listed-cores\.mjs --index \S+ --releases https:\/\/github\.com\/soksak-app\/core\/releases\/download/, `${workflow} runs no listed core check on the core releases`);
+    assert.match(text, /gh release download "\$CORE_RELEASE" --repo soksak-app\/core/, `${workflow} takes no sok from a core release`);
+    assert.doesNotMatch(text, /repository: soksak-app\/core|go build/, `${workflow} checks out or builds core`);
   }
 });

@@ -14,13 +14,13 @@ export async function fetchBytes(url) {
   return Buffer.from(await response.arrayBuffer());
 }
 
-/** plugin.json of a plugin release, a gzip tar with plugin.json at its root. */
+/** plugin.json of a plugin release, the pnpm pack file of the plugin: a gzip tar with plugin.json under package/. */
 export function releaseManifest(bytes) {
   const folder = mkdtempSync(join(tmpdir(), "soksak-registry-plugin-manifest-"));
   try {
     const path = join(folder, "plugin.tgz");
     writeFileSync(path, bytes);
-    return JSON.parse(execFileSync("tar", ["-xzOf", path, "plugin.json"], { encoding: "utf8" }));
+    return JSON.parse(execFileSync("tar", ["-xzOf", path, "package/plugin.json"], { encoding: "utf8" }));
   } finally {
     rmSync(folder, { recursive: true, force: true });
   }

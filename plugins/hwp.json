@@ -7,68 +7,16 @@
   "repository": "https://github.com/soksak-app/plugin-hwp",
   "versions": [
     {
-      "version": "0.0.1",
+      "version": "0.0.9",
       "release": {
-        "url": "https://github.com/soksak-app/plugin-hwp/releases/download/v0.0.1/hwp-0.0.1.tgz",
-        "sha256": "31d1807de09dda1ecbb2eeeb8494fe270f862d9acfb52eb465deee22338f53d5"
+        "url": "https://github.com/soksak-app/plugin-hwp/releases/download/v0.0.9/soksak-plugin-hwp-0.0.9.tgz",
+        "sha256": "878e0ac32df0c323f0edde8262b10bbdb5b038997f414f0293046cb496af4b59"
       },
       "engines": {
-        "soksak": ">=0.0.12"
+        "soksak": "^0.0.26"
       },
       "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.5"
-      }
-    },
-    {
-      "version": "0.0.2",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-hwp/releases/download/v0.0.2/hwp-0.0.2.tgz",
-        "sha256": "792b5982507da8e762264fc4234568a2b1a47b5580cdd5c094bcb8f4ae120c57"
-      },
-      "engines": {
-        "soksak": ">=0.0.18"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.5"
-      }
-    },
-    {
-      "version": "0.0.5",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-hwp/releases/download/v0.0.5/hwp-0.0.5.tgz",
-        "sha256": "789ec3e8e919509c036195b16c67403d43fb432e180961e8e75bfcb9fcae8032"
-      },
-      "engines": {
-        "soksak": "^0.0.21"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.8"
-      }
-    },
-    {
-      "version": "0.0.6",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-hwp/releases/download/v0.0.6/hwp-0.0.6.tgz",
-        "sha256": "d8f2f2a93e43be889d5c3a36a767fe39258ec405fe866b864ad9f73b68cfa324"
-      },
-      "engines": {
-        "soksak": "^0.0.23"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.8"
-      }
-    },
-    {
-      "version": "0.0.7",
-      "release": {
-        "url": "https://github.com/soksak-app/plugin-hwp/releases/download/v0.0.7/hwp-0.0.7.tgz",
-        "sha256": "3c31342a6daad75d96191ad29ca132fb4ab1438fc099f528d6e2226d8f3b49c0"
-      },
-      "engines": {
-        "soksak": "^0.0.24"
-      },
-      "sidecars": {
-        "@soksak/sidecar-files": ">=0.0.8"
+        "@soksak/sidecar-files": ">=0.0.9"
       }
     }
   ]

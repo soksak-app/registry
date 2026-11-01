@@ -72,10 +72,12 @@ async function check(t, baseFiles, headFiles, author = "alice") {
 function pluginRelease(t, manifest) {
   const root = mkdtempSync(join(tmpdir(), "soksak-registry-plugin-release-"));
   t.after(() => rmSync(root, { recursive: true, force: true }));
-  const manifestPath = join(root, "plugin.json");
+  // A plugin release is the pnpm pack file of the plugin: plugin.json is under package/.
+  mkdirSync(join(root, "package"));
+  const manifestPath = join(root, "package", "plugin.json");
   const archivePath = join(root, "probe-0.1.0.tgz");
   writeFileSync(manifestPath, JSON.stringify(manifest));
-  execFileSync("tar", ["-czf", archivePath, "-C", root, "plugin.json"]);
+  execFileSync("tar", ["-czf", archivePath, "-C", root, "package/plugin.json"]);
   const bytes = readFileSync(archivePath);
   return { bytes, sha256: createHash("sha256").update(bytes).digest("hex") };
 }
