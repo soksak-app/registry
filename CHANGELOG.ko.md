@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G61: listed core 검사는 각 listed core의 plugin API release의 `checkPluginRepository`를 그것이 설치하는 plugin release를 푼 폴더에 실행하므로, plugin repository는 core release를 pin하지 않고 exposed 이름을 core 선언과 비교받는다. Red: `each listed core version checks the exposure names of the plugin releases that it installs with its own SDK`가 실패했다. Green: 통과하고, 게시된 index의 검사가 통과한다.
 - G60: registry는 core 0.0.26과 그것이 설치하는 `pnpm pack`, `npm pack` 형태의 release를 적는다: browser 0.0.11, editor 0.0.11, files 0.0.12, hwp 0.0.9, terminal 0.0.25, files sidecar 0.0.9, VT 0.0.18. 이전 release와 그 revoked 항목은 지웠다. core 0.0.26이 그 형태를 설치하지 않기 때문이다. 0.0.26 이전 core는 0.0.26으로 update한다. workflow는 core checkout 대신 core release v0.0.26의 `sok`와 각 listed core의 plugin API release 파일을 쓴다.
 - G59: listed core 검사가 범위가 가장 새 listed core보다 새 core를 포함하는 철회되지 않은 plugin version에서 실패하고, `revoked.json`이 core 0.0.24가 거부하는 그런 version 22개를 철회한다.
 - G58: registry가 core 0.0.24와 plugin release browser 0.0.8과 0.0.9, editor 0.0.8과 0.0.9, files 0.0.9와 0.0.10, hwp 0.0.6과 0.0.7, terminal 0.0.22와 0.0.23을 올린다.

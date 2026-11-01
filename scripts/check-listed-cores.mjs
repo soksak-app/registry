@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Checks, for every core version that core.json lists and revoked.json does not withdraw, the plugin version that installation
-// selects for it with the manifest reader of that core release (core docs/spec/registry.md#check). Installation selects the
+// selects for it with the manifest reader and the exposure check of that core release (core docs/spec/registry.md#check): the
+// exposure check compares the names that the release sources write with the declarations of that core. Installation selects the
 // newest unrevoked version whose engines.soksak contains the core version (core docs/spec/installation.md#version-selection).
 // The SDK of a core release is its plugin API release file v<version>/soksak-plugin-api-<version>.tgz under the release
 // download address of core.
@@ -11,7 +12,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
-import { fetchBytes, verifiedManifest } from "./plugin-release.mjs";
+import { fetchBytes, verifiedRelease } from "./plugin-release.mjs";
 
 /** The order of two plain x.y.z versions; a version of another form is an error. */
 export function compareVersions(a, b) {
@@ -38,12 +39,13 @@ export function selectedVersions(index, core, rangeContains) {
 
 /**
  * The errors of the listed core versions: `core <version>: plugin <id> <version>: <reason>`. loadSdk(version) returns
- * { version, rangeContains, validateManifest } of that core release; an SDK of another version is an error.
+ * { version, rangeContains, validateManifest, checkPluginRepository } of that core release; an SDK of another version is an
+ * error. The releases are extracted under out.
  */
-export async function listedCoreErrors(index, loadSdk, fetchRelease = fetchBytes) {
+export async function listedCoreErrors(index, out, loadSdk, fetchRelease = fetchBytes) {
   // default: an index without revoked.core withdraws no core version.
   const withdrawn = new Set((index.revoked.core ?? []).map((entry) => entry.version));
-  const manifests = new Map();
+  const folders = new Map();
   const errors = [];
   let checked = 0;
   for (const { version: core } of index.core.versions) {
@@ -54,8 +56,10 @@ export async function listedCoreErrors(index, loadSdk, fetchRelease = fetchBytes
       checked += 1;
       try {
         // Each release is read once; the same version is selected by many core versions.
-        if (!manifests.has(entry.release.url)) manifests.set(entry.release.url, verifiedManifest(entry, fetchRelease));
-        sdk.validateManifest(await manifests.get(entry.release.url));
+        if (!folders.has(entry.release.url)) folders.set(entry.release.url, verifiedRelease(entry, out, fetchRelease));
+        const folder = await folders.get(entry.release.url);
+        sdk.validateManifest(JSON.parse(readFileSync(join(folder, "plugin.json"), "utf8")));
+        errors.push(...sdk.checkPluginRepository(folder).map((error) => `core ${core}: plugin ${id} ${entry.version}: ${error}`));
       } catch (error) {
         errors.push(`core ${core}: plugin ${id} ${entry.version}: ${error.message}`);
       }
@@ -115,7 +119,10 @@ export function releaseSdkLoader(releases, out, fetchRelease = fetchBytes) {
     const api = join(folder, "package");
     const manifest = JSON.parse(readFileSync(join(api, "package.json"), "utf8"));
     const sdk = await import(pathToFileURL(join(api, manifest.exports["."])).href);
-    return { version: manifest.version, rangeContains: sdk.rangeContains, validateManifest: sdk.validateManifest };
+    if (typeof manifest.exports["./exposure-check"] !== "string") throw new Error(`the SDK of core ${version} at ${url} exports no ./exposure-check`);
+    const exposure = await import(pathToFileURL(join(api, manifest.exports["./exposure-check"])).href);
+    return { version: manifest.version, rangeContains: sdk.rangeContains, validateManifest: sdk.validateManifest,
+      checkPluginRepository: exposure.checkPluginRepository };
   };
 }
 
@@ -129,7 +136,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const out = mkdtempSync(join(tmpdir(), "soksak-registry-core-sdks-"));
   try {
     const load = releaseSdkLoader(values.releases, out);
-    const { checked, errors } = await listedCoreErrors(index, load);
+    const { checked, errors } = await listedCoreErrors(index, join(out, "releases"), load);
     // The ranges are read with the range rule of the newest listed core.
     const later = laterCoreErrors(index, (await load(newestListedCore(index))).rangeContains);
     if (later.length) {
