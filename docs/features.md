@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G65 — P1, linked to core F361: The registry lists terminal 0.0.27, which requires VT `^0.0.19`, so core 0.0.27 installs terminal with VT 0.0.19. Result: `make test` passes, and the publication run checks the index.
 - [o] G64 — P1: The registry lists the sidecar releases files 0.0.10 and VT 0.0.19 beside the earlier versions; the `sha256` of each release is the digest that its GitHub release states. Result: `make test` passes, and the publication run checks the index.
 - [o] G62 — P0, linked to core F360: The registry lists core 0.0.27 and the plugin versions for it: browser 0.0.12, editor 0.0.12, files 0.0.13, hwp 0.0.10 and terminal 0.0.26, each with `engines.soksak` `^0.0.27`; the earlier versions stay for core 0.0.26, and the workflows take `sok` and the SDK from `CORE_RELEASE` `v0.0.27`. The `sha256` of each release is the digest that its GitHub release states. Result: `make test` passes, and the publication run checks the index.
 - [ ] G63 — P1: `scripts/add-version.mjs` requires a plugin release named `<id>-<version>.tgz`, while the plugin releases are the `pnpm pack` files `soksak-plugin-<id>-<version>.tgz`, so it refuses every current release. Expected: a test with a `pnpm pack` release fails on the earlier name rule, and the script accepts the `pnpm pack` name and reads `package/package.json` and `package/plugin.json`.

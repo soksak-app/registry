@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G65: registry는 VT `^0.0.19`와 함께 terminal 0.0.27을 올린다.
 - G64: registry는 sidecar release files 0.0.10과 VT 0.0.19를 올린다.
 - G62: registry는 browser 0.0.12, editor 0.0.12, files 0.0.13, hwp 0.0.10, terminal 0.0.26과 함께 core 0.0.27을 올리고, workflow는 `CORE_RELEASE` `v0.0.27`을 쓴다.
 - G61: listed core 검사는 각 listed core의 plugin API release의 `checkPluginRepository`를 그것이 설치하는 plugin release를 푼 폴더에 실행하므로, plugin repository는 core release를 pin하지 않고 exposed 이름을 core 선언과 비교받는다. Red: `each listed core version checks the exposure names of the plugin releases that it installs with its own SDK`가 실패했다. Green: 통과하고, 게시된 index의 검사가 통과한다.

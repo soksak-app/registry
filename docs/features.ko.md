@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G65 — P1, core F361 연결: registry는 VT `^0.0.19`를 요구하는 terminal 0.0.27을 올리므로 core 0.0.27은 terminal을 VT 0.0.19와 함께 설치한다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G64 — P1: registry는 이전 version 옆에 sidecar release files 0.0.10과 VT 0.0.19를 올린다. 각 release의 `sha256`은 그 GitHub release가 밝히는 digest다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G62 — P0, core F360 연결: registry는 core 0.0.27과 그것을 위한 plugin version을 올린다. browser 0.0.12, editor 0.0.12, files 0.0.13, hwp 0.0.10, terminal 0.0.26이며 각각 `engines.soksak` `^0.0.27`이다. 이전 version은 core 0.0.26을 위해 남고, workflow는 `CORE_RELEASE` `v0.0.27`에서 `sok`와 SDK를 가져온다. 각 release의 `sha256`은 그 GitHub release가 밝히는 digest다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [ ] G63 — P1: `scripts/add-version.mjs`는 `<id>-<version>.tgz`라는 plugin release를 요구하지만 plugin release는 `pnpm pack` 파일 `soksak-plugin-<id>-<version>.tgz`이므로, 현재의 모든 release를 거부한다. 기대: `pnpm pack` release로 만든 test가 이전 이름 규칙에서 실패하고, script는 `pnpm pack` 이름을 받아 `package/package.json`과 `package/plugin.json`을 읽는다.

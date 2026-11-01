@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G65: The registry lists terminal 0.0.27 with VT `^0.0.19`.
 - G64: The registry lists the sidecar releases files 0.0.10 and VT 0.0.19.
 - G62: The registry lists core 0.0.27 with browser 0.0.12, editor 0.0.12, files 0.0.13, hwp 0.0.10 and terminal 0.0.26, and the workflows use `CORE_RELEASE` `v0.0.27`.
 - G61: The listed core check runs `checkPluginRepository` of the plugin API release of each listed core on the extracted plugin releases that it installs, so a plugin repository checks its exposed names against core declarations without pinning a core release. Red: `each listed core version checks the exposure names of the plugin releases that it installs with its own SDK` failed. Green: it passes, and the check of the published index passes.
