@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G62: The registry lists core 0.0.27 with browser 0.0.12, editor 0.0.12, files 0.0.13, hwp 0.0.10 and terminal 0.0.26, and the workflows use `CORE_RELEASE` `v0.0.27`.
 - G61: The listed core check runs `checkPluginRepository` of the plugin API release of each listed core on the extracted plugin releases that it installs, so a plugin repository checks its exposed names against core declarations without pinning a core release. Red: `each listed core version checks the exposure names of the plugin releases that it installs with its own SDK` failed. Green: it passes, and the check of the published index passes.
 - G60: The registry lists core 0.0.26 and the releases of the `pnpm pack` and `npm pack` form that it installs: browser 0.0.11, editor 0.0.11, files 0.0.12, hwp 0.0.9, terminal 0.0.25, files sidecar 0.0.9 and VT 0.0.18. The earlier releases and their revoked entries are removed, because core 0.0.26 does not install their form; a core before 0.0.26 updates to 0.0.26. The workflows use the `sok` of the core release v0.0.26 and the plugin API release file of each listed core instead of a core checkout.
 - G59: The listed core check fails on an unrevoked plugin version whose range contains a core newer than the newest listed core, and `revoked.json` withdraws the 22 such versions, which core 0.0.24 refuses.
