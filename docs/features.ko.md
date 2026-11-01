@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G66 — P0, core F362, F363, F364 연결: registry는 core 0.0.28, core 0.0.27용 editor 0.0.13, core 0.0.28용 browser 0.0.13, editor 0.0.14, files 0.0.14, hwp 0.0.11, terminal 0.0.28을 올리고, workflow는 `v0.0.28`로 검사한다. 각 `sha256`은 게시된 release 파일의 SHA-256이다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G65 — P1, core F361 연결: registry는 VT `^0.0.19`를 요구하는 terminal 0.0.27을 올리므로 core 0.0.27은 terminal을 VT 0.0.19와 함께 설치한다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G64 — P1: registry는 이전 version 옆에 sidecar release files 0.0.10과 VT 0.0.19를 올린다. 각 release의 `sha256`은 그 GitHub release가 밝히는 digest다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G62 — P0, core F360 연결: registry는 core 0.0.27과 그것을 위한 plugin version을 올린다. browser 0.0.12, editor 0.0.12, files 0.0.13, hwp 0.0.10, terminal 0.0.26이며 각각 `engines.soksak` `^0.0.27`이다. 이전 version은 core 0.0.26을 위해 남고, workflow는 `CORE_RELEASE` `v0.0.27`에서 `sok`와 SDK를 가져온다. 각 release의 `sha256`은 그 GitHub release가 밝히는 digest다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
