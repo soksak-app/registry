@@ -5,11 +5,12 @@
 // 오류다.
 //
 //   node scripts/add-version.mjs plugin --registry <dir> --package <plugin dir> --release <tgz>
-//   node scripts/add-version.mjs sidecar --registry <dir> --package <sidecar dir> --release <platform>=<tar.gz>...
+//   node scripts/add-version.mjs sidecar --registry <dir> --package <sidecar dir> --release <platform>=<tgz>...
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { pathToFileURL } from "node:url";
+import { packageFileName } from "./validate.mjs";
 
 const read = (path) => JSON.parse(readFileSync(path, "utf8"));
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
@@ -20,11 +21,6 @@ export function githubRepository(pkg) {
   const match = typeof url === "string" && /^(?:git\+)?https:\/\/github\.com\/([A-Za-z0-9-]+)\/([A-Za-z0-9._-]+?)(?:\.git)?$/.exec(url);
   if (!match) throw new Error(`package.json repository must be a GitHub repository: ${url}`);
   return `https://github.com/${match[1]}/${match[2]}`;
-}
-
-/** sidecar 이름의 파일 이름. `@scope/name` 은 `scope-name` 이다. */
-function fileName(name) {
-  return name.startsWith("@") ? name.slice(1).replace("/", "-") : name;
 }
 
 /** 항목을 읽거나 새로 만들고 version 을 더해 쓴다. */
@@ -44,7 +40,8 @@ export function addPlugin(registry, folder, release) {
   const pkg = read(join(folder, "package.json"));
   const manifest = read(join(folder, "plugin.json"));
   const repository = githubRepository(pkg);
-  const name = `${manifest.id}-${pkg.version}.tgz`;
+  // pnpm pack names the release file of a plugin `<scope>-<name>-<version>.tgz`.
+  const name = `${packageFileName(pkg.name)}-${pkg.version}.tgz`;
   if (basename(release) !== name) throw new Error(`${release}: the plugin release must be named ${name}`);
   return addVersion(join(registry, "plugins", `${manifest.id}.json`), {
     id: manifest.id, package: pkg.name, name: manifest.name, description: pkg.description, license: pkg.license, repository, versions: [],
@@ -61,11 +58,12 @@ export function addSidecar(registry, folder, releases) {
   const pkg = read(join(folder, "package.json"));
   const sidecar = read(join(folder, "sidecar.json"));
   const repository = githubRepository(pkg);
-  const file = fileName(pkg.name);
-  if (Object.keys(releases).length === 0) throw new Error("a sidecar version needs at least one --release <platform>=<tar.gz>");
+  const file = packageFileName(pkg.name);
+  if (Object.keys(releases).length === 0) throw new Error("a sidecar version needs at least one --release <platform>=<tgz>");
   const urls = {};
   for (const [platform, release] of Object.entries(releases)) {
-    const name = `${file}-${pkg.version}-${platform}.tar.gz`;
+    // make release names the npm pack file of a sidecar with its platform.
+    const name = `${file}-${pkg.version}-${platform}.tgz`;
     if (basename(release) !== name) throw new Error(`${release}: the ${platform} release must be named ${name}`);
     urls[platform] = { url: `${repository}/releases/download/v${pkg.version}/${name}`, sha256: sha256(release) };
   }
@@ -111,7 +109,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   } else if (kind === "sidecar") {
     const releases = Object.fromEntries(values("release").map((value) => {
       const at = value.indexOf("=");
-      if (at <= 0) throw new Error(`--release must be <platform>=<tar.gz>: ${value}`);
+      if (at <= 0) throw new Error(`--release must be <platform>=<tgz>: ${value}`);
       return [value.slice(0, at), value.slice(at + 1)];
     }));
     path = addSidecar(one("registry"), one("package"), releases);
@@ -123,7 +121,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     }));
     path = addCore(one("registry"), one("version"), releases);
   } else {
-    throw new Error("usage: add-version.mjs plugin|sidecar|core --registry <dir> (--package <dir> --release (<tgz> | <platform>=<tar.gz>...) | --version <version> --release <platform>-<host>=<zip>...)");
+    throw new Error("usage: add-version.mjs plugin|sidecar|core --registry <dir> (--package <dir> --release (<tgz> | <platform>=<tgz>...) | --version <version> --release <platform>-<host>=<zip>...)");
   }
   console.log(path);
 }

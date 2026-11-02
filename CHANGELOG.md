@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G73: The validator and `add-version.mjs` use the release file names that plugins and sidecars publish.
 - G72: Core 0.0.32 and its plugins are listed.
 - G71: Core 0.0.31 and its plugins are listed.
 - G70: VT 0.0.22 and terminal 0.0.32 are listed.

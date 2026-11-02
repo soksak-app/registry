@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G73: validator와 `add-version.mjs`는 plugin과 sidecar가 게시하는 release 파일 이름을 쓴다.
 - G72: core 0.0.32와 그 plugin을 올린다.
 - G71: core 0.0.31과 그 plugin을 올린다.
 - G70: VT 0.0.22와 terminal 0.0.32를 올린다.

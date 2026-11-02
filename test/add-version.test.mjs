@@ -26,8 +26,8 @@ test("a plugin release records the sidecar ranges of its plugin.json dependencie
   write("plugin/package.json", { name: "@soksak/plugin-terminal", version: "0.0.3", description: "Terminal.", license: "MIT",
     repository: { url: "git+https://github.com/soksak-app/plugin-terminal.git" }, engines: { soksak: "^0.0.3" } });
   write("plugin/plugin.json", { id: "terminal", name: "터미널", dependencies: { "@soksak/sidecar-vt-alacritty": "^0.0.3" } });
-  write("dist/terminal-0.0.3.tgz", "release");
-  const entry = JSON.parse(readFileSync(addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/terminal-0.0.3.tgz")), "utf8"));
+  write("dist/soksak-plugin-terminal-0.0.3.tgz", "release");
+  const entry = JSON.parse(readFileSync(addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/soksak-plugin-terminal-0.0.3.tgz")), "utf8"));
   assert.deepEqual(entry.versions[0].sidecars, { "@soksak/sidecar-vt-alacritty": "^0.0.3" });
 });
 
@@ -36,22 +36,22 @@ test("a plugin release adds its version with the release URL of its repository",
   write("plugin/package.json", { name: "@soksak/plugin-browser", version: "0.0.3", description: "Browser.", license: "MIT",
     repository: { url: "git+https://github.com/soksak-app/plugin-browser.git" }, engines: { soksak: "^0.0.3" } });
   write("plugin/plugin.json", { id: "browser", name: "브라우저" });
-  write("dist/browser-0.0.3.tgz", "release");
-  const path = addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/browser-0.0.3.tgz"));
+  write("dist/soksak-plugin-browser-0.0.3.tgz", "release");
+  const path = addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/soksak-plugin-browser-0.0.3.tgz"));
   const entry = JSON.parse(readFileSync(path, "utf8"));
   assert.deepEqual(entry, {
     id: "browser", package: "@soksak/plugin-browser", name: "브라우저", description: "Browser.", license: "MIT",
     repository: "https://github.com/soksak-app/plugin-browser",
     versions: [{
       version: "0.0.3",
-      release: { url: "https://github.com/soksak-app/plugin-browser/releases/download/v0.0.3/browser-0.0.3.tgz", sha256: sha("release") },
+      release: { url: "https://github.com/soksak-app/plugin-browser/releases/download/v0.0.3/soksak-plugin-browser-0.0.3.tgz", sha256: sha("release") },
       engines: { soksak: "^0.0.3" }, sidecars: {},
     }],
   });
   assert.deepEqual(checkEntry("plugins/browser.json", entry), []);
-  assert.throws(() => addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/browser-0.0.3.tgz")), /version 0\.0\.3 is already published/);
+  assert.throws(() => addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/soksak-plugin-browser-0.0.3.tgz")), /version 0\.0\.3 is already published/);
   write("dist/other.tgz", "release");
-  assert.throws(() => addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/other.tgz")), /must be named browser-0\.0\.3\.tgz/);
+  assert.throws(() => addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/other.tgz")), /must be named soksak-plugin-browser-0\.0\.3\.tgz/);
 });
 
 test("a sidecar release adds its version with a release per platform", (t) => {
@@ -59,13 +59,13 @@ test("a sidecar release adds its version with a release per platform", (t) => {
   write("sidecar/package.json", { name: "@soksak/sidecar-vt-alacritty", version: "0.0.3",
     repository: { url: "git+https://github.com/soksak-app/sidecar-vt.git", directory: "vt-alacritty" } });
   write("sidecar/sidecar.json", { executable: "build/x", protocol: 1 });
-  write("dist/soksak-sidecar-vt-alacritty-0.0.3-darwin-arm64.tar.gz", "mac");
+  write("dist/soksak-sidecar-vt-alacritty-0.0.3-darwin-arm64.tgz", "mac");
   const path = addSidecar(join(root, "registry"), join(root, "sidecar"),
-    { "darwin-arm64": join(root, "dist/soksak-sidecar-vt-alacritty-0.0.3-darwin-arm64.tar.gz") });
+    { "darwin-arm64": join(root, "dist/soksak-sidecar-vt-alacritty-0.0.3-darwin-arm64.tgz") });
   const entry = JSON.parse(readFileSync(path, "utf8"));
   assert.equal(path, join(root, "registry/sidecars/soksak-sidecar-vt-alacritty.json"));
   assert.deepEqual(entry.versions, [{ version: "0.0.3", protocol: 1, releases: { "darwin-arm64": {
-    url: "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.3/soksak-sidecar-vt-alacritty-0.0.3-darwin-arm64.tar.gz", sha256: sha("mac") } } }]);
+    url: "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.3/soksak-sidecar-vt-alacritty-0.0.3-darwin-arm64.tgz", sha256: sha("mac") } } }]);
   assert.deepEqual(checkEntry("sidecars/soksak-sidecar-vt-alacritty.json", entry), []);
   assert.throws(() => addSidecar(join(root, "registry"), join(root, "sidecar"), {}), /at least one --release/);
 });

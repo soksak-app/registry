@@ -8,7 +8,7 @@ import { parseArgs } from "node:util";
 import { isDeepStrictEqual } from "node:util";
 import { fileURLToPath } from "node:url";
 import { candidateManifestErrors } from "./check-candidate-plugin-manifests.mjs";
-import { sidecarFileName } from "./validate.mjs";
+import { packageFileName } from "./validate.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PLAN_PATH = join(ROOT, "candidate-release.json");
@@ -190,10 +190,10 @@ function readCandidateDeclarations(root, plan) {
   const pluginsDir = join(root, "plugins");
   const sidecarsDir = join(root, "sidecars");
   const plugins = plan.replacementPlugins.map(({ id }) => readJson(join(pluginsDir, `${id}.json`)));
-  const sidecars = plan.replacementSidecars.map(({ name }) => readJson(join(sidecarsDir, `${sidecarFileName(name)}.json`)));
+  const sidecars = plan.replacementSidecars.map(({ name }) => readJson(join(sidecarsDir, `${packageFileName(name)}.json`)));
   const allowed = new Set([
     ...plan.replacementPlugins.map(({ id }) => `plugins/${id}.json`),
-    ...plan.replacementSidecars.map(({ name }) => `sidecars/${sidecarFileName(name)}.json`),
+    ...plan.replacementSidecars.map(({ name }) => `sidecars/${packageFileName(name)}.json`),
   ]);
   for (const folder of ["plugins", "sidecars"]) {
     const directory = join(root, folder);
@@ -211,7 +211,7 @@ function writeRegistryDeclarations(root, declarations) {
     const directory = join(root, folder);
     mkdirSync(directory, { recursive: true });
     for (const entry of declarations[folder]) {
-      const key = folder === "plugins" ? entry.id : folder === "sidecars" ? sidecarFileName(entry.name) : entry.name;
+      const key = folder === "plugins" ? entry.id : folder === "sidecars" ? packageFileName(entry.name) : entry.name;
       writeFileSync(join(directory, `${key}.json`), `${JSON.stringify(entry, null, 2)}\n`);
     }
   }

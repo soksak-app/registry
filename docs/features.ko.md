@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G73 — P1: `scripts/validate.mjs`, `scripts/add-version.mjs`, CONTRIBUTING은 plugin과 sidecar가 게시하는 release 파일 이름을 쓴다. plugin은 `pnpm pack` 파일 `<scope>-<name>-<version>.tgz`, sidecar는 `npm pack` 파일 `<file name>-<version>-<platform>.tgz`이며, 모든 등록된 version이 이 이름을 쓴다(core docs/spec/installation.md). 입력: validator와 `add-version.mjs`가 `<id>-<version>.tgz`와 `.tar.gz`를 요구해서 `add-version.mjs`가 게시된 sidecar release `soksak-sidecar-alacritty-0.0.1-darwin-arm64.tgz`를 거부했다. Red: 게시된 이름을 쓴 `test/add-version.test.mjs`와 `test/validate.test.mjs`가 `must be named`와 `url must be`로 실패했다. Green: 통과하고, 파일 이름 helper는 plugin과 sidecar 모두의 `packageFileName`이며, `make test`가 통과한다.
 - [o] G72 — P0, core F386-5, F389 연결: registry는 core 0.0.32와, 그것을 위한 browser 0.0.17, editor 0.0.18, files 0.0.18, hwp 0.0.15, terminal 0.0.34를 올리고, workflow는 `v0.0.32`로 검사한다. 각 `sha256`은 게시된 release 파일의 SHA-256이다. 결과: `make test`가 통과하고, 게시 run이 index를 검사한다.
 - [o] G71 — P0, core F385, F387 연결: registry는 core 0.0.31과, 그것을 위한 browser 0.0.16, editor 0.0.17, files 0.0.17, hwp 0.0.14, terminal 0.0.33을 올리고, workflow는 `v0.0.31`로 검사한다. 각 `sha256`은 게시된 release 파일의 SHA-256이다. 결과: `make test`가 통과하고, 게시 run이 index를 검사한다.
 - [o] G70 — P0, VT S120과 terminal S120-terminal 연결: registry는 image region이 그리지 않는 terminal에 아무것도 그리지 않는 VT 0.0.22와, 그것을 요구하는 terminal 0.0.32를 core 0.0.30용으로 올린다. 각 `sha256`은 게시된 release 파일의 SHA-256이다. 결과: `make test`가 통과하고, 게시 run이 index를 검사한다.

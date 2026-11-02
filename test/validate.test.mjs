@@ -19,7 +19,7 @@ function plugin(owner = "alice", repo = "plugin-probe", versions = ["0.1.0"]) {
     id: "probe", package: "@alice/plugin-probe", name: "Probe", description: "Probe.", license: "MIT",
     repository: `https://github.com/${owner}/${repo}`,
     versions: versions.map((version) => ({
-      version, release: { url: `https://github.com/${owner}/${repo}/releases/download/v${version}/probe-${version}.tgz`, sha256: SHA },
+      version, release: { url: `https://github.com/${owner}/${repo}/releases/download/v${version}/alice-plugin-probe-${version}.tgz`, sha256: SHA },
       engines: { soksak: "^0.0.3" }, sidecars: {},
     })),
   };
@@ -29,7 +29,7 @@ function sidecar(owner = "acme", repo = "sidecar-worker") {
   return {
     name: "@acme/sidecar-worker", repository: `https://github.com/${owner}/${repo}`,
     versions: [{ version: "0.1.0", protocol: 1, releases: {
-      "darwin-arm64": { url: `https://github.com/${owner}/${repo}/releases/download/v0.1.0/acme-sidecar-worker-0.1.0-darwin-arm64.tar.gz`, sha256: SHA },
+      "darwin-arm64": { url: `https://github.com/${owner}/${repo}/releases/download/v0.1.0/acme-sidecar-worker-0.1.0-darwin-arm64.tgz`, sha256: SHA },
     } }],
   };
 }
@@ -108,7 +108,7 @@ test("a release must be published by the entry's repository", async (t) => {
   const entry = plugin();
   entry.versions[0].release.url = "https://example.invalid/probe-0.1.0.tgz";
   const { errors } = await check(t, {}, { "plugins/probe.json": entry });
-  assert.deepEqual(errors, ["plugins/probe.json: version 0.1.0: release url must be https://github.com/alice/plugin-probe/releases/download/v0.1.0/probe-0.1.0.tgz"]);
+  assert.deepEqual(errors, ["plugins/probe.json: version 0.1.0: release url must be https://github.com/alice/plugin-probe/releases/download/v0.1.0/alice-plugin-probe-0.1.0.tgz"]);
   const other = sidecar();
   other.versions[0].releases["darwin-arm64"].url = other.versions[0].releases["darwin-arm64"].url.replace("acme/sidecar-worker", "acme/other");
   const { errors: sidecarErrors } = await check(t, {}, { "sidecars/acme-sidecar-worker.json": other });

@@ -38,8 +38,8 @@ export function changedFiles(base, head) {
   });
 }
 
-/** sidecar 이름의 파일 이름. `@scope/name` 은 `scope-name` 이다. */
-export function sidecarFileName(name) {
+/** package 이름의 파일 이름. `@scope/name` 은 `scope-name` 이며, sidecar 항목과 plugin·sidecar release 파일의 이름이 이것으로 시작한다. */
+export function packageFileName(name) {
   return name.startsWith("@") ? name.slice(1).replace("/", "-") : name;
 }
 
@@ -73,15 +73,17 @@ export function checkEntry(path, entry) {
   if (folder === "plugins") {
     if (file !== `${entry.id}.json`) errors.push(`${path}: the file name must be ${entry.id}.json`);
     for (const version of versions) {
-      const want = `${release(version.version)}${entry.id}-${version.version}.tgz`;
+      // The release of a plugin is the pnpm pack file of its package (core docs/spec/installation.md#plugin-release).
+      const want = `${release(version.version)}${packageFileName(String(entry.package))}-${version.version}.tgz`;
       if (version.release?.url !== want) errors.push(`${path}: version ${version.version}: release url must be ${want}`);
     }
   } else {
-    const name = typeof entry.name === "string" ? sidecarFileName(entry.name) : null;
+    const name = typeof entry.name === "string" ? packageFileName(entry.name) : null;
     if (file !== `${name}.json`) errors.push(`${path}: the file name must be ${name}.json`);
     for (const version of versions) {
       for (const [platform, asset] of Object.entries(version.releases ?? {})) {
-        const want = `${release(version.version)}${name}-${version.version}-${platform}.tar.gz`;
+        // The release of a sidecar is the npm pack file of its built folder with the platform (core docs/spec/installation.md).
+        const want = `${release(version.version)}${name}-${version.version}-${platform}.tgz`;
         if (asset?.url !== want) errors.push(`${path}: version ${version.version} ${platform}: url must be ${want}`);
       }
     }
