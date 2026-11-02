@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G75: The sidecar alacritty 0.0.2 and the plugin term 0.0.2 are listed.
 - G74: The sidecar alacritty 0.0.1 and the plugin term 0.0.1 are listed.
 - G73: The validator and `add-version.mjs` use the release file names that plugins and sidecars publish.
 - G72: Core 0.0.32 and its plugins are listed.
