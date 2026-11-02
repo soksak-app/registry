@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G76 — P1, sidecar alacritty S1-17과 plugin term P1-6에 연결: GPU pass 없이 frame을 그리는 sidecar `@soksak/sidecar-alacritty` 0.0.3과 이를 요구하는 plugin `term` 0.0.3을 올린다. `add-version.mjs`가 두 version을 GitHub release에서 썼다.
 - [o] G75 — P1, sidecar alacritty S1-12와 plugin term P1-5 연결: sidecar `@soksak/sidecar-alacritty` 0.0.2와, 그것을 요구하는 plugin `term` 0.0.2를 등록한다. `add-version.mjs`가 GitHub release에서 두 version을 썼고, `make test`가 통과한다.
 - [o] G74 — P1, sidecar alacritty S1-4와 plugin term P1-3 연결: sidecar `@soksak/sidecar-alacritty` 0.0.1과, 그것과 core `^0.0.32`를 요구하는 plugin `term` 0.0.1을 등록한다. `add-version.mjs`가 GitHub release `soksak-sidecar-alacritty-0.0.1-darwin-arm64.tgz`와 `soksak-plugin-term-0.0.1.tgz`로 두 version을 썼다. 결과: core의 `sok`으로 `make build`가 모든 release를 받아 `sha256`을 확인하고, `make test`가 통과한다.
 - [o] G73 — P1: `scripts/validate.mjs`, `scripts/add-version.mjs`, CONTRIBUTING은 plugin과 sidecar가 게시하는 release 파일 이름을 쓴다. plugin은 `pnpm pack` 파일 `<scope>-<name>-<version>.tgz`, sidecar는 `npm pack` 파일 `<file name>-<version>-<platform>.tgz`이며, 모든 등록된 version이 이 이름을 쓴다(core docs/spec/installation.md). 입력: validator와 `add-version.mjs`가 `<id>-<version>.tgz`와 `.tar.gz`를 요구해서 `add-version.mjs`가 게시된 sidecar release `soksak-sidecar-alacritty-0.0.1-darwin-arm64.tgz`를 거부했다. Red: 게시된 이름을 쓴 `test/add-version.test.mjs`와 `test/validate.test.mjs`가 `must be named`와 `url must be`로 실패했다. Green: 통과하고, 파일 이름 helper는 plugin과 sidecar 모두의 `packageFileName`이며, `make test`가 통과한다.

@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G76: sidecar alacritty 0.0.3과 plugin term 0.0.3을 올렸다.
 - G75: sidecar alacritty 0.0.2와 plugin term 0.0.2를 등록했다.
 - G74: sidecar alacritty 0.0.1과 plugin term 0.0.1을 등록했다.
 - G73: validator와 `add-version.mjs`는 plugin과 sidecar가 게시하는 release 파일 이름을 쓴다.
