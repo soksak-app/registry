@@ -49,6 +49,17 @@
         "soksak": "^0.0.29"
       },
       "sidecars": {}
+    },
+    {
+      "version": "0.0.15",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-browser/releases/download/v0.0.15/soksak-plugin-browser-0.0.15.tgz",
+        "sha256": "0421df0ae87fa6027ed983f7be1711144b6a56142b283f40d0db86d96b5d10c6"
+      },
+      "engines": {
+        "soksak": "^0.0.30"
+      },
+      "sidecars": {}
     }
   ]
 }

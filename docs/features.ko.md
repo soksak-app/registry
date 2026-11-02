@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G68 — P0, core F378, F379와 VT S115 연결: registry는 core 0.0.30, VT 0.0.20, 그리고 그것을 위한 browser 0.0.15, editor 0.0.16, files 0.0.16, hwp 0.0.13, terminal 0.0.30을 나열한다. workflow는 `v0.0.30`에 대해 검사한다. 각 `sha256`은 게시된 release file의 SHA-256이다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G67 — P0, core F365, F366, F367 연결: registry는 core 0.0.29와 그것을 위한 browser 0.0.14, editor 0.0.15, files 0.0.15, hwp 0.0.12, terminal 0.0.29를 올리고, workflow는 `v0.0.29`로 검사한다. 각 `sha256`은 게시된 release 파일의 SHA-256이다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G66 — P0, core F362, F363, F364 연결: registry는 core 0.0.28, core 0.0.27용 editor 0.0.13, core 0.0.28용 browser 0.0.13, editor 0.0.14, files 0.0.14, hwp 0.0.11, terminal 0.0.28을 올리고, workflow는 `v0.0.28`로 검사한다. 각 `sha256`은 게시된 release 파일의 SHA-256이다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G65 — P1, core F361 연결: registry는 VT `^0.0.19`를 요구하는 terminal 0.0.27을 올리므로 core 0.0.27은 terminal을 VT 0.0.19와 함께 설치한다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.

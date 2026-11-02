@@ -57,6 +57,19 @@
       "sidecars": {
         "@soksak/sidecar-files": ">=0.0.9"
       }
+    },
+    {
+      "version": "0.0.13",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-hwp/releases/download/v0.0.13/soksak-plugin-hwp-0.0.13.tgz",
+        "sha256": "f514bc161f3116aeaf8fe7786c1a50c236567d5663dbbb4cafdcaf1a71fcbc43"
+      },
+      "engines": {
+        "soksak": "^0.0.30"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.9"
+      }
     }
   ]
 }

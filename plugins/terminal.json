@@ -70,6 +70,19 @@
       "sidecars": {
         "@soksak/sidecar-vt-alacritty": "^0.0.19"
       }
+    },
+    {
+      "version": "0.0.30",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-terminal/releases/download/v0.0.30/soksak-plugin-terminal-0.0.30.tgz",
+        "sha256": "b53668a367d7087bebc53a96f8509caabc3e79307f1899812ec08508e1e2b85c"
+      },
+      "engines": {
+        "soksak": "^0.0.30"
+      },
+      "sidecars": {
+        "@soksak/sidecar-vt-alacritty": "^0.0.20"
+      }
     }
   ]
 }
