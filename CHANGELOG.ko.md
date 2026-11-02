@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G70: VT 0.0.22와 terminal 0.0.32를 올린다.
 - G69: VT 0.0.21과 terminal 0.0.31을 올린다.
 - G68: core 0.0.30, VT 0.0.20과 core 0.0.30을 위한 plugin을 나열한다.
 - G67: registry는 core 0.0.29와 그 plugin release를 올린다.

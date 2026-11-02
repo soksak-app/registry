@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G70 — P0, VT S120과 terminal S120-terminal 연결: registry는 image region이 그리지 않는 terminal에 아무것도 그리지 않는 VT 0.0.22와, 그것을 요구하는 terminal 0.0.32를 core 0.0.30용으로 올린다. 각 `sha256`은 게시된 release 파일의 SHA-256이다. 결과: `make test`가 통과하고, 게시 run이 index를 검사한다.
 - [o] G69 — P0, VT S118과 terminal S118-terminal 연결: registry는 각 shell integration 설치를 자기 임시 파일로 쓰는 VT 0.0.21과, 그것을 요구하는 terminal 0.0.31을 core 0.0.30용으로 올린다. 각 `sha256`은 게시된 release 파일의 SHA-256이다. 결과: `make test`가 통과하고, 게시 run이 index를 검사한다.
 - [o] G68 — P0, core F378, F379와 VT S115 연결: registry는 core 0.0.30, VT 0.0.20, 그리고 그것을 위한 browser 0.0.15, editor 0.0.16, files 0.0.16, hwp 0.0.13, terminal 0.0.30을 나열한다. workflow는 `v0.0.30`에 대해 검사한다. 각 `sha256`은 게시된 release file의 SHA-256이다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
 - [o] G67 — P0, core F365, F366, F367 연결: registry는 core 0.0.29와 그것을 위한 browser 0.0.14, editor 0.0.15, files 0.0.15, hwp 0.0.12, terminal 0.0.29를 올리고, workflow는 `v0.0.29`로 검사한다. 각 `sha256`은 게시된 release 파일의 SHA-256이다. 결과: `make test`가 통과하고, publication run이 index를 검사한다.
