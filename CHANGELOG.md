@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G72: Core 0.0.32 and its plugins are listed.
 - G71: Core 0.0.31 and its plugins are listed.
 - G70: VT 0.0.22 and terminal 0.0.32 are listed.
 - G69: VT 0.0.21 and terminal 0.0.31 are listed.

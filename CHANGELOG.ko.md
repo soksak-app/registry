@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G72: core 0.0.32와 그 plugin을 올린다.
 - G71: core 0.0.31과 그 plugin을 올린다.
 - G70: VT 0.0.22와 terminal 0.0.32를 올린다.
 - G69: VT 0.0.21과 terminal 0.0.31을 올린다.
