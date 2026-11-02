@@ -64,6 +64,19 @@
           "sha256": "7df7cf7db25bffa3643d12809e71487335718557494e9d23c9488d57c567f3ff"
         }
       }
+    },
+    {
+      "version": "0.0.31",
+      "releases": {
+        "darwin-arm64-wailsv3": {
+          "url": "https://github.com/soksak-app/core/releases/download/v0.0.31/soksak-0.0.31-darwin-arm64-wailsv3.zip",
+          "sha256": "b4de55070ce6c31e2db7a4659fac409fd1d2243b0b38620df798396bc2b8615f"
+        },
+        "darwin-arm64-tauriv2": {
+          "url": "https://github.com/soksak-app/core/releases/download/v0.0.31/soksak-0.0.31-darwin-arm64-tauriv2.zip",
+          "sha256": "501e965c60bce272522055655e5bda44c355a0e982c6de038187a23e5cf129ad"
+        }
+      }
     }
   ]
 }
