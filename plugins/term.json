@@ -1,0 +1,23 @@
+{
+  "id": "term",
+  "package": "@soksak/plugin-term",
+  "name": "GPU 터미널",
+  "description": "Term plugin: a full-screen terminal surface whose sidecar draws its frames on the GPU and presents them in the lease mode.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-term",
+  "versions": [
+    {
+      "version": "0.0.1",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-term/releases/download/v0.0.1/soksak-plugin-term-0.0.1.tgz",
+        "sha256": "571a6bd53a24dd31345f069e251b5c929d5e671741d2d27ed58072da1be654e4"
+      },
+      "engines": {
+        "soksak": "^0.0.32"
+      },
+      "sidecars": {
+        "@soksak/sidecar-alacritty": "^0.0.1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@soksak/sidecar-alacritty",
+  "repository": "https://github.com/soksak-app/sidecar-alacritty",
+  "versions": [
+    {
+      "version": "0.0.1",
+      "protocol": 1,
+      "releases": {
+        "darwin-arm64": {
+          "url": "https://github.com/soksak-app/sidecar-alacritty/releases/download/v0.0.1/soksak-sidecar-alacritty-0.0.1-darwin-arm64.tgz",
+          "sha256": "4e57339428f9464c4bee9b81b8e29b3e745312d072834538ca272df2d781c80c"
+        }
+      }
+    }
+  ]
+}
