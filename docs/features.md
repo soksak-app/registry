@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G69 — P0, linked to VT S118 and terminal S118-terminal: The registry lists VT 0.0.21, which writes each shell integration install through its own temporary file, and terminal 0.0.31, which requires it, for core 0.0.30. Each `sha256` is the SHA-256 of the published release file. Result: `make test` passes, and the publication run checks the index.
 - [o] G68 — P0, linked to core F378 and F379 and VT S115: The registry lists core 0.0.30, VT 0.0.20, and browser 0.0.15, editor 0.0.16, files 0.0.16, hwp 0.0.13 and terminal 0.0.30 for it; the workflows check against `v0.0.30`. Each `sha256` is the SHA-256 of the published release file. Result: `make test` passes, and the publication run checks the index.
 - [o] G67 — P0, linked to core F365, F366 and F367: The registry lists core 0.0.29 and browser 0.0.14, editor 0.0.15, files 0.0.15, hwp 0.0.12 and terminal 0.0.29 for it; the workflows check against `v0.0.29`. Each `sha256` is the SHA-256 of the published release file. Result: `make test` passes, and the publication run checks the index.
 - [o] G66 — P0, linked to core F362, F363 and F364: The registry lists core 0.0.28, editor 0.0.13 for core 0.0.27, and browser 0.0.13, editor 0.0.14, files 0.0.14, hwp 0.0.11 and terminal 0.0.28 for core 0.0.28; the workflows check against `v0.0.28`. Each `sha256` is the SHA-256 of the published release file. Result: `make test` passes, and the publication run checks the index.

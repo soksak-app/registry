@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G69: VT 0.0.21 and terminal 0.0.31 are listed.
 - G68: Core 0.0.30, VT 0.0.20 and the plugins for core 0.0.30 are listed.
 - G67: The registry lists core 0.0.29 and its plugin releases.
 - G66: The registry lists core 0.0.28 and the plugin releases for core 0.0.27 and 0.0.28.
