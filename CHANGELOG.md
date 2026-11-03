@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G77: VT 0.0.23, the sidecar alacritty 0.0.4, the plugin terminal 0.0.35 and the plugin term 0.0.4 are listed.
 - G76: The sidecar alacritty 0.0.3 and the plugin term 0.0.3 are listed.
 - G75: The sidecar alacritty 0.0.2 and the plugin term 0.0.2 are listed.
 - G74: The sidecar alacritty 0.0.1 and the plugin term 0.0.1 are listed.

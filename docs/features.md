@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G77 — P0, linked to VT S129, sidecar alacritty S20, plugin terminal P107 and plugin term P2: List VT 0.0.23, the sidecar alacritty 0.0.4, the plugin terminal 0.0.35 and the plugin term 0.0.4, which lower the cost of a frame.
 - [o] G76 — P1, linked to sidecar alacritty S1-17 and plugin term P1-6: List the sidecar `@soksak/sidecar-alacritty` 0.0.3, whose frame draws without a GPU pass, and the plugin `term` 0.0.3, which requires it. `add-version.mjs` wrote both versions from their GitHub releases.
 - [o] G75 — P1, linked to sidecar alacritty S1-12 and plugin term P1-5: List the sidecar `@soksak/sidecar-alacritty` 0.0.2 and the plugin `term` 0.0.2, which requires it. `add-version.mjs` wrote both versions from their GitHub releases, and `make test` passes.
 - [o] G74 — P1, linked to sidecar alacritty S1-4 and plugin term P1-3: List the sidecar `@soksak/sidecar-alacritty` 0.0.1 and the plugin `term` 0.0.1, which requires it and core `^0.0.32`. `add-version.mjs` wrote both versions from their GitHub releases `soksak-sidecar-alacritty-0.0.1-darwin-arm64.tgz` and `soksak-plugin-term-0.0.1.tgz`. Result: `make build` with the `sok` of core downloads every release and checks its `sha256`, and `make test` passes.

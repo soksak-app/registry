@@ -44,6 +44,19 @@
       "sidecars": {
         "@soksak/sidecar-alacritty": "^0.0.3"
       }
+    },
+    {
+      "version": "0.0.4",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-term/releases/download/v0.0.4/soksak-plugin-term-0.0.4.tgz",
+        "sha256": "a52a3f261ec5a7add20498a793e470476e03310f805445842d1937fbfa073181"
+      },
+      "engines": {
+        "soksak": "^0.0.32"
+      },
+      "sidecars": {
+        "@soksak/sidecar-alacritty": "^0.0.4"
+      }
     }
   ]
 }
