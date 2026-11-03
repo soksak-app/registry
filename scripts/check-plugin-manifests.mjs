@@ -4,23 +4,20 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { rangeContains as developmentRangeContains, validateManifest as developmentValidateManifest } from "@soksak/plugin-api";
+import { rangeContains, validateManifest } from "@soksak/plugin-api";
 import { fetchBytes, verifiedManifest } from "./plugin-release.mjs";
 
 const API_ENTRY = fileURLToPath(import.meta.resolve("@soksak/plugin-api"));
 export const PLUGIN_API_VERSION = JSON.parse(readFileSync(join(dirname(API_ENTRY), "package.json"), "utf8")).version;
 
 /** Errors for unrevoked releases whose engine range includes the pinned plugin API version. */
-export async function registryManifestErrors(index, fetchRelease = fetchBytes, reader = {}) {
-  const sdkVersion = reader.version ?? PLUGIN_API_VERSION;
-  const rangeContains = reader.rangeContains ?? developmentRangeContains;
-  const validateManifest = reader.validateManifest ?? developmentValidateManifest;
+export async function registryManifestErrors(index, fetchRelease = fetchBytes) {
   const revoked = new Set(index.revoked.plugins.map((entry) => `${entry.id}@${entry.version}`));
   const errors = [];
   let checked = 0;
   for (const plugin of index.plugins) {
     for (const version of plugin.versions) {
-      if (revoked.has(`${plugin.id}@${version.version}`) || !rangeContains(version.engines.soksak, sdkVersion)) continue;
+      if (revoked.has(`${plugin.id}@${version.version}`) || !rangeContains(version.engines.soksak, PLUGIN_API_VERSION)) continue;
       checked += 1;
       const where = `plugin ${plugin.id} ${version.version}`;
       try {
