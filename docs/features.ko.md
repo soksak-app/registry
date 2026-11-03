@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G80 — P0, core F401과 F402, VT S148, sidecar alacritty S87, plugin terminal P111, plugin term P5와 연결: registry가 core 0.0.33, VT 0.0.24, sidecar alacritty 0.0.5, plugin terminal 0.0.36과 0.0.37, plugin term 0.0.5와 0.0.6, browser 0.0.19, editor 0.0.19, files 0.0.19, hwp 0.0.16을 올리고, workflow는 `v0.0.33`을 기준으로 검사한다. 각 `sha256`은 publish된 release 파일의 digest이다. 결과: `make build`와 `make test`가 통과하고 publication run이 index를 검사한다.
 - [o] G78 — P0, browser F332-6-4-4와 연결: registry는 core 0.0.32의 node 식별자로 DOM 행의 key를 정하는 plugin browser 0.0.18을 등록한다.
 - [ ] G79 — P1: candidate 선언을 제거하거나 갱신한다. 입력: `candidate-release.json`과 `test/candidate-release.test.mjs`는 core 0.0.21을 적고 있으며, 그 뒤의 어떤 release도 `make candidate-release`를 쓰지 않았다. 기대: 선언이 publish된 version을 적지 않거나, target, script, test, `CONTRIBUTING.md`의 해당 절을 제거한다.
 - [o] G77 — P0, VT S129, sidecar alacritty S20, plugin terminal P107, plugin term P2와 연결: frame 비용을 낮춘 VT 0.0.23, sidecar alacritty 0.0.4, plugin terminal 0.0.35, plugin term 0.0.4를 올린다.

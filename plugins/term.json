@@ -57,6 +57,32 @@
       "sidecars": {
         "@soksak/sidecar-alacritty": "^0.0.4"
       }
+    },
+    {
+      "version": "0.0.5",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-term/releases/download/v0.0.5/soksak-plugin-term-0.0.5.tgz",
+        "sha256": "ac6ce1231a0bef0446efa88e993ddf9b40cb76636a311f38fb52fccbe93e96ca"
+      },
+      "engines": {
+        "soksak": "^0.0.32"
+      },
+      "sidecars": {
+        "@soksak/sidecar-alacritty": "^0.0.5"
+      }
+    },
+    {
+      "version": "0.0.6",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-term/releases/download/v0.0.6/soksak-plugin-term-0.0.6.tgz",
+        "sha256": "946052da4df3895e6c151854ae38f15dc587c8e15d2ea63065385e41bc9a0d70"
+      },
+      "engines": {
+        "soksak": "^0.0.33"
+      },
+      "sidecars": {
+        "@soksak/sidecar-alacritty": "^0.0.5"
+      }
     }
   ]
 }

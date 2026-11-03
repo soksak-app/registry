@@ -96,6 +96,19 @@
       "sidecars": {
         "@soksak/sidecar-files": ">=0.0.9"
       }
+    },
+    {
+      "version": "0.0.19",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-files/releases/download/v0.0.19/soksak-plugin-files-0.0.19.tgz",
+        "sha256": "cac0a646ac68c2cb371ab45836a4ff4bd05964c7679daf3eff102281482c102f"
+      },
+      "engines": {
+        "soksak": "^0.0.33"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.9"
+      }
     }
   ]
 }
