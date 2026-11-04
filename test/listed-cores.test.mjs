@@ -8,14 +8,17 @@ import test from "node:test";
 import { laterCoreErrors, listedCoreErrors, releaseSdkLoader, selectedVersions } from "../scripts/check-listed-cores.mjs";
 import { pathToFileURL } from "node:url";
 
-// A plugin release is the pnpm pack file of the plugin: a gzip tar with plugin.json under package/.
-function release(manifest, view = "") {
+// A plugin release is the pnpm pack file of the plugin: a gzip tar with plugin.json under package/, and the other root files
+// that the release holds.
+function release(manifest, view = "", files = {}) {
   const folder = mkdtempSync(join(tmpdir(), "listed-cores-release-"));
   try {
     mkdirSync(join(folder, "package", "ui"), { recursive: true });
     writeFileSync(join(folder, "package", "plugin.json"), JSON.stringify(manifest));
     writeFileSync(join(folder, "package", "ui", "view.js"), view);
-    execFileSync("tar", ["-czf", join(folder, "plugin.tgz"), "-C", folder, "package/plugin.json", "package/ui/view.js"]);
+    for (const [name, text] of Object.entries(files)) writeFileSync(join(folder, "package", name), text);
+    const members = ["package/plugin.json", "package/ui/view.js", ...Object.keys(files).map((name) => `package/${name}`)];
+    execFileSync("tar", ["-czf", join(folder, "plugin.tgz"), "-C", folder, ...members]);
     return readFileSync(join(folder, "plugin.tgz"));
   } finally {
     rmSync(folder, { recursive: true, force: true });
@@ -23,9 +26,9 @@ function release(manifest, view = "") {
 }
 
 const releases = new Map();
-function version(id, number, range, form, view = "") {
+function version(id, number, range, form, view = "", files = {}) {
   const url = `https://example.invalid/${id}-${number}.tgz`;
-  const bytes = release({ id, version: number, form }, view);
+  const bytes = release({ id, version: number, form }, view, files);
   releases.set(url, bytes);
   return { version: number, release: { url, sha256: createHash("sha256").update(bytes).digest("hex") }, engines: { soksak: range } };
 }
@@ -146,4 +149,28 @@ test("each listed core version checks the exposure names of the plugin releases 
   const { checked, errors } = await listedCoreErrors(exposed, out(t), async (core) => sdks[core], fetchRelease);
   assert.equal(checked, 1);
   assert.deepEqual(errors, ["core 0.0.20: plugin browser 0.0.3: ui/view.js: core 0.0.20 does not declare core.undeclared"]);
+});
+
+// The contract copies of a release (core docs/spec/plugins.md#contract-copies): checkPluginRepository of each listed core
+// compares the declaration contract-copies.json of the release with the contract files of that core.
+test("each listed core version checks the contract copies that the plugin releases it installs declare with its own SDK", { timeout: 5000 }, async (t) => {
+  const contract = { "0.0.20": "a".repeat(64), "0.0.21": "b".repeat(64) };
+  // Both cores accept the manifest; they differ only in their contract files.
+  const copies = (core) => ({
+    ...sdks[core],
+    validateManifest() {},
+    checkPluginRepository(root) {
+      const declared = JSON.parse(readFileSync(join(root, "contract-copies.json"), "utf8"));
+      return Object.entries(declared).filter(([, digest]) => digest !== contract[core])
+        .map(([name]) => `contract copy ${name} differs from contract/${name}`);
+    },
+  });
+  const declaring = {
+    plugins: [{ id: "browser", versions: [version("browser", "0.0.3", ">=0.0.20", "old", "", { "contract-copies.json": JSON.stringify({ "expose.json": contract["0.0.20"] }) })] }],
+    core: { versions: [{ version: "0.0.20" }, { version: "0.0.21" }] },
+    revoked: { plugins: [], sidecars: [], core: [] },
+  };
+  const { checked, errors } = await listedCoreErrors(declaring, out(t), async (core) => copies(core), fetchRelease);
+  assert.equal(checked, 2);
+  assert.deepEqual(errors, ["core 0.0.21: plugin browser 0.0.3: contract copy expose.json differs from contract/expose.json"]);
 });
