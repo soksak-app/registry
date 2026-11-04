@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G103: The candidate manifest check is removed: the target `candidate-manifest-check`, its script, its test, its fixture and its section of `CONTRIBUTING.md`, because no workflow or other target calls it.
 - G79: The candidate release path is removed, because every release lists its entries directly.
 - G81: Core 0.0.34, VT 0.0.25, the sidecar alacritty 0.0.6 and the plugin releases for them are listed.
 - G80: Core 0.0.33, VT 0.0.24, the sidecar alacritty 0.0.5 and the plugin releases for them are listed.

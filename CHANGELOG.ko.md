@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G103: candidate manifest 검사를 제거했다. target `candidate-manifest-check`, 그 script, test, fixture와 `CONTRIBUTING.md`의 해당 절이다. 어떤 workflow나 다른 target도 이 검사를 부르지 않기 때문이다.
 - G79: 모든 release가 항목을 직접 올리므로 candidate release 경로를 제거했다.
 - G81: core 0.0.34, VT 0.0.25, sidecar alacritty 0.0.6과 그에 맞는 plugin release를 올린다.
 - G80: core 0.0.33, VT 0.0.24, sidecar alacritty 0.0.5와 그에 맞는 plugin release를 올린다.
