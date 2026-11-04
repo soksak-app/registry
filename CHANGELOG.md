@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G81: Core 0.0.34, VT 0.0.25, the sidecar alacritty 0.0.6 and the plugin releases for them are listed.
 - G80: Core 0.0.33, VT 0.0.24, the sidecar alacritty 0.0.5 and the plugin releases for them are listed.
 - G78: The plugin browser 0.0.18 is listed. G3 and G53.3 are closed and G5 and G53 are complete, because their conditions passed.
 - G77: VT 0.0.23, the sidecar alacritty 0.0.4, the plugin terminal 0.0.35 and the plugin term 0.0.4 are listed.

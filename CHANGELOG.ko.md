@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G81: core 0.0.34, VT 0.0.25, sidecar alacritty 0.0.6과 그에 맞는 plugin release를 올린다.
 - G80: core 0.0.33, VT 0.0.24, sidecar alacritty 0.0.5와 그에 맞는 plugin release를 올린다.
 - G78: plugin browser 0.0.18을 등록했다. 조건이 이미 지나갔으므로 G3과 G53.3을 닫고 G5와 G53을 완료했다.
 - G77: VT 0.0.23, sidecar alacritty 0.0.4, plugin terminal 0.0.35, plugin term 0.0.4를 올렸다.
