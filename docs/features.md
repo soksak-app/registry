@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G82 — P0, linked to core F462: The registry lists core 0.0.35, the plugin terminal 0.0.39, the plugin term 0.0.8, browser 0.0.21, editor 0.0.21, files 0.0.21 and hwp 0.0.18. Each sha256 is the digest of the published release file, and the workflows check against v0.0.35.
 - [o] G81 — P0, linked to core F431 and F432, VT S152, sidecar alacritty S92: The registry lists core 0.0.34, VT 0.0.25, the sidecar alacritty 0.0.6, the plugin terminal 0.0.38, the plugin term 0.0.7, browser 0.0.20, editor 0.0.20, files 0.0.20 and hwp 0.0.17. Each sha256 is the digest of the published release file, and the workflows check against v0.0.34.
 - [o] G80 — P0, linked to core F401 and F402, VT S148, sidecar alacritty S87, plugin terminal P111 and plugin term P5: The registry lists core 0.0.33, VT 0.0.24, the sidecar alacritty 0.0.5, the plugin terminal 0.0.36 and 0.0.37, the plugin term 0.0.5 and 0.0.6, browser 0.0.19, editor 0.0.19, files 0.0.19 and hwp 0.0.16; the workflows check against `v0.0.33`. Each `sha256` is the digest of the published release file. Result: `make build` and `make test` pass, and the publication run checks the index.
 - [o] G78 — P0, linked to browser F332-6-4-4: The registry lists the plugin browser 0.0.18, which keys its DOM rows by the node identity of core 0.0.32.
