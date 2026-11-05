@@ -3,6 +3,7 @@
 [English](features.md)
 
 - [o] F460-registry — P2, core F460과 연결: `.gitignore`가 local 출력 폴더 `/build/`를 지정한다. 입력: 그 폴더는 local 출력을 담고 추적되지 않은 항목으로 보였다. 결과: `git status`에 추적되지 않은 폴더가 없고 `make test`가 통과한다.
+- [o] F475-registry — P0, core F475와 연결: publish 검사가 등록된 각 core release의 `./exposure-check`를 읽는다. 입력: F472-registry의 이름 변경이 그 package export 이름을 `./check-exposure`로 바꿨다. 동작: publish가 `exports no ./check-exposure`로 실패했다. 기대: 검사는 release가 선언한 export를 읽는다. 결과: `make test`가 통과한다.
 - [o] F472-registry — P2, core F472와 연결: 저장소의 명령 이름이 하는 일을 말하고, `make test`가 `sok-check commands`를 실행한다. 결과: `make test`가 통과한다.
 - [o] F468-registry — P2, core F468과 연결: 저장소가 kit의 `soksak-check docs`를 실행한다. 결과: `make test`가 통과한다.
 - [o] F466-registry — P2, core F466과 연결: 저장소가 local build log와 임시 log의 인용을 보고하는 kit release를 pin하고, 기록에 그런 인용이 없다. 결과: `make test`가 통과한다.

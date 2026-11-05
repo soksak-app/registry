@@ -3,6 +3,7 @@
 [한국어](features.ko.md)
 
 - [o] F460-registry — P2, linked to core F460: `.gitignore` names the local output folder `/build/`. Input: the folder held local output and showed as untracked. Result: `git status` shows no untracked folder, and `make test` passes.
+- [o] F475-registry — P0, linked to core F475: The publish check reads `./exposure-check` of each listed core release. Input: the rename of F472-registry changed that package export name to `./check-exposure`. Behavior: the publish failed with `exports no ./check-exposure`. Expected: the check reads the export that the releases declare. Result: `make test` passes.
 - [o] F472-registry — P2, linked to core F472: The names of the commands of the repository state what they do, and `make test` runs `sok-check commands`. Result: `make test` passes.
 - [o] F468-registry — P2, linked to core F468: The repository runs `soksak-check docs` of the kit. Result: `make test` passes.
 - [o] F466-registry — P2, linked to core F466: The repository pins the kit release whose record check reports a citation of a local build log or a temporary log, and its records hold no such citation. Result: `make test` passes.

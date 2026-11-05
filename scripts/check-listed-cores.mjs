@@ -119,8 +119,8 @@ export function releaseSdkLoader(releases, out, fetchRelease = fetchBytes) {
     const api = join(folder, "package");
     const manifest = JSON.parse(readFileSync(join(api, "package.json"), "utf8"));
     const sdk = await import(pathToFileURL(join(api, manifest.exports["."])).href);
-    if (typeof manifest.exports["./check-exposure"] !== "string") throw new Error(`the SDK of core ${version} at ${url} exports no ./check-exposure`);
-    const exposure = await import(pathToFileURL(join(api, manifest.exports["./check-exposure"])).href);
+    if (typeof manifest.exports["./exposure-check"] !== "string") throw new Error(`the SDK of core ${version} at ${url} exports no ./exposure-check`);
+    const exposure = await import(pathToFileURL(join(api, manifest.exports["./exposure-check"])).href);
     return { version: manifest.version, rangeContains: sdk.rangeContains, validateManifest: sdk.validateManifest,
       checkPluginRepository: exposure.checkPluginRepository };
   };

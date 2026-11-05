@@ -3,6 +3,7 @@
 ## 미출시
 
 - F460-registry: `.gitignore`가 local 출력 폴더 `/build/`를 지정한다.
+- F475-registry: publish 검사가 등록된 각 core release의 `./exposure-check`를 읽는다.
 - F472-registry: 명령 이름이 하는 일을 말하고, `sok-check commands`가 이를 강제한다.
 - F468-registry: 저장소가 kit의 `soksak-check docs`를 실행한다.
 - F466-registry: 저장소가 local build log와 임시 log의 인용을 보고하는 kit release를 pin한다.

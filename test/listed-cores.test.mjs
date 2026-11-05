@@ -115,9 +115,9 @@ test("the SDK of a listed core is the plugin API release file of that core relea
   t.after(() => rmSync(root, { recursive: true, force: true }));
   // The release file of core 0.0.26 is the pnpm pack file of packages/plugin-api: package/package.json names its entry.
   mkdirSync(join(root, "package"));
-  writeFileSync(join(root, "package", "package.json"), JSON.stringify({ name: "@soksak/plugin-api", version: "0.0.26", type: "module", exports: { ".": "./index.js", "./check-exposure": "./check-exposure.js" } }));
+  writeFileSync(join(root, "package", "package.json"), JSON.stringify({ name: "@soksak/plugin-api", version: "0.0.26", type: "module", exports: { ".": "./index.js", "./exposure-check": "./exposure-check.js" } }));
   writeFileSync(join(root, "package", "index.js"), "export const rangeContains = () => true;\nexport function validateManifest() {}\n");
-  writeFileSync(join(root, "package", "check-exposure.js"), "export function checkPluginRepository() { return []; }\n");
+  writeFileSync(join(root, "package", "exposure-check.js"), "export function checkPluginRepository() { return []; }\n");
   mkdirSync(join(root, "v0.0.26"));
   execFileSync("tar", ["-czf", join(root, "v0.0.26", "soksak-plugin-api-0.0.26.tgz"), "-C", root, "package"]);
   const load = releaseSdkLoader(pathToFileURL(root).href, join(root, "out"));
