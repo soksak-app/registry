@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] F474-registry — P0, core F474와 연결: registry가 core 0.0.36, sidecar vt 0.0.26, alacritty 0.0.7, files 0.0.11, plugin browser 0.0.22, editor 0.0.22, files 0.0.22, hwp 0.0.19, term 0.0.9, terminal 0.0.40을 올린다. 각 sha256은 게시된 release 파일의 digest이고, workflow는 v0.0.36으로 검사한다. 결과: `make test`가 통과한다.
 - [o] F460-registry — P2, core F460과 연결: `.gitignore`가 local 출력 폴더 `/build/`를 지정한다. 입력: 그 폴더는 local 출력을 담고 추적되지 않은 항목으로 보였다. 결과: `git status`에 추적되지 않은 폴더가 없고 `make test`가 통과한다.
 - [o] F475-registry — P0, core F475와 연결: publish 검사가 등록된 각 core release의 `./exposure-check`를 읽는다. 입력: F472-registry의 이름 변경이 그 package export 이름을 `./check-exposure`로 바꿨다. 동작: publish가 `exports no ./check-exposure`로 실패했다. 기대: 검사는 release가 선언한 export를 읽는다. 결과: `make test`가 통과한다.
 - [o] F472-registry — P2, core F472와 연결: 저장소의 명령 이름이 하는 일을 말하고, `make test`가 `sok-check commands`를 실행한다. 결과: `make test`가 통과한다.

@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] F474-registry — P0, linked to core F474: The registry lists core 0.0.36, the sidecars vt 0.0.26, alacritty 0.0.7 and files 0.0.11, the plugins browser 0.0.22, editor 0.0.22, files 0.0.22, hwp 0.0.19, term 0.0.9 and terminal 0.0.40. Each sha256 is the digest of the published release file, and the workflows check against v0.0.36. Result: `make test` passes.
 - [o] F460-registry — P2, linked to core F460: `.gitignore` names the local output folder `/build/`. Input: the folder held local output and showed as untracked. Result: `git status` shows no untracked folder, and `make test` passes.
 - [o] F475-registry — P0, linked to core F475: The publish check reads `./exposure-check` of each listed core release. Input: the rename of F472-registry changed that package export name to `./check-exposure`. Behavior: the publish failed with `exports no ./check-exposure`. Expected: the check reads the export that the releases declare. Result: `make test` passes.
 - [o] F472-registry — P2, linked to core F472: The names of the commands of the repository state what they do, and `make test` runs `sok-check commands`. Result: `make test` passes.

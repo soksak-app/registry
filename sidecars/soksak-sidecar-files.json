@@ -21,6 +21,16 @@
           "sha256": "cf33f096ca8ea98bf406fece71a0880f10406a64a4ebe77443f48f188cc3826a"
         }
       }
+    },
+    {
+      "version": "0.0.11",
+      "protocol": 1,
+      "releases": {
+        "darwin-arm64": {
+          "url": "https://github.com/soksak-app/sidecar-files/releases/download/v0.0.11/soksak-sidecar-files-0.0.11-darwin-arm64.tgz",
+          "sha256": "aa7f753147dff8c01ef58cc078b752bf5cd2c46e896774e2206621853e4f7f15"
+        }
+      }
     }
   ]
 }
