@@ -8,6 +8,8 @@
 - G102: The released manifest check is removed with its core 0.0.20 fixture, because no listed plugin version has a range that contains 0.0.20 and the listed core check checks each listed core with its own plugin API.
 - G103: The candidate manifest check is removed: the target `candidate-manifest-check`, its script, its test, its fixture and its section of `CONTRIBUTING.md`, because no workflow or other target calls it.
 - F460-registry: `.gitignore` names the local output folder `/build/`.
+- F475-registry: The publish check reads `./exposure-check` of each listed core release.
+- F472-registry: The names of the commands state what they do, and `sok-check commands` holds them.
 - F468-registry: The repository runs `soksak-check docs` of the kit.
 - F466-registry: The repository pins the kit release that reports a citation of a local build log or a temporary log.
 - F467-registry: The repository pins `@soksak/kit`.

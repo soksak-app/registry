@@ -9,17 +9,17 @@ importers:
   .:
     devDependencies:
       '@soksak/kit':
-        specifier: https://github.com/soksak-app/kit/releases/download/v0.0.12/soksak-kit-0.0.12.tgz
-        version: https://github.com/soksak-app/kit/releases/download/v0.0.12/soksak-kit-0.0.12.tgz
+        specifier: https://github.com/soksak-app/kit/releases/download/v0.0.13/soksak-kit-0.0.13.tgz
+        version: https://github.com/soksak-app/kit/releases/download/v0.0.13/soksak-kit-0.0.13.tgz
       '@soksak/plugin-api':
         specifier: git+https://github.com/soksak-app/core.git#6dc6ec00bb0bbcdda8980035e702edf74af3f78b&path:/packages/plugin-api
         version: https://codeload.github.com/soksak-app/core/tar.gz/6dc6ec00bb0bbcdda8980035e702edf74af3f78b#path:/packages/plugin-api
 
 packages:
 
-  '@soksak/kit@https://github.com/soksak-app/kit/releases/download/v0.0.12/soksak-kit-0.0.12.tgz':
-    resolution: {integrity: sha512-mfjE4MirRq5ktVXVrdSgWK+ttqouX0XxSoS/Bh2Ufsbc5JirHSxic9XTTTYb+6BPgSezIE8tRYazidSXutd2Jw==, tarball: https://github.com/soksak-app/kit/releases/download/v0.0.12/soksak-kit-0.0.12.tgz}
-    version: 0.0.12
+  '@soksak/kit@https://github.com/soksak-app/kit/releases/download/v0.0.13/soksak-kit-0.0.13.tgz':
+    resolution: {integrity: sha512-nBzwE16HUz3Ft7zz1RNaaQgsXbV+HjHrcJMu5s0cwVlPQrqOh891AHKREytzl7/BZhI0xqWZ41oA/wJyEfdEfw==, tarball: https://github.com/soksak-app/kit/releases/download/v0.0.13/soksak-kit-0.0.13.tgz}
+    version: 0.0.13
     hasBin: true
 
   '@soksak/plugin-api@https://codeload.github.com/soksak-app/core/tar.gz/6dc6ec00bb0bbcdda8980035e702edf74af3f78b#path:/packages/plugin-api':
@@ -46,11 +46,16 @@ packages:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
 
+  smol-toml@1.9.1:
+    resolution: {integrity: sha512-j7WyPdf0CJoutMzMoPLF/bVXHtKZIT9Rb4eGeEbWw8X2t5oirjPgpL+OpaENZrILYaXqYwnVH+qgUwVbl+pUJQ==}
+    engines: {node: '>= 18'}
+
 snapshots:
 
-  '@soksak/kit@https://github.com/soksak-app/kit/releases/download/v0.0.12/soksak-kit-0.0.12.tgz':
+  '@soksak/kit@https://github.com/soksak-app/kit/releases/download/v0.0.13/soksak-kit-0.0.13.tgz':
     dependencies:
       ajv: 8.20.0
+      smol-toml: 1.9.1
 
   '@soksak/plugin-api@https://codeload.github.com/soksak-app/core/tar.gz/6dc6ec00bb0bbcdda8980035e702edf74af3f78b#path:/packages/plugin-api':
     dependencies:
@@ -72,3 +77,5 @@ snapshots:
   json-schema-traverse@1.0.0: {}
 
   require-from-string@2.0.2: {}
+
+  smol-toml@1.9.1: {}

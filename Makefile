@@ -1,5 +1,5 @@
 # 공개 registry 의 검사와 index build(core docs/spec/registry.md). build 는 core 의 sok 를 쓴다.
-.PHONY: build test development-manifest-check hooks
+.PHONY: build test check-development-manifest install-hooks
 
 SOK ?= sok
 
@@ -9,19 +9,20 @@ build:
 
 # Checks releases against the development SDK pinned in package.json. This is
 # separate from the public registry build and publication checks.
-development-manifest-check: node_modules
-	@test -n "$(INDEX)" || { echo "development-manifest-check needs INDEX=<registry index>" >&2; exit 2; }
+check-development-manifest: node_modules
+	@test -n "$(INDEX)" || { echo "check-development-manifest needs INDEX=<registry index>" >&2; exit 2; }
 	node scripts/check-plugin-manifests.mjs --index "$(INDEX)"
 
 node_modules: package.json
 	pnpm install
 	touch node_modules
 
-# The tests of the scripts and the document check (soksak-check docs of the kit).
+# The tests of the scripts and the document check (sok-check docs of the kit).
 test: node_modules
 	node --test test/
-	pnpm exec soksak-check docs
+	pnpm exec sok-check docs
+	pnpm exec sok-check commands
 
 # Sets this repository to use .githooks, which checks commit messages and records at commit time.
-hooks:
+install-hooks:
 	@git config core.hooksPath .githooks
