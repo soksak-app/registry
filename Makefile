@@ -1,5 +1,5 @@
 # 공개 registry 의 검사와 index build(core docs/spec/registry.md). build 는 core 의 sok 를 쓴다.
-.PHONY: build test development-manifest-check released-sdk-fixture released-manifest-check candidate-manifest-check hooks
+.PHONY: build test check-development-manifest build-released-sdk-fixture check-released-manifest check-candidate-manifest install-hooks
 
 SOK ?= sok
 
@@ -9,32 +9,33 @@ build:
 
 # Checks releases against the development SDK pinned in package.json. This is
 # separate from the public registry build and publication checks.
-development-manifest-check: node_modules
-	@test -n "$(INDEX)" || { echo "development-manifest-check needs INDEX=<registry index>" >&2; exit 2; }
+check-development-manifest: node_modules
+	@test -n "$(INDEX)" || { echo "check-development-manifest needs INDEX=<registry index>" >&2; exit 2; }
 	node scripts/check-plugin-manifests.mjs --index "$(INDEX)"
 
-released-sdk-fixture:
+build-released-sdk-fixture:
 	pnpm --dir test/released-core-v0.0.20 install --frozen-lockfile
 
-released-manifest-check: released-sdk-fixture
-	@test -n "$(INDEX)" || { echo "released-manifest-check needs INDEX=<registry index>" >&2; exit 2; }
+check-released-manifest: build-released-sdk-fixture
+	@test -n "$(INDEX)" || { echo "check-released-manifest needs INDEX=<registry index>" >&2; exit 2; }
 	node scripts/check-released-plugin-manifests.mjs --index "$(INDEX)"
 
-candidate-manifest-check: node_modules
-	@test -n "$(INDEX)" || { echo "candidate-manifest-check needs INDEX=<registry index>" >&2; exit 2; }
-	@test -n "$(CORE_PLUGIN_API_DIR)" || { echo "candidate-manifest-check needs CORE_PLUGIN_API_DIR=<plugin-api package directory>" >&2; exit 2; }
-	@test -n "$(CANDIDATE_VERSION)" || { echo "candidate-manifest-check needs CANDIDATE_VERSION=<version>" >&2; exit 2; }
+check-candidate-manifest: node_modules
+	@test -n "$(INDEX)" || { echo "check-candidate-manifest needs INDEX=<registry index>" >&2; exit 2; }
+	@test -n "$(CORE_PLUGIN_API_DIR)" || { echo "check-candidate-manifest needs CORE_PLUGIN_API_DIR=<plugin-api package directory>" >&2; exit 2; }
+	@test -n "$(CANDIDATE_VERSION)" || { echo "check-candidate-manifest needs CANDIDATE_VERSION=<version>" >&2; exit 2; }
 	CORE_PLUGIN_API_DIR="$(CORE_PLUGIN_API_DIR)" CANDIDATE_VERSION="$(CANDIDATE_VERSION)" node scripts/check-candidate-plugin-manifests.mjs --index "$(INDEX)"
 
 node_modules: package.json
 	pnpm install
 	touch node_modules
 
-# The tests of the scripts and the document check (soksak-check docs of the kit).
-test: node_modules released-sdk-fixture
+# The tests of the scripts and the document check (sok-check docs of the kit).
+test: node_modules build-released-sdk-fixture
 	node --test test/
-	pnpm exec soksak-check docs
+	pnpm exec sok-check docs
+	pnpm exec sok-check commands
 
 # Sets this repository to use .githooks, which checks commit messages and records at commit time.
-hooks:
+install-hooks:
 	@git config core.hooksPath .githooks

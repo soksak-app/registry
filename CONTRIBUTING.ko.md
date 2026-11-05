@@ -10,11 +10,11 @@
 
 `validate` workflow가 pull request를 검사한다. 바뀐 경로, 항목 규칙, 게시한 version, 소유권, 그리고 모든 release를 읽어 `sha256`을 비교하는 `sok registry build`로 registry 전체를 확인한다. Validation과 publication workflow는 `CORE_RELEASE`가 지정한 core release의 application zip에 든 `sok`를 쓰고, 각 listed core를 그 core release의 plugin API release 파일로 검사한다. core 소스는 checkout하지 않는다. Development manifest check는 이 workflow에서 실행하지 않는다.
 
-`make development-manifest-check INDEX=<registry index>`는 이 repository가 고정한 development SDK version이 `engines.soksak`에 포함되는 철회되지 않은 모든 plugin release를 검사한다. 이 명령은 development `@soksak/plugin-api` manifest reader를 사용한다. 결과는 해당 development commit과의 호환성만 나타내며 released core tag와의 호환성을 입증하지 않는다. 특히 같은 version 번호라도 development SDK와 released core tag의 manifest contract가 다를 수 있다. Development 호환성 결과를 release 검사와 분리하고, 공개 entry나 철회를 바꾸기 전에 다음 SDK release identity와 사용자 영향을 해결한다.
+`make check-development-manifest INDEX=<registry index>`는 이 repository가 고정한 development SDK version이 `engines.soksak`에 포함되는 철회되지 않은 모든 plugin release를 검사한다. 이 명령은 development `@soksak/plugin-api` manifest reader를 사용한다. 결과는 해당 development commit과의 호환성만 나타내며 released core tag와의 호환성을 입증하지 않는다. 특히 같은 version 번호라도 development SDK와 released core tag의 manifest contract가 다를 수 있다. Development 호환성 결과를 release 검사와 분리하고, 공개 entry나 철회를 바꾸기 전에 다음 SDK release identity와 사용자 영향을 해결한다.
 
-`make released-manifest-check INDEX=<registry index>`는 core v0.0.20의 immutable released SDK fixture로 같은 release를 분류한다. 이 검사는 public entry나 철회 항목을 바꾸지 않는다. Development와 released SDK 검사는 서로 다른 package dependency를 사용하며 각자 자신의 manifest reader에 대한 호환성만 보고한다.
+`make check-released-manifest INDEX=<registry index>`는 core v0.0.20의 immutable released SDK fixture로 같은 release를 분류한다. 이 검사는 public entry나 철회 항목을 바꾸지 않는다. Development와 released SDK 검사는 서로 다른 package dependency를 사용하며 각자 자신의 manifest reader에 대한 호환성만 보고한다.
 
-`make candidate-manifest-check INDEX=<registry index> CORE_PLUGIN_API_DIR=<plugin-api package directory> CANDIDATE_VERSION=<version>`는 local core SDK candidate를 검사한다. 명령은 package의 `exports["."]`가 선언한 root만 읽고 `package.json` version이 `CANDIDATE_VERSION`과 일치해야 한다. 이 검사는 고정 development SDK 및 released v0.0.20 SDK와 분리된다. Local candidate index만 검사하며 public entry나 철회 항목은 바꾸지 않는다.
+`make check-candidate-manifest INDEX=<registry index> CORE_PLUGIN_API_DIR=<plugin-api package directory> CANDIDATE_VERSION=<version>`는 local core SDK candidate를 검사한다. 명령은 package의 `exports["."]`가 선언한 root만 읽고 `package.json` version이 `CANDIDATE_VERSION`과 일치해야 한다. 이 검사는 고정 development SDK 및 released v0.0.20 SDK와 분리된다. Local candidate index만 검사하며 public entry나 철회 항목은 바꾸지 않는다.
 
 registry 관리자는 검사를 통과한 pull request를 검토해 merge하고, merge가 index를 게시한다. 게시한 version은 바뀌지 않는다. version을 철회하려면 registry 관리자에게 `revoked.json`에 올려 달라고 요청한다.
 
