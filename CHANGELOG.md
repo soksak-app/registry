@@ -7,6 +7,7 @@
 - G104: A test pins that the listed core check passes the declared contract copies of a plugin release to `checkPluginRepository` of each listed core and reports a differing copy with that core.
 - G102: The released manifest check is removed with its core 0.0.20 fixture, because no listed plugin version has a range that contains 0.0.20 and the listed core check checks each listed core with its own plugin API.
 - G103: The candidate manifest check is removed: the target `candidate-manifest-check`, its script, its test, its fixture and its section of `CONTRIBUTING.md`, because no workflow or other target calls it.
+- G82: Core 0.0.35 and the plugin releases for it are listed.
 - G79: The candidate release path is removed, because every release lists its entries directly.
 - G81: Core 0.0.34, VT 0.0.25, the sidecar alacritty 0.0.6 and the plugin releases for them are listed.
 - G80: Core 0.0.33, VT 0.0.24, the sidecar alacritty 0.0.5 and the plugin releases for them are listed.
