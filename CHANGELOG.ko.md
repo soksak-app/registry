@@ -7,6 +7,8 @@
 - G104: listed core 검사가 plugin release의 선언된 contract 사본을 각 listed core의 `checkPluginRepository`에 넘기고, 다른 사본을 그 core와 함께 보고함을 test로 고정했다.
 - G102: core 0.0.20 fixture와 함께 released manifest check를 지웠다. 범위가 0.0.20을 포함하는 올린 plugin version이 없고, listed core 검사가 각 listed core를 그 core의 plugin API로 검사하기 때문이다.
 - G103: candidate manifest 검사를 제거했다. target `candidate-manifest-check`, 그 script, test, fixture와 `CONTRIBUTING.md`의 해당 절이다. 어떤 workflow나 다른 target도 이 검사를 부르지 않기 때문이다.
+- F466-registry: 저장소가 local build log와 임시 log의 인용을 보고하는 kit release를 pin한다.
+- F467-registry: 저장소가 `@soksak/kit`을 pin한다.
 - G83: registry가 checks kit과 실행 파일 하나 `soksak-check`를 쓴다.
 - G82: core 0.0.35와 그에 맞는 plugin release를 올린다.
 - G79: 모든 release가 항목을 직접 올리므로 candidate release 경로를 제거했다.

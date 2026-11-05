@@ -17,7 +17,7 @@ node_modules: package.json
 	pnpm install
 	touch node_modules
 
-# The tests of the scripts and the record check (soksak-check records of the checks kit).
+# The tests of the scripts and the record check (soksak-check records of the kit).
 test: node_modules
 	node --test test/
 	pnpm exec soksak-check records

@@ -7,6 +7,8 @@
 - G104: A test pins that the listed core check passes the declared contract copies of a plugin release to `checkPluginRepository` of each listed core and reports a differing copy with that core.
 - G102: The released manifest check is removed with its core 0.0.20 fixture, because no listed plugin version has a range that contains 0.0.20 and the listed core check checks each listed core with its own plugin API.
 - G103: The candidate manifest check is removed: the target `candidate-manifest-check`, its script, its test, its fixture and its section of `CONTRIBUTING.md`, because no workflow or other target calls it.
+- F466-registry: The repository pins the kit release that reports a citation of a local build log or a temporary log.
+- F467-registry: The repository pins `@soksak/kit`.
 - G83: The registry uses the checks kit and its one executable `soksak-check`.
 - G82: Core 0.0.35 and the plugin releases for it are listed.
 - G79: The candidate release path is removed, because every release lists its entries directly.
