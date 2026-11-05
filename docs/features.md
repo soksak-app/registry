@@ -3,6 +3,7 @@
 [한국어](features.ko.md)
 
 - [o] F460-registry — P2, linked to core F460: `.gitignore` names the local output folder `/build/`. Input: the folder held local output and showed as untracked. Result: `git status` shows no untracked folder, and `make test` passes.
+- [o] F468-registry — P2, linked to core F468: The repository runs `soksak-check docs` of the kit. Result: `make test` passes.
 - [o] F466-registry — P2, linked to core F466: The repository pins the kit release whose record check reports a citation of a local build log or a temporary log, and its records hold no such citation. Result: `make test` passes.
 - [o] F467-registry — P1, linked to core F467: The repository pins `@soksak/kit`, the one kit of the workspace. Input: it pinned `@soksak/kit-checks`. Result: `make test` passes.
 - [o] G83 — P1, linked to core F463: The registry uses the checks kit. Input: its hooks, targets and workflow ran the record commands of a pinned plugin API source. Expected: `package.json` pins `@soksak/kit-checks`, and they run `soksak-check`. Result: `make test` passes.

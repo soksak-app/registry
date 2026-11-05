@@ -3,6 +3,7 @@
 ## Unreleased
 
 - F460-registry: `.gitignore` names the local output folder `/build/`.
+- F468-registry: The repository runs `soksak-check docs` of the kit.
 - F466-registry: The repository pins the kit release that reports a citation of a local build log or a temporary log.
 - F467-registry: The repository pins `@soksak/kit`.
 - G83: The registry uses the checks kit and its one executable `soksak-check`.

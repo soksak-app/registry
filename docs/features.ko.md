@@ -3,6 +3,7 @@
 [English](features.md)
 
 - [o] F460-registry — P2, core F460과 연결: `.gitignore`가 local 출력 폴더 `/build/`를 지정한다. 입력: 그 폴더는 local 출력을 담고 추적되지 않은 항목으로 보였다. 결과: `git status`에 추적되지 않은 폴더가 없고 `make test`가 통과한다.
+- [o] F468-registry — P2, core F468과 연결: 저장소가 kit의 `soksak-check docs`를 실행한다. 결과: `make test`가 통과한다.
 - [o] F466-registry — P2, core F466과 연결: 저장소가 local build log와 임시 log의 인용을 보고하는 kit release를 pin하고, 기록에 그런 인용이 없다. 결과: `make test`가 통과한다.
 - [o] F467-registry — P1, core F467과 연결: 저장소가 workspace의 유일한 kit인 `@soksak/kit`을 pin한다. 입력: `@soksak/kit-checks`를 pin했다. 결과: `make test`가 통과한다.
 - [o] G83 — P1, core F463과 연결: registry가 checks kit을 쓴다. 입력: hook, target, workflow가 pin한 plugin API 소스의 record command를 실행했다. 기대: `package.json`이 `@soksak/kit-checks`를 pin하고 이들이 `soksak-check`를 실행한다. 결과: `make test`가 통과한다.
