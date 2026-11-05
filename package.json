@@ -5,7 +5,7 @@
   "license": "MIT",
   "packageManager": "pnpm@11.24.0",
   "devDependencies": {
-    "@soksak/kit-checks": "https://github.com/soksak-app/kit-checks/releases/download/v0.0.8/soksak-kit-checks-0.0.8.tgz",
+    "@soksak/kit": "https://github.com/soksak-app/kit/releases/download/v0.0.10/soksak-kit-0.0.10.tgz",
     "@soksak/plugin-api": "git+https://github.com/soksak-app/core.git#6dc6ec00bb0bbcdda8980035e702edf74af3f78b&path:/packages/plugin-api"
   }
 }
