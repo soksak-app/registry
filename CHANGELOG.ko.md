@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- F479-registry: core 0.0.37과 그 plugin release를 올린다.
 - F474-registry: core 0.0.36, 그 plugin release, 현재 실행 파일 이름을 쓰는 sidecar release를 올린다.
 - F460-registry: `.gitignore`가 local 출력 폴더 `/build/`를 지정한다.
 - F475-registry: publish 검사가 등록된 각 core release의 `./exposure-check`를 읽는다.

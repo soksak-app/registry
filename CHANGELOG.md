@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- F479-registry: Core 0.0.37 and its plugin releases are listed.
 - F474-registry: Core 0.0.36, its plugin releases and the sidecar releases with the current executable names are listed.
 - F460-registry: `.gitignore` names the local output folder `/build/`.
 - F475-registry: The publish check reads `./exposure-check` of each listed core release.
