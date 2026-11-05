@@ -17,10 +17,10 @@ node_modules: package.json
 	pnpm install
 	touch node_modules
 
-# The tests of the scripts and the record check (soksak-check records of the kit).
+# The tests of the scripts and the document check (soksak-check docs of the kit).
 test: node_modules
 	node --test test/
-	pnpm exec soksak-check records
+	pnpm exec soksak-check docs
 
 # Sets this repository to use .githooks, which checks commit messages and records at commit time.
 hooks:
