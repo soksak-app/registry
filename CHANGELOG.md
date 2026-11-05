@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G83: The registry uses the checks kit and its one executable `soksak-check`.
 - G82: Core 0.0.35 and the plugin releases for it are listed.
 - G79: The candidate release path is removed, because every release lists its entries directly.
 - G81: Core 0.0.34, VT 0.0.25, the sidecar alacritty 0.0.6 and the plugin releases for them are listed.

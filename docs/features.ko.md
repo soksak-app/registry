@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G83 — P1, core F463과 연결: registry가 checks kit을 쓴다. 입력: hook, target, workflow가 pin한 plugin API 소스의 record command를 실행했다. 기대: `package.json`이 `@soksak/kit-checks`를 pin하고 이들이 `soksak-check`를 실행한다. 결과: `make test`가 통과한다.
 - [o] G82 — P0, core F462와 연결: registry가 core 0.0.35, plugin terminal 0.0.39, plugin term 0.0.8, browser 0.0.21, editor 0.0.21, files 0.0.21, hwp 0.0.18을 올린다. 각 sha256은 게시된 release 파일의 digest이고 workflow는 v0.0.35에 대해 검사한다.
 - [o] G81 — P0, core F431과 F432, VT S152, sidecar alacritty S92와 연결: registry가 core 0.0.34, VT 0.0.25, sidecar alacritty 0.0.6, plugin terminal 0.0.38, plugin term 0.0.7, browser 0.0.20, editor 0.0.20, files 0.0.20, hwp 0.0.17을 올린다. 각 sha256은 게시된 release 파일의 digest이고 workflow는 v0.0.34에 대해 검사한다.
 - [o] G80 — P0, core F401과 F402, VT S148, sidecar alacritty S87, plugin terminal P111, plugin term P5와 연결: registry가 core 0.0.33, VT 0.0.24, sidecar alacritty 0.0.5, plugin terminal 0.0.36과 0.0.37, plugin term 0.0.5와 0.0.6, browser 0.0.19, editor 0.0.19, files 0.0.19, hwp 0.0.16을 올리고, workflow는 `v0.0.33`을 기준으로 검사한다. 각 `sha256`은 publish된 release 파일의 digest이다. 결과: `make build`와 `make test`가 통과하고 publication run이 index를 검사한다.

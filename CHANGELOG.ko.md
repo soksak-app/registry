@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G83: registry가 checks kit과 실행 파일 하나 `soksak-check`를 쓴다.
 - G82: core 0.0.35와 그에 맞는 plugin release를 올린다.
 - G79: 모든 release가 항목을 직접 올리므로 candidate release 경로를 제거했다.
 - G81: core 0.0.34, VT 0.0.25, sidecar alacritty 0.0.6과 그에 맞는 plugin release를 올린다.
