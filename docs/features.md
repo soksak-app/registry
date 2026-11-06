@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] F497-registry — P0, linked to core F497: The registry lists core 0.0.39 and the plugins browser 0.0.25, editor 0.0.25, files 0.0.25, hwp 0.0.22, term 0.0.12 and terminal 0.0.43. The sidecars are unchanged. Each sha256 is the digest of the published release file, and the workflows check against v0.0.39. Result: `make test` passes.
 - [o] F494-registry — P0, linked to core F494: The registry lists core 0.0.38 and the plugins browser 0.0.24, editor 0.0.24, files 0.0.24, hwp 0.0.21, term 0.0.11 and terminal 0.0.42. The sidecars are unchanged. Each sha256 is the digest of the published release file, and the workflows check against v0.0.38. Result: `make test` passes.
 - [o] F479-registry — P0, linked to core F479: The registry lists core 0.0.37 and the plugins browser 0.0.23, editor 0.0.23, files 0.0.23, hwp 0.0.20, term 0.0.10 and terminal 0.0.41. The sidecars are unchanged. Each sha256 is the digest of the published release file, and the workflows check against v0.0.37. Result: `make test` passes.
 - [o] F474-registry — P0, linked to core F474: The registry lists core 0.0.36, the sidecars vt 0.0.26, alacritty 0.0.7 and files 0.0.11, the plugins browser 0.0.22, editor 0.0.22, files 0.0.22, hwp 0.0.19, term 0.0.9 and terminal 0.0.40. Each sha256 is the digest of the published release file, and the workflows check against v0.0.36. Result: `make test` passes.

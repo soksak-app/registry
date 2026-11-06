@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] F497-registry — P0, core F497와 연결: registry가 core 0.0.39와 plugin browser 0.0.25, editor 0.0.25, files 0.0.25, hwp 0.0.22, term 0.0.12, terminal 0.0.43을 올린다. sidecar는 그대로다. 각 sha256은 게시된 release 파일의 digest이고, workflow는 v0.0.39로 검사한다. 결과: `make test`가 통과한다.
 - [o] F494-registry — P0, core F494와 연결: registry가 core 0.0.38과 plugin browser 0.0.24, editor 0.0.24, files 0.0.24, hwp 0.0.21, term 0.0.11, terminal 0.0.42을 올린다. sidecar는 그대로다. 각 sha256은 게시된 release 파일의 digest이고, workflow는 v0.0.38로 검사한다. 결과: `make test`가 통과한다.
 - [o] F479-registry — P0, core F479와 연결: registry가 core 0.0.37과 plugin browser 0.0.23, editor 0.0.23, files 0.0.23, hwp 0.0.20, term 0.0.10, terminal 0.0.41을 올린다. sidecar는 그대로다. 각 sha256은 게시된 release 파일의 digest이고, workflow는 v0.0.37로 검사한다. 결과: `make test`가 통과한다.
 - [o] F474-registry — P0, core F474와 연결: registry가 core 0.0.36, sidecar vt 0.0.26, alacritty 0.0.7, files 0.0.11, plugin browser 0.0.22, editor 0.0.22, files 0.0.22, hwp 0.0.19, term 0.0.9, terminal 0.0.40을 올린다. 각 sha256은 게시된 release 파일의 digest이고, workflow는 v0.0.36으로 검사한다. 결과: `make test`가 통과한다.

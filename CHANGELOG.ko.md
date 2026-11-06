@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- F497-registry: core 0.0.39와 그 plugin release를 올린다.
 - F494-registry: core 0.0.38과 그 plugin release를 올린다.
 - F479-registry: core 0.0.37과 그 plugin release를 올린다.
 - F474-registry: core 0.0.36, 그 plugin release, 현재 실행 파일 이름을 쓰는 sidecar release를 올린다.
