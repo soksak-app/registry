@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G106: push check와 CI가 push 범위에 kit 0.0.14의 commit message 검사와 체크리스트 이력 검사 `sok-check docs --range`를 실행한다.
 - G105: changelog가 기록 없이 체크리스트에서 빠진 G10의 폐기를 기록한다.
 - 체크리스트 항목 `G10` 폐기: 체크리스트 항목은 프로젝트 작업을 담는데, 이 항목은 record 규칙의 적용을 담았다.
 - G104: listed core 검사가 plugin release의 선언된 contract 사본을 각 listed core의 `checkPluginRepository`에 넘기고, 다른 사본을 그 core와 함께 보고함을 test로 고정했다.

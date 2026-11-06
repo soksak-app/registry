@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G106: The push check and CI run the commit message check and the checklist history check `sok-check docs --range` of kit 0.0.14 on the pushed range.
 - G105: The changelog records the retirement of G10, which left the checklist without a record.
 - Retired checklist entry `G10`: a checklist entry holds project work, and this entry held the application of a record rule.
 - G104: A test pins that the listed core check passes the declared contract copies of a plugin release to `checkPluginRepository` of each listed core and reports a differing copy with that core.

@@ -1,5 +1,5 @@
 # 공개 registry 의 검사와 index build(core docs/spec/registry.md). build 는 core 의 sok 를 쓴다.
-.PHONY: build test check-development-manifest install-hooks
+.PHONY: build test check-development-manifest check-push install-hooks
 
 SOK ?= sok
 
@@ -22,6 +22,13 @@ test: node_modules
 	node --test test/
 	pnpm exec sok-check docs
 	pnpm exec sok-check commands
+
+# The checks that a push needs: the commit messages and the checklist history of the pushed range, because a published
+# commit is kept; CI runs the tests on the pushed commits.
+# RANGE holds the commits of the pushed refs; the pre-push hook sets it, and it defaults to origin/main..HEAD.
+check-push:
+	pnpm exec sok-check commits "$(or $(RANGE),origin/main..HEAD)"
+	pnpm exec sok-check docs --range "$(or $(RANGE),origin/main..HEAD)"
 
 # Sets this repository to use .githooks, which checks commit messages and records at commit time.
 install-hooks:
