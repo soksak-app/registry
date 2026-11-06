@@ -106,11 +106,46 @@ test("an unrevoked plugin version whose range contains a core newer than the new
     "plugin hwp 0.0.2: range >=0.0.18 contains core 0.0.22, newer than the newest listed core 0.0.21",
     "plugin hwp 0.0.9: range >=0.0.30 contains core 0.1.0, newer than the newest listed core 0.0.21",
   ]);
-  // A closed range and a revoked version are no error.
-  const exact = (range, core) => range === `^${core}`;
+  // A caret range of a 0.0 version and a revoked version are no error.
   const closed = { ...index, plugins: [{ id: "editor", versions: [version("editor", "0.0.8", "^0.0.21", "new"), version("editor", "0.0.4", ">=0.0.18", "old")] }],
     revoked: { ...index.revoked, plugins: [{ id: "editor", version: "0.0.4", reason: "r" }] } };
-  assert.deepEqual(laterCoreErrors(closed, (range, core) => exact(range, core) || atLeast(range, core)), []);
+  assert.deepEqual(laterCoreErrors(closed, (range, core) => caret(range, core) || atLeast(range, core)), []);
+});
+
+// The caret rule of core: `^0.0.z` is from 0.0.z below 0.1.0, `^0.y.z` (y > 0) below 0.(y+1).0, `^x.y.z` (x > 0) below
+// (x+1).0.0.
+function caret(range, core) {
+  if (!range.startsWith("^")) return false;
+  const [x, y] = range.slice(1).split(".").map(Number);
+  const below = x > 0 ? `${x + 1}.0.0` : y > 0 ? `0.${y + 1}.0` : "0.1.0";
+  return compare(core, range.slice(1)) >= 0 && compare(core, below) < 0;
+}
+
+test("a caret range of a 0.0 version admits the later 0.0 cores, and an open range or a caret of a later line does not", { timeout: 5000 }, () => {
+  // 0.0.21 is the newest listed core; a patch release of core is a compatible release, so ^0.0.21 and ^0.0.18 contain 0.0.22
+  // by intent, while >=0.0.21 and * contain 0.1.0 and 1.0.0 as well, and ^0.1.0 contains 0.1.0.
+  const ranges = { ...index, plugins: [{ id: "editor", versions: [
+    version("editor", "0.0.8", "^0.0.21", "new"), version("editor", "0.0.9", "^0.0.18", "new"), version("editor", "0.0.10", "^0.1.0", "new"),
+    version("editor", "0.0.11", ">=0.0.21", "new"), version("editor", "0.0.12", "*", "new")] }] };
+  assert.deepEqual(laterCoreErrors(ranges, (range, core) => caret(range, core) || atLeast(range, core)), [
+    "plugin editor 0.0.10: range ^0.1.0 contains core 0.1.0, newer than the newest listed core 0.0.21",
+    "plugin editor 0.0.11: range >=0.0.21 contains core 0.0.22, newer than the newest listed core 0.0.21",
+    "plugin editor 0.0.12: range * contains core 0.0.22, newer than the newest listed core 0.0.21",
+  ]);
+});
+
+// The range rule of an SDK of core: a union `<range> || <range>` contains a core that one of its parts contains.
+const union = (range, core) => range.split(" || ").some((one) => caret(one, core) || atLeast(one, core));
+
+test("a 0.0 caret part of a union admits the later 0.0 cores, and another part that contains a later core is an error", { timeout: 5000 }, () => {
+  const unions = { ...index, plugins: [{ id: "editor", versions: [
+    version("editor", "0.0.8", "^0.0.18 || ^0.0.21", "new"), version("editor", "0.0.9", "^0.1.0 || >=0.0.21", "new"),
+    version("editor", "0.0.10", "^0.0.21 || >=0.0.30", "new"), version("editor", "0.0.11", "^0.0.21 || *", "new")] }] };
+  assert.deepEqual(laterCoreErrors(unions, union), [
+    "plugin editor 0.0.9: range ^0.1.0 || >=0.0.21 contains core 0.0.22, newer than the newest listed core 0.0.21",
+    "plugin editor 0.0.10: range ^0.0.21 || >=0.0.30 contains core 0.1.0, newer than the newest listed core 0.0.21",
+    "plugin editor 0.0.11: range ^0.0.21 || * contains core 0.1.0, newer than the newest listed core 0.0.21",
+  ]);
 });
 
 test("the SDK of a listed core is the plugin API release file of that core release", { timeout: 10000 }, async (t) => {

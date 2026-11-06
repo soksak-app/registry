@@ -78,10 +78,25 @@ export function newestListedCore(index) {
 }
 
 /**
+ * Whether core is a 0.0 version that a caret range of a 0.0 version in range admits: `^0.0.z` is from 0.0.z below 0.1.0
+ * (core docs/spec/installation.md#versions-and-ranges), because a patch release of core is a compatible release. Such a
+ * range is the whole range or a part of a union `<range> || <range>`. The containment itself is the rule of the SDK; this
+ * names only the later cores that a range admits by intent.
+ */
+export function zeroCaretAdmits(range, core) {
+  return range.split(" || ").some((part) => {
+    const match = /^\^0\.0\.(\d+)$/.exec(part);
+    return match !== null && compareVersions(core, `0.0.${match[1]}`) >= 0 && compareVersions(core, "0.1.0") < 0;
+  });
+}
+
+/**
  * The errors of the unrevoked plugin versions whose range contains a core newer than the newest listed core that is not
  * withdrawn: `plugin <id> <version>: range <range> contains core <core>, newer than the newest listed core <newest>`.
  * Core releases publish before the plugin releases for them, so such a core would select that version although its manifest
  * reader was not checked against it. Each range is probed with the next patch, minor and major version of the newest core.
+ * A later 0.0 core that a caret range of a 0.0 version, or such a part of a union, admits is no error, because that range
+ * admits the later patch releases of its line by intent.
  */
 export function laterCoreErrors(index, rangeContains) {
   const newest = newestListedCore(index);
@@ -92,8 +107,9 @@ export function laterCoreErrors(index, rangeContains) {
   for (const plugin of index.plugins) {
     for (const entry of plugin.versions) {
       if (revoked.has(`${plugin.id}@${entry.version}`)) continue;
-      const core = later.find((version) => rangeContains(entry.engines.soksak, version));
-      if (core) errors.push(`plugin ${plugin.id} ${entry.version}: range ${entry.engines.soksak} contains core ${core}, newer than the newest listed core ${newest}`);
+      const range = entry.engines.soksak;
+      const core = later.find((version) => rangeContains(range, version) && !zeroCaretAdmits(range, version));
+      if (core) errors.push(`plugin ${plugin.id} ${entry.version}: range ${range} contains core ${core}, newer than the newest listed core ${newest}`);
     }
   }
   return errors;

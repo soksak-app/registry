@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G107: The listed core check admits the later 0.0 cores that a caret range of a 0.0 version, or such a part of a union range, contains, because a patch release of core is a compatible release.
 - G106: The push check and CI run the commit message check and the checklist history check `sok-check docs --range` of kit 0.0.14 on the pushed range.
 - G105: The changelog records the retirement of G10, which left the checklist without a record.
 - Retired checklist entry `G10`: a checklist entry holds project work, and this entry held the application of a record rule.
