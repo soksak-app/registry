@@ -1,5 +1,5 @@
 # 공개 registry 의 검사와 index build(core docs/spec/registry.md). build 는 core 의 sok 를 쓴다.
-.PHONY: build test check-development-manifest check-push install-hooks
+.PHONY: build test check-development-manifest check-push install-hooks check-environment
 
 SOK ?= sok
 
@@ -33,3 +33,9 @@ check-push:
 # Sets this repository to use .githooks, which checks commit messages and records at commit time.
 install-hooks:
 	@git config core.hooksPath .githooks
+
+# The environment check of the installed cohort (G108): soksak-test-app sets the index.json that make build writes in each published
+# application, whose first run installs its starter pack from it, and runs environment/. It gates no release and is not part of make test.
+check-environment: node_modules
+	@test -f index.json || { echo "check-environment needs the index.json that make build writes" >&2; exit 2; }
+	pnpm exec soksak-test-app --index "$(CURDIR)/index.json" environment/cohort-upgrade.test.mjs
