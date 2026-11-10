@@ -33,3 +33,12 @@ test("the pre-push hook runs make check-push on the pushed range", { timeout: 30
   const hook = readFileSync(join(root, ".githooks", "pre-push"), "utf8");
   assert.match(hook, /make -C "\$root" check-push RANGE="\$base\.\.\$local_sha"/);
 });
+
+// The environment check of the installed cohort drives the published core application (G108); it gates no release, so
+// make test does not run it.
+test("make check-environment runs the published window-check run on the index that make build writes, outside make test", { timeout: 30000 }, () => {
+  assert.deepEqual(recipe("check-environment").trim().split("\n").slice(-1),
+    [`pnpm exec sok-test-app --index "${root}/index.json" environment/cohort-upgrade.test.mjs`]);
+  assert.doesNotMatch(recipe("check-environment"), /soksak-test-app/, "the bin of @soksak/window-check is sok-test-app");
+  assert.doesNotMatch(recipe("test"), /environment|sok-test-app/);
+});
