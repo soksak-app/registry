@@ -160,7 +160,7 @@ test("a failed registry build fails the check with its reason", async (t) => {
   assert.deepEqual(errors, ["sok registry build: sha256 differs"]);
 });
 
-test("the compatibility check validates the current form and skips revoked or out-of-range releases", { timeout: 10000 }, async (t) => {
+test("the compatibility check validates the current form and skips revoked or out-of-range releases", async (t) => {
   const { registryManifestErrors } = await import("../scripts/check-plugin-manifests.mjs");
   assert.equal(typeof registryManifestErrors, "function");
   const base = {

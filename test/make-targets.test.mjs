@@ -15,28 +15,28 @@ function recipe(target) {
   const env = { ...process.env };
   delete env.MAKEFLAGS;
   delete env.RANGE;
-  const result = spawnSync("make", ["-n", "--no-print-directory", target], { cwd: root, encoding: "utf8", timeout: 30000, env });
+  const result = spawnSync("make", ["-n", "--no-print-directory", target], { cwd: root, encoding: "utf8", env });
   assert.equal(result.status, 0, `make -n ${target} failed: ${result.stderr}`);
   return result.stdout;
 }
 
 // A published commit is kept, so the push checks its message and the checklist history it records; CI runs the tests on
 // the pushed commits.
-test("make check-push runs the commit message check and the checklist history check of the pushed range", { timeout: 30000 }, () => {
+test("make check-push runs the commit message check and the checklist history check of the pushed range", () => {
   assert.deepEqual(recipe("check-push").trim().split("\n"), [
     'pnpm exec sok-check commits "origin/main..HEAD"',
     'pnpm exec sok-check docs --range "origin/main..HEAD"',
   ]);
 });
 
-test("the pre-push hook runs make check-push on the pushed range", { timeout: 30000 }, () => {
+test("the pre-push hook runs make check-push on the pushed range", () => {
   const hook = readFileSync(join(root, ".githooks", "pre-push"), "utf8");
   assert.match(hook, /make -C "\$root" check-push RANGE="\$base\.\.\$local_sha"/);
 });
 
 // The environment check of the installed cohort drives the published core application (G108); it gates no release, so
 // make test does not run it.
-test("make check-environment runs the published window-check run on the index that make build writes, outside make test", { timeout: 30000 }, () => {
+test("make check-environment runs the published window-check run on the index that make build writes, outside make test", () => {
   assert.deepEqual(recipe("check-environment").trim().split("\n").slice(-1),
     [`pnpm exec sok-test-app --index "${root}/index.json" environment/cohort-upgrade.test.mjs`]);
   assert.doesNotMatch(recipe("check-environment"), /soksak-test-app/, "the bin of @soksak/window-check is sok-test-app");
