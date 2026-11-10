@@ -18,7 +18,7 @@ const newest = (versions) => versions.map((entry) => entry.version)
   .sort((a, b) => b.split(".").map(Number).reduce((order, part, i) => order || part - Number(a.split(".")[i]), 0))[0];
 
 for (const app of Object.values(APPS)) {
-  test(`${app.name}: the browser upgrade keeps the starter cohort of the registry index ready`, { timeout: 90000 }, async (t) => {
+  test(`${app.name}: the browser upgrade keeps the starter cohort of the registry index ready`, async (t) => {
     const s = await open(t, app);
     await prepareFixture(s);
     const registry = process.env.SOKSAK_REGISTRY_INDEX;

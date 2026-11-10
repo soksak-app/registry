@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G109: `make test` runs `node --test` with the runner limit `--test-timeout=120000`, so the runner fails a test that does not end with its name, and no test sets a time limit of its own; a test requires both.
 - G107: The listed core check admits the later 0.0 cores that a caret range of a 0.0 version, or such a part of a union range, contains, because a patch release of core is a compatible release.
 - G106: The push check and CI run the commit message check and the checklist history check `sok-check docs --range` of kit 0.0.14 on the pushed range.
 - G105: The changelog records the retirement of G10, which left the checklist without a record.

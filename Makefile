@@ -19,7 +19,7 @@ node_modules: package.json
 
 # The tests of the scripts and the document check (sok-check docs of the kit).
 test: node_modules
-	node --test test/
+	node --test --test-timeout=120000 test/
 	pnpm exec sok-check docs
 	pnpm exec sok-check commands
 

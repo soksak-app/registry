@@ -69,7 +69,7 @@ function out(t) {
   return folder;
 }
 
-test("installation selects for a core version the newest unrevoked plugin version whose range contains it", { timeout: 5000 }, () => {
+test("installation selects for a core version the newest unrevoked plugin version whose range contains it", () => {
   const selected = (core) => Object.fromEntries([...selectedVersions(index, core, atLeast)].map(([id, entry]) => [id, entry.version]));
   assert.deepEqual(selected("0.0.20"), { editor: "0.0.4", files: "0.0.6", hwp: "0.0.2" });
   // hwp 0.0.9 is newer but its range excludes 0.0.21, so 0.0.2 is the version that 0.0.21 installs.
@@ -78,7 +78,7 @@ test("installation selects for a core version the newest unrevoked plugin versio
   assert.equal(selectedVersions(revoked, "0.0.21", atLeast).get("editor").version, "0.0.4");
 });
 
-test("each listed core version is checked with its own SDK against the plugin versions that it installs", { timeout: 5000 }, async (t) => {
+test("each listed core version is checked with its own SDK against the plugin versions that it installs", async (t) => {
   const loaded = [];
   const { checked, errors } = await listedCoreErrors(index, out(t), async (core) => { loaded.push(core); return sdks[core]; }, fetchRelease);
   // The revoked core 0.0.19 is not checked; 0.0.20 accepts its three versions; 0.0.21 rejects the old forms that it selects.
@@ -90,14 +90,14 @@ test("each listed core version is checked with its own SDK against the plugin ve
   ]);
 });
 
-test("an SDK whose version differs from the listed core, or a release whose bytes differ from the index, is an error", { timeout: 5000 }, async (t) => {
+test("an SDK whose version differs from the listed core, or a release whose bytes differ from the index, is an error", async (t) => {
   await assert.rejects(listedCoreErrors(index, out(t), async () => sdk("0.0.18", "old"), fetchRelease),
     /the SDK of core 0\.0\.20 reports version 0\.0\.18/);
   const { errors } = await listedCoreErrors(index, out(t), async (core) => sdks[core], async () => Buffer.from("other"));
   assert.match(errors[0], /^core 0\.0\.20: plugin editor 0\.0\.4: release sha256 [0-9a-f]{64} differs from the index/);
 });
 
-test("an unrevoked plugin version whose range contains a core newer than the newest listed core is an error", { timeout: 5000 }, () => {
+test("an unrevoked plugin version whose range contains a core newer than the newest listed core is an error", () => {
   // 0.0.21 is the newest listed core that is not withdrawn; each range is probed with 0.0.22, 0.1.0 and 1.0.0.
   assert.deepEqual(laterCoreErrors(index, atLeast), [
     "plugin editor 0.0.4: range >=0.0.18 contains core 0.0.22, newer than the newest listed core 0.0.21",
@@ -121,7 +121,7 @@ function caret(range, core) {
   return compare(core, range.slice(1)) >= 0 && compare(core, below) < 0;
 }
 
-test("a caret range of a 0.0 version admits the later 0.0 cores, and an open range or a caret of a later line does not", { timeout: 5000 }, () => {
+test("a caret range of a 0.0 version admits the later 0.0 cores, and an open range or a caret of a later line does not", () => {
   // 0.0.21 is the newest listed core; a patch release of core is a compatible release, so ^0.0.21 and ^0.0.18 contain 0.0.22
   // by intent, while >=0.0.21 and * contain 0.1.0 and 1.0.0 as well, and ^0.1.0 contains 0.1.0.
   const ranges = { ...index, plugins: [{ id: "editor", versions: [
@@ -137,7 +137,7 @@ test("a caret range of a 0.0 version admits the later 0.0 cores, and an open ran
 // The range rule of an SDK of core: a union `<range> || <range>` contains a core that one of its parts contains.
 const union = (range, core) => range.split(" || ").some((one) => caret(one, core) || atLeast(one, core));
 
-test("a 0.0 caret part of a union admits the later 0.0 cores, and another part that contains a later core is an error", { timeout: 5000 }, () => {
+test("a 0.0 caret part of a union admits the later 0.0 cores, and another part that contains a later core is an error", () => {
   const unions = { ...index, plugins: [{ id: "editor", versions: [
     version("editor", "0.0.8", "^0.0.18 || ^0.0.21", "new"), version("editor", "0.0.9", "^0.1.0 || >=0.0.21", "new"),
     version("editor", "0.0.10", "^0.0.21 || >=0.0.30", "new"), version("editor", "0.0.11", "^0.0.21 || *", "new")] }] };
@@ -148,7 +148,7 @@ test("a 0.0 caret part of a union admits the later 0.0 cores, and another part t
   ]);
 });
 
-test("the SDK of a listed core is the plugin API release file of that core release", { timeout: 10000 }, async (t) => {
+test("the SDK of a listed core is the plugin API release file of that core release", async (t) => {
   const root = mkdtempSync(join(tmpdir(), "listed-cores-sdk-"));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   // The release file of core 0.0.26 is the pnpm pack file of packages/plugin-api: package/package.json names its entry.
@@ -166,7 +166,7 @@ test("the SDK of a listed core is the plugin API release file of that core relea
   await assert.rejects(load("0.0.27"), /soksak-plugin-api-0\.0\.27\.tgz/);
 });
 
-test("the pull request check and the publication take sok and the SDK from core releases, not from a core checkout", { timeout: 5000 }, () => {
+test("the pull request check and the publication take sok and the SDK from core releases, not from a core checkout", () => {
   for (const workflow of ["validate.yml", "publish.yml"]) {
     const text = readFileSync(new URL(`../.github/workflows/${workflow}`, import.meta.url), "utf8");
     assert.match(text, /scripts\/check-listed-cores\.mjs --index \S+ --releases https:\/\/github\.com\/soksak-app\/core\/releases\/download/, `${workflow} runs no listed core check on the core releases`);
@@ -175,7 +175,7 @@ test("the pull request check and the publication take sok and the SDK from core 
   }
 });
 
-test("each listed core version checks the exposure names of the plugin releases that it installs with its own SDK", { timeout: 5000 }, async (t) => {
+test("each listed core version checks the exposure names of the plugin releases that it installs with its own SDK", async (t) => {
   const exposed = {
     plugins: [{ id: "browser", versions: [version("browser", "0.0.3", ">=0.0.20", "old", 'run("core.undeclared");\n')] }],
     core: { versions: [{ version: "0.0.20" }] },
@@ -188,7 +188,7 @@ test("each listed core version checks the exposure names of the plugin releases 
 
 // The contract copies of a release (core docs/spec/plugins.md#contract-copies): checkPluginRepository of each listed core
 // compares the declaration contract-copies.json of the release with the contract files of that core.
-test("each listed core version checks the contract copies that the plugin releases it installs declare with its own SDK", { timeout: 5000 }, async (t) => {
+test("each listed core version checks the contract copies that the plugin releases it installs declare with its own SDK", async (t) => {
   const contract = { "0.0.20": "a".repeat(64), "0.0.21": "b".repeat(64) };
   // Both cores accept the manifest; they differ only in their contract files.
   const copies = (core) => ({

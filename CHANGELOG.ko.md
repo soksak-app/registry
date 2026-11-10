@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G109: `make test` 가 runner 한도 `--test-timeout=120000` 으로 `node --test` 를 실행해 runner 가 끝나지 않는 test 를 이름과 함께 실패시키고, 어떤 test 도 자기 시간 한도를 두지 않는다. test 가 둘 다 요구한다.
 - G107: listed core 검사가 0.0 version의 caret 범위나 합집합 범위의 그런 부분이 포함하는 이후 0.0 core를 받아들인다. core의 patch release는 호환 release이기 때문이다.
 - G106: push check와 CI가 push 범위에 kit 0.0.14의 commit message 검사와 체크리스트 이력 검사 `sok-check docs --range`를 실행한다.
 - G105: changelog가 기록 없이 체크리스트에서 빠진 G10의 폐기를 기록한다.
