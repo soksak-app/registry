@@ -38,6 +38,7 @@ test("the pre-push hook runs make check-push on the pushed range", { timeout: 30
 // make test does not run it.
 test("make check-environment runs the published window-check run on the index that make build writes, outside make test", { timeout: 30000 }, () => {
   assert.deepEqual(recipe("check-environment").trim().split("\n").slice(-1),
-    [`pnpm exec soksak-test-app --index "${root}/index.json" environment/cohort-upgrade.test.mjs`]);
-  assert.doesNotMatch(recipe("test"), /environment|soksak-test-app/);
+    [`pnpm exec sok-test-app --index "${root}/index.json" environment/cohort-upgrade.test.mjs`]);
+  assert.doesNotMatch(recipe("check-environment"), /soksak-test-app/, "the bin of @soksak/window-check is sok-test-app");
+  assert.doesNotMatch(recipe("test"), /environment|sok-test-app/);
 });

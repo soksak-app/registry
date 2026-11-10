@@ -34,8 +34,8 @@ check-push:
 install-hooks:
 	@git config core.hooksPath .githooks
 
-# The environment check of the installed cohort (G108): soksak-test-app sets the index.json that make build writes in each published
+# The environment check of the installed cohort (G108): sok-test-app sets the index.json that make build writes in each published
 # application, whose first run installs its starter pack from it, and runs environment/. It gates no release and is not part of make test.
 check-environment: node_modules
 	@test -f index.json || { echo "check-environment needs the index.json that make build writes" >&2; exit 2; }
-	pnpm exec soksak-test-app --index "$(CURDIR)/index.json" environment/cohort-upgrade.test.mjs
+	pnpm exec sok-test-app --index "$(CURDIR)/index.json" environment/cohort-upgrade.test.mjs
