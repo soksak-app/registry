@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G117 — P0: plugin release browser 0.0.29, editor 0.0.29, files 0.0.29, hwp 0.0.26 and term 0.0.16를 올린다. 이 plugin들은 plugin API에 dependency를 선언하지 않고 `engines.soksak` `^0.0.41`을 선언한다.
 - [o] G116 — P0: plugin release terminal 0.0.45를 올린다. 이 plugin의 시험은 core의 어떤 것도 읽지 않고 `engines.soksak` `^0.0.41`을 선언한다.
 - [o] G115 — P0: plugin release browser 0.0.28, editor 0.0.28, files 0.0.28, hwp 0.0.25, term 0.0.15를 올린다. 이 plugin의 시험은 자기 저장소의 fixture로 host에 답한다.
 - [o] G114 — P0: plugin release term 0.0.14를 올린다. 이 plugin은 core 0.0.41의 plugin API release로 시험하고 `engines.soksak` `^0.0.41`을 선언한다.
