@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G111: core 0.0.40이 올라가고, workflow가 v0.0.40을 기준으로 검사한다.
 - G110: core 0.0.40용 plugin release가 올라간다: browser 0.0.26, editor 0.0.26, files 0.0.26, hwp 0.0.23, term 0.0.13, terminal 0.0.44.
 - G109: `make test` 가 runner 한도 `--test-timeout=120000` 으로 `node --test` 를 실행해 runner 가 끝나지 않는 test 를 이름과 함께 실패시키고, 어떤 test 도 자기 시간 한도를 두지 않는다. test 가 둘 다 요구한다.
 - G107: listed core 검사가 0.0 version의 caret 범위나 합집합 범위의 그런 부분이 포함하는 이후 0.0 core를 받아들인다. core의 patch release는 호환 release이기 때문이다.

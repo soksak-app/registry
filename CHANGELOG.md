@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G111: Core 0.0.40 is listed, and the workflows check against v0.0.40.
 - G110: The plugin releases for core 0.0.40 are listed: browser 0.0.26, editor 0.0.26, files 0.0.26, hwp 0.0.23, term 0.0.13 and terminal 0.0.44.
 - G109: `make test` runs `node --test` with the runner limit `--test-timeout=120000`, so the runner fails a test that does not end with its name, and no test sets a time limit of its own; a test requires both.
 - G107: The listed core check admits the later 0.0 cores that a caret range of a 0.0 version, or such a part of a union range, contains, because a patch release of core is a compatible release.
