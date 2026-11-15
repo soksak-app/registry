@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G115: registry가 browser 0.0.28, editor 0.0.28, files 0.0.28, hwp 0.0.25, term 0.0.15를 올린다.
 - G114: registry가 term 0.0.14를 올린다.
 - G113: registry가 core 0.0.41, browser 0.0.27, editor 0.0.27, files 0.0.27, hwp 0.0.24를 올린다.
 - G112: listed core 검사가 listed core가 설치하는 plugin release를 더 읽지 않고, 철회되지 않은 plugin 범위가 가장 새 listed core보다 새 core를 포함하지 않는지만 검사한다.

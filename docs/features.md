@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G115 — P0: List the plugin releases browser 0.0.28, editor 0.0.28, files 0.0.28, hwp 0.0.25 and term 0.0.15, whose tests answer the host with a fixture of their own repository.
 - [o] G114 — P0: List the plugin release term 0.0.14, whose tests use the plugin API release of core 0.0.41 and which declares `engines.soksak` `^0.0.41`.
 - [o] G113 — P0: List core 0.0.41 and the plugin releases browser 0.0.27, editor 0.0.27, files 0.0.27 and hwp 0.0.24, whose tests use the plugin API release of core 0.0.41 and which declare `engines.soksak` `^0.0.41`; the workflows check against core v0.0.41.
 - [o] G112 — P0, linked to core F866: The listed core check reads no plugin release. A core version enters core.json without a check of the plugins that it installs, because each plugin keeps its own compatibility with a new core and a core refuses a plugin that it does not accept alone. The check keeps only the rule that no unrevoked plugin range contains a core newer than the newest listed core.

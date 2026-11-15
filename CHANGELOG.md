@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G115: The registry lists browser 0.0.28, editor 0.0.28, files 0.0.28, hwp 0.0.25 and term 0.0.15.
 - G114: The registry lists term 0.0.14.
 - G113: The registry lists core 0.0.41, browser 0.0.27, editor 0.0.27, files 0.0.27 and hwp 0.0.24.
 - G112: The listed core check no longer reads the plugin releases that a listed core installs; it checks only that no unrevoked plugin range contains a core newer than the newest listed core.
