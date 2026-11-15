@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G114 — P0: plugin release term 0.0.14를 올린다. 이 plugin은 core 0.0.41의 plugin API release로 시험하고 `engines.soksak` `^0.0.41`을 선언한다.
 - [o] G113 — P0: core 0.0.41과 plugin release browser 0.0.27, editor 0.0.27, files 0.0.27, hwp 0.0.24를 올린다. 이 plugin은 core 0.0.41의 plugin API release로 시험하고 `engines.soksak` `^0.0.41`을 선언한다. workflow는 core v0.0.41로 검사한다.
 - [o] G112 — P0, core F866 와 연결: listed core 검사가 plugin release를 읽지 않는다. core version은 그 core가 설치하는 plugin을 검사하지 않고 core.json에 올라간다. 각 plugin이 새 core와의 호환을 스스로 맞추고, core는 받아들이지 않는 plugin만 따로 거부하기 때문이다. 검사는 철회되지 않은 plugin 범위가 가장 새 listed core보다 새 core를 포함하지 않는다는 규칙만 남긴다.
 - [o] G111 — P0, linked to G110: Registry는 core 0.0.40을 나열하며, 그 plugin은 G110이 나열했다. 각 sha256은 게시된 release file의 digest이고, workflow는 v0.0.40을 기준으로 검사한다.
