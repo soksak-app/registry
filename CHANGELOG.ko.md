@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G116: registry가 terminal 0.0.45를 올린다.
 - G115: registry가 browser 0.0.28, editor 0.0.28, files 0.0.28, hwp 0.0.25, term 0.0.15를 올린다.
 - G114: registry가 term 0.0.14를 올린다.
 - G113: registry가 core 0.0.41, browser 0.0.27, editor 0.0.27, files 0.0.27, hwp 0.0.24를 올린다.
