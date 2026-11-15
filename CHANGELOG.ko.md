@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G113: registry가 core 0.0.41, browser 0.0.27, editor 0.0.27, files 0.0.27, hwp 0.0.24를 올린다.
 - G112: listed core 검사가 listed core가 설치하는 plugin release를 더 읽지 않고, 철회되지 않은 plugin 범위가 가장 새 listed core보다 새 core를 포함하지 않는지만 검사한다.
 - G111: core 0.0.40이 올라가고, workflow가 v0.0.40을 기준으로 검사한다.
 - G110: core 0.0.40용 plugin release가 올라간다: browser 0.0.26, editor 0.0.26, files 0.0.26, hwp 0.0.23, term 0.0.13, terminal 0.0.44.

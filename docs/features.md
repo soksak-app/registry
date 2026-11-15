@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G113 — P0: List core 0.0.41 and the plugin releases browser 0.0.27, editor 0.0.27, files 0.0.27 and hwp 0.0.24, whose tests use the plugin API release of core 0.0.41 and which declare `engines.soksak` `^0.0.41`; the workflows check against core v0.0.41.
 - [o] G112 — P0, linked to core F866: The listed core check reads no plugin release. A core version enters core.json without a check of the plugins that it installs, because each plugin keeps its own compatibility with a new core and a core refuses a plugin that it does not accept alone. The check keeps only the rule that no unrevoked plugin range contains a core newer than the newest listed core.
 - [o] G111 — P0, linked to G110: The registry lists core 0.0.40, whose plugins G110 listed. Each sha256 is the digest of the published release file, and the workflows check against v0.0.40.
 - [o] G110 — P0, linked to core F502-13: The registry lists the plugins browser 0.0.26, editor 0.0.26, files 0.0.26, hwp 0.0.23, term 0.0.13 and terminal 0.0.44, which declare `exposes.element` and `engines.soksak` `^0.0.40`, before core 0.0.40, so a person who updates to core 0.0.40 finds plugins that it accepts; core 0.0.39 keeps installing the earlier versions, whose engines contain it. Each sha256 is the digest of the published release file.

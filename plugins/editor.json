@@ -213,6 +213,19 @@
       "sidecars": {
         "@soksak/sidecar-files": ">=0.0.9"
       }
+    },
+    {
+      "version": "0.0.27",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-editor/releases/download/v0.0.27/soksak-plugin-editor-0.0.27.tgz",
+        "sha256": "edb1ae02a2756434ce896617ee968606f8b53c5d437d6f90ac95147992ff3352"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.9"
+      }
     }
   ]
 }
