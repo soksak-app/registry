@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G118: The registry lists terminal 0.0.46.
 - G117: The registry lists browser 0.0.29, editor 0.0.29, files 0.0.29, hwp 0.0.26 and term 0.0.16.
 - G116: The registry lists terminal 0.0.45.
 - G115: The registry lists browser 0.0.28, editor 0.0.28, files 0.0.28, hwp 0.0.25 and term 0.0.15.
