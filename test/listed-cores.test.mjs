@@ -5,7 +5,8 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "nod
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { laterCoreErrors, listedCoreErrors, releaseSdkLoader, selectedVersions } from "../scripts/check-listed-cores.mjs";
+import * as listedCores from "../scripts/check-listed-cores.mjs";
+import { laterCoreErrors, releaseSdkLoader } from "../scripts/check-listed-cores.mjs";
 import { pathToFileURL } from "node:url";
 
 // A plugin release is the pnpm pack file of the plugin: a gzip tar with plugin.json under package/, and the other root files
@@ -33,24 +34,9 @@ function version(id, number, range, form, view = "", files = {}) {
   return { version: number, release: { url, sha256: createHash("sha256").update(bytes).digest("hex") }, engines: { soksak: range } };
 }
 
-// A range is ">=X" or "*"; an SDK of core X accepts the manifest form that it names.
+// A range is ">=X" or "*".
 const atLeast = (range, core) => range === "*" || (range.startsWith(">=") && compare(core, range.slice(2)) >= 0);
 const compare = (a, b) => a.split(".").map(Number).reduce((order, part, at) => order || part - b.split(".").map(Number)[at], 0);
-function sdk(core, form) {
-  return {
-    version: core,
-    rangeContains: atLeast,
-    validateManifest(manifest) {
-      if (manifest.form !== form) throw new Error(`core ${core} rejects the ${manifest.form} form`);
-    },
-    // A view that names core.undeclared uses a name that this core does not declare.
-    checkPluginRepository(root) {
-      const view = readFileSync(join(root, "ui", "view.js"), "utf8");
-      return view.includes("core.undeclared") ? [`ui/view.js: core ${core} does not declare core.undeclared`] : [];
-    },
-  };
-}
-
 const index = {
   plugins: [
     { id: "editor", versions: [version("editor", "0.0.4", ">=0.0.18", "old"), version("editor", "0.0.7", ">=0.0.21", "new")] },
@@ -60,7 +46,6 @@ const index = {
   core: { versions: [{ version: "0.0.20" }, { version: "0.0.21" }, { version: "0.0.19" }] },
   revoked: { plugins: [], sidecars: [], core: [{ version: "0.0.19", reason: "withdrawn" }] },
 };
-const sdks = { "0.0.20": sdk("0.0.20", "old"), "0.0.21": sdk("0.0.21", "new") };
 const fetchRelease = async (url) => releases.get(url);
 /** A folder for the extracted releases of one test, removed when the test ends. */
 function out(t) {
@@ -68,34 +53,6 @@ function out(t) {
   t.after(() => rmSync(folder, { recursive: true, force: true }));
   return folder;
 }
-
-test("installation selects for a core version the newest unrevoked plugin version whose range contains it", () => {
-  const selected = (core) => Object.fromEntries([...selectedVersions(index, core, atLeast)].map(([id, entry]) => [id, entry.version]));
-  assert.deepEqual(selected("0.0.20"), { editor: "0.0.4", files: "0.0.6", hwp: "0.0.2" });
-  // hwp 0.0.9 is newer but its range excludes 0.0.21, so 0.0.2 is the version that 0.0.21 installs.
-  assert.deepEqual(selected("0.0.21"), { editor: "0.0.7", files: "0.0.6", hwp: "0.0.2" });
-  const revoked = { ...index, revoked: { ...index.revoked, plugins: [{ id: "editor", version: "0.0.7", reason: "r" }] } };
-  assert.equal(selectedVersions(revoked, "0.0.21", atLeast).get("editor").version, "0.0.4");
-});
-
-test("each listed core version is checked with its own SDK against the plugin versions that it installs", async (t) => {
-  const loaded = [];
-  const { checked, errors } = await listedCoreErrors(index, out(t), async (core) => { loaded.push(core); return sdks[core]; }, fetchRelease);
-  // The revoked core 0.0.19 is not checked; 0.0.20 accepts its three versions; 0.0.21 rejects the old forms that it selects.
-  assert.deepEqual(loaded, ["0.0.20", "0.0.21"]);
-  assert.equal(checked, 6);
-  assert.deepEqual(errors, [
-    "core 0.0.21: plugin files 0.0.6: core 0.0.21 rejects the old form",
-    "core 0.0.21: plugin hwp 0.0.2: core 0.0.21 rejects the old form",
-  ]);
-});
-
-test("an SDK whose version differs from the listed core, or a release whose bytes differ from the index, is an error", async (t) => {
-  await assert.rejects(listedCoreErrors(index, out(t), async () => sdk("0.0.18", "old"), fetchRelease),
-    /the SDK of core 0\.0\.20 reports version 0\.0\.18/);
-  const { errors } = await listedCoreErrors(index, out(t), async (core) => sdks[core], async () => Buffer.from("other"));
-  assert.match(errors[0], /^core 0\.0\.20: plugin editor 0\.0\.4: release sha256 [0-9a-f]{64} differs from the index/);
-});
 
 test("an unrevoked plugin version whose range contains a core newer than the newest listed core is an error", () => {
   // 0.0.21 is the newest listed core that is not withdrawn; each range is probed with 0.0.22, 0.1.0 and 1.0.0.
@@ -153,16 +110,14 @@ test("the SDK of a listed core is the plugin API release file of that core relea
   t.after(() => rmSync(root, { recursive: true, force: true }));
   // The release file of core 0.0.26 is the pnpm pack file of packages/plugin-api: package/package.json names its entry.
   mkdirSync(join(root, "package"));
-  writeFileSync(join(root, "package", "package.json"), JSON.stringify({ name: "@soksak/plugin-api", version: "0.0.26", type: "module", exports: { ".": "./index.js", "./exposure-check": "./exposure-check.js" } }));
-  writeFileSync(join(root, "package", "index.js"), "export const rangeContains = () => true;\nexport function validateManifest() {}\n");
-  writeFileSync(join(root, "package", "exposure-check.js"), "export function checkPluginRepository() { return []; }\n");
+  writeFileSync(join(root, "package", "package.json"), JSON.stringify({ name: "@soksak/plugin-api", version: "0.0.26", type: "module", exports: { ".": "./index.js" } }));
+  writeFileSync(join(root, "package", "index.js"), "export const rangeContains = () => true;\n");
   mkdirSync(join(root, "v0.0.26"));
   execFileSync("tar", ["-czf", join(root, "v0.0.26", "soksak-plugin-api-0.0.26.tgz"), "-C", root, "package"]);
   const load = releaseSdkLoader(pathToFileURL(root).href, join(root, "out"));
   const sdk = await load("0.0.26");
   assert.equal(sdk.version, "0.0.26");
   assert.equal(sdk.rangeContains("^0.0.26", "0.0.26"), true);
-  assert.deepEqual(sdk.checkPluginRepository(root), []);
   await assert.rejects(load("0.0.27"), /soksak-plugin-api-0\.0\.27\.tgz/);
 });
 
@@ -175,37 +130,10 @@ test("the pull request check and the publication take sok and the SDK from core 
   }
 });
 
-test("each listed core version checks the exposure names of the plugin releases that it installs with its own SDK", async (t) => {
-  const exposed = {
-    plugins: [{ id: "browser", versions: [version("browser", "0.0.3", ">=0.0.20", "old", 'run("core.undeclared");\n')] }],
-    core: { versions: [{ version: "0.0.20" }] },
-    revoked: { plugins: [], sidecars: [], core: [] },
-  };
-  const { checked, errors } = await listedCoreErrors(exposed, out(t), async (core) => sdks[core], fetchRelease);
-  assert.equal(checked, 1);
-  assert.deepEqual(errors, ["core 0.0.20: plugin browser 0.0.3: ui/view.js: core 0.0.20 does not declare core.undeclared"]);
-});
 
-// The contract copies of a release (core docs/spec/plugins.md#contract-copies): checkPluginRepository of each listed core
-// compares the declaration contract-copies.json of the release with the contract files of that core.
-test("each listed core version checks the contract copies that the plugin releases it installs declare with its own SDK", async (t) => {
-  const contract = { "0.0.20": "a".repeat(64), "0.0.21": "b".repeat(64) };
-  // Both cores accept the manifest; they differ only in their contract files.
-  const copies = (core) => ({
-    ...sdks[core],
-    validateManifest() {},
-    checkPluginRepository(root) {
-      const declared = JSON.parse(readFileSync(join(root, "contract-copies.json"), "utf8"));
-      return Object.entries(declared).filter(([, digest]) => digest !== contract[core])
-        .map(([name]) => `contract copy ${name} differs from contract/${name}`);
-    },
-  });
-  const declaring = {
-    plugins: [{ id: "browser", versions: [version("browser", "0.0.3", ">=0.0.20", "old", "", { "contract-copies.json": JSON.stringify({ "expose.json": contract["0.0.20"] }) })] }],
-    core: { versions: [{ version: "0.0.20" }, { version: "0.0.21" }] },
-    revoked: { plugins: [], sidecars: [], core: [] },
-  };
-  const { checked, errors } = await listedCoreErrors(declaring, out(t), async (core) => copies(core), fetchRelease);
-  assert.equal(checked, 2);
-  assert.deepEqual(errors, ["core 0.0.21: plugin browser 0.0.3: contract copy expose.json differs from contract/expose.json"]);
+// A core version enters core.json without a check of the plugins that it installs (core docs/spec/registry.md#check): a plugin
+// keeps its own compatibility with a new core, and a listed core refuses a plugin that it does not accept alone.
+test("the check of the listed cores reads no plugin release that a listed core installs", () => {
+  assert.equal(listedCores.listedCoreErrors, undefined, "the check validates the plugin releases that a listed core installs");
+  assert.equal(listedCores.selectedVersions, undefined, "the check selects the plugin releases that a listed core installs");
 });

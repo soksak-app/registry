@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-// Checks, for every core version that core.json lists and revoked.json does not withdraw, the plugin version that installation
-// selects for it with the manifest reader and the exposure check of that core release (core docs/spec/registry.md#check): the
-// exposure check compares the names that the release sources write with the declarations of that core. Installation selects the
-// newest unrevoked version whose engines.soksak contains the core version (core docs/spec/installation.md#version-selection).
-// The SDK of a core release is its plugin API release file v<version>/soksak-plugin-api-<version>.tgz under the release
-// download address of core.
+// Checks that no unrevoked plugin version has an engines.soksak range that contains a core newer than the newest core version
+// that core.json lists (core docs/spec/registry.md#check). A listed core enters core.json without a check of the plugins that
+// it installs: each plugin keeps its own compatibility, and a core refuses a plugin that it does not accept alone. The ranges
+// are read with the range rule of the newest listed core, from its plugin API release file
+// v<version>/soksak-plugin-api-<version>.tgz under the release download address of core.
 //   node scripts/check-listed-cores.mjs --index <registry index> --releases <release download address of core>
 import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -12,7 +11,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
-import { fetchBytes, verifiedRelease } from "./plugin-release.mjs";
+import { fetchBytes } from "./plugin-release.mjs";
 
 /** The order of two plain x.y.z versions; a version of another form is an error. */
 export function compareVersions(a, b) {
@@ -22,50 +21,6 @@ export function compareVersions(a, b) {
   };
   const [left, right] = [parts(a), parts(b)];
   return left[0] - right[0] || left[1] - right[1] || left[2] - right[2];
-}
-
-/** The version entry that installation selects for core, for each plugin that has one, by plugin id. */
-export function selectedVersions(index, core, rangeContains) {
-  const revoked = new Set(index.revoked.plugins.map((entry) => `${entry.id}@${entry.version}`));
-  const selected = new Map();
-  for (const plugin of index.plugins) {
-    const candidates = plugin.versions.filter((entry) => !revoked.has(`${plugin.id}@${entry.version}`)
-      && rangeContains(entry.engines.soksak, core));
-    if (candidates.length === 0) continue;
-    selected.set(plugin.id, candidates.reduce((newest, entry) => (compareVersions(entry.version, newest.version) > 0 ? entry : newest)));
-  }
-  return selected;
-}
-
-/**
- * The errors of the listed core versions: `core <version>: plugin <id> <version>: <reason>`. loadSdk(version) returns
- * { version, rangeContains, validateManifest, checkPluginRepository } of that core release; an SDK of another version is an
- * error. The releases are extracted under out.
- */
-export async function listedCoreErrors(index, out, loadSdk, fetchRelease = fetchBytes) {
-  // default: an index without revoked.core withdraws no core version.
-  const withdrawn = new Set((index.revoked.core ?? []).map((entry) => entry.version));
-  const folders = new Map();
-  const errors = [];
-  let checked = 0;
-  for (const { version: core } of index.core.versions) {
-    if (withdrawn.has(core)) continue;
-    const sdk = await loadSdk(core);
-    if (sdk.version !== core) throw new Error(`the SDK of core ${core} reports version ${sdk.version}`);
-    for (const [id, entry] of selectedVersions(index, core, sdk.rangeContains)) {
-      checked += 1;
-      try {
-        // Each release is read once; the same version is selected by many core versions.
-        if (!folders.has(entry.release.url)) folders.set(entry.release.url, verifiedRelease(entry, out, fetchRelease));
-        const folder = await folders.get(entry.release.url);
-        sdk.validateManifest(JSON.parse(readFileSync(join(folder, "plugin.json"), "utf8")));
-        errors.push(...sdk.checkPluginRepository(folder).map((error) => `core ${core}: plugin ${id} ${entry.version}: ${error}`));
-      } catch (error) {
-        errors.push(`core ${core}: plugin ${id} ${entry.version}: ${error.message}`);
-      }
-    }
-  }
-  return { checked, errors };
 }
 
 /** The newest core version that core.json lists and revoked.json does not withdraw. */
@@ -135,10 +90,8 @@ export function releaseSdkLoader(releases, out, fetchRelease = fetchBytes) {
     const api = join(folder, "package");
     const manifest = JSON.parse(readFileSync(join(api, "package.json"), "utf8"));
     const sdk = await import(pathToFileURL(join(api, manifest.exports["."])).href);
-    if (typeof manifest.exports["./exposure-check"] !== "string") throw new Error(`the SDK of core ${version} at ${url} exports no ./exposure-check`);
-    const exposure = await import(pathToFileURL(join(api, manifest.exports["./exposure-check"])).href);
-    return { version: manifest.version, rangeContains: sdk.rangeContains, validateManifest: sdk.validateManifest,
-      checkPluginRepository: exposure.checkPluginRepository };
+    if (manifest.version !== version) throw new Error(`the SDK of core ${version} at ${url} reports version ${manifest.version}`);
+    return { version: manifest.version, rangeContains: sdk.rangeContains };
   };
 }
 
@@ -152,7 +105,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const out = mkdtempSync(join(tmpdir(), "soksak-registry-core-sdks-"));
   try {
     const load = releaseSdkLoader(values.releases, out);
-    const { checked, errors } = await listedCoreErrors(index, join(out, "releases"), load);
     // The ranges are read with the range rule of the newest listed core.
     const later = laterCoreErrors(index, (await load(newestListedCore(index))).rangeContains);
     if (later.length) {
@@ -160,12 +112,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       console.error(`${later.length} unrevoked plugin versions have ranges that contain a core newer than the newest listed core`);
       process.exit(1);
     }
-    if (errors.length) {
-      console.error(errors.join("\n"));
-      console.error(`${errors.length} of ${checked} plugin versions that the listed core versions install have manifests that the core rejects`);
-      process.exit(1);
-    }
-    console.log(`Listed core check passed: ${index.core.versions.length} listed core versions accept the ${checked} plugin versions that they install`);
+    console.log(`Listed core check passed: no plugin range contains a core newer than ${newestListedCore(index)}`);
   } finally {
     rmSync(out, { recursive: true, force: true });
   }
