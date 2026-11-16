@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G119: registry가 core 0.0.42를 올리고, workflow가 v0.0.42로 검증한다.
 - G118: registry가 terminal 0.0.46을 올린다.
 - G117: registry가 browser 0.0.29, editor 0.0.29, files 0.0.29, hwp 0.0.26 and term 0.0.16를 올린다.
 - G116: registry가 terminal 0.0.45를 올린다.

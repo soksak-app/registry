@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G119 — P0: window check release가 pnpm 기본 설정으로 설치되고 folder identity가 volume UUID와 inode인 core 0.0.42를 올리고, plugin을 그것으로 검증한다(`CORE_RELEASE` v0.0.42).
 - [o] G118 — P0: plugin release terminal 0.0.46을 올린다. 이 plugin은 plugin API에 dependency를 선언하지 않고 `engines.soksak` `^0.0.41`을 선언한다.
 - [o] G117 — P0: plugin release browser 0.0.29, editor 0.0.29, files 0.0.29, hwp 0.0.26 and term 0.0.16를 올린다. 이 plugin들은 plugin API에 dependency를 선언하지 않고 `engines.soksak` `^0.0.41`을 선언한다.
 - [o] G116 — P0: plugin release terminal 0.0.45를 올린다. 이 plugin의 시험은 core의 어떤 것도 읽지 않고 `engines.soksak` `^0.0.41`을 선언한다.
