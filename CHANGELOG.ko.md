@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G121: registry가 terminal 0.0.47을 올린다.
 - G120: registry가 vt-alacritty 0.0.27을 올린다.
 - G119: registry가 core 0.0.42를 올리고, workflow가 v0.0.42로 검증한다.
 - G118: registry가 terminal 0.0.46을 올린다.

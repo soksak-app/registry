@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G121: The registry lists terminal 0.0.47.
 - G120: The registry lists vt-alacritty 0.0.27.
 - G119: The registry lists core 0.0.42, and its workflows validate against v0.0.42.
 - G118: The registry lists terminal 0.0.46.
