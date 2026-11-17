@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G123 — P0: core 0.0.43의 darwin-arm64 wailsv3, tauriv2 application zip을 등록한다. 버전 선언과 Cargo.lock 수정 뒤 release가 게시한 파일이다.
 - [o] G122 — P0: sidecar release vt-alacritty 0.0.28을 등록한다. 이 release는 dim 그리기(S175), session 환경(S176), clippy 수정(S177)을 담는다.
 - [o] G121 — P0: vt-alacritty `^0.0.27`을 요구하는 plugin release terminal 0.0.47을 올린다.
 - [o] G120 — P0: sidecar release vt-alacritty 0.0.27을 올린다. 이 release의 draw 함수는 자기 autorelease pool을 비운다.
