@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G120 — P0: List the sidecar release vt-alacritty 0.0.27, whose drawing functions drain their own autorelease pools.
 - [o] G119 — P0: List core 0.0.42, whose window check release installs with the default settings of pnpm and whose folder identity is the volume UUID and the inode, and validate the plugins against it (`CORE_RELEASE` v0.0.42).
 - [o] G118 — P0: List the plugin release terminal 0.0.46, whose plugin declares no dependency on the plugin API and which declares `engines.soksak` `^0.0.41`.
 - [o] G117 — P0: List the plugin releases browser 0.0.29, editor 0.0.29, files 0.0.29, hwp 0.0.26 and term 0.0.16, whose plugins declare no dependency on the plugin API and which declare `engines.soksak` `^0.0.41`.

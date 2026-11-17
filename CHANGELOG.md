@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G120: The registry lists vt-alacritty 0.0.27.
 - G119: The registry lists core 0.0.42, and its workflows validate against v0.0.42.
 - G118: The registry lists terminal 0.0.46.
 - G117: The registry lists browser 0.0.29, editor 0.0.29, files 0.0.29, hwp 0.0.26 and term 0.0.16.
