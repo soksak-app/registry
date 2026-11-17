@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G122 — P0: sidecar release vt-alacritty 0.0.28을 등록한다. 이 release는 dim 그리기(S175), session 환경(S176), clippy 수정(S177)을 담는다.
 - [o] G121 — P0: vt-alacritty `^0.0.27`을 요구하는 plugin release terminal 0.0.47을 올린다.
 - [o] G120 — P0: sidecar release vt-alacritty 0.0.27을 올린다. 이 release의 draw 함수는 자기 autorelease pool을 비운다.
 - [o] G119 — P0: window check release가 pnpm 기본 설정으로 설치되고 folder identity가 volume UUID와 inode인 core 0.0.42를 올리고, plugin을 그것으로 검증한다(`CORE_RELEASE` v0.0.42).

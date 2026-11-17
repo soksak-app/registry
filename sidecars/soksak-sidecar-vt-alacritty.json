@@ -101,6 +101,16 @@
           "sha256": "0fb904c305e739282273a845d83efdf5d0eebb870320aba226c791ad22dde356"
         }
       }
+    },
+    {
+      "version": "0.0.28",
+      "protocol": 1,
+      "releases": {
+        "darwin-arm64": {
+          "url": "https://github.com/soksak-app/sidecar-vt/releases/download/v0.0.28/soksak-sidecar-vt-alacritty-0.0.28-darwin-arm64.tgz",
+          "sha256": "f2f1fad710df44e7c9594428fdf7110ca6f14fcd4a3a886f66302dd1fb4a105d"
+        }
+      }
     }
   ]
 }

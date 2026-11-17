@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G122 — P0: List the sidecar release vt-alacritty 0.0.28, which contains the dim drawing (S175), the session environment (S176) and the clippy fix (S177).
 - [o] G121 — P0: List the plugin release terminal 0.0.47, which requires vt-alacritty `^0.0.27`.
 - [o] G120 — P0: List the sidecar release vt-alacritty 0.0.27, whose drawing functions drain their own autorelease pools.
 - [o] G119 — P0: List core 0.0.42, whose window check release installs with the default settings of pnpm and whose folder identity is the volume UUID and the inode, and validate the plugins against it (`CORE_RELEASE` v0.0.42).
