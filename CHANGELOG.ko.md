@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G124: registry가 vt-alacritty 0.0.29를 올린다.
 - G121: registry가 terminal 0.0.47을 올린다.
 - G123: registry가 core 0.0.43을 등록한다.
 - G122: registry가 vt-alacritty 0.0.28을 등록한다.
