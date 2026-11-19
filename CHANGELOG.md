@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G125: The registry lists terminal 0.0.48.
 - G124: The registry lists vt-alacritty 0.0.29.
 - G121: The registry lists terminal 0.0.47.
 - G123: The registry lists core 0.0.43.

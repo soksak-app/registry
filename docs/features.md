@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G125 — P0: List the plugin release terminal 0.0.48, which requires vt-alacritty `^0.0.29`, whose `view` event carries `background`.
 - [o] G124 — P0: List the sidecar release vt-alacritty 0.0.29, whose `view` event carries `background` (S185), which plugin terminal 0.0.48 requires.
 - [o] G123 — P0: List core 0.0.43 with its darwin-arm64 wailsv3 and tauriv2 application zips, as published by the release of the version declaration and its Cargo.lock fix.
 - [o] G122 — P0: List the sidecar release vt-alacritty 0.0.28, which contains the dim drawing (S175), the session environment (S176) and the clippy fix (S177).
