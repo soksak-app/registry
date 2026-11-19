@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G127 — P0: List the plugin release terminal 0.0.49, which replaces the revoked 0.0.48 with a `plugin.json` that the core installer reads, and requires vt-alacritty `^0.0.29`.
 - [o] G126 — P0: Revoke the plugin release terminal 0.0.48: core refuses its `plugin.json` at install, because the params of `terminal.screen.rows` declare `required`, `minimum` and `maximum`, which the manifest reader of core does not accept.
 - [o] G125 — P0: List the plugin release terminal 0.0.48, which requires vt-alacritty `^0.0.29`, whose `view` event carries `background`.
 - [o] G124 — P0: List the sidecar release vt-alacritty 0.0.29, whose `view` event carries `background` (S185), which plugin terminal 0.0.48 requires.
