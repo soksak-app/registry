@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G126 — P0: plugin release terminal 0.0.48을 철회한다. `terminal.screen.rows`의 params가 core의 manifest reader가 받아들이지 않는 `required`, `minimum`, `maximum`을 선언하므로, core가 설치할 때 그 `plugin.json`을 거절한다.
 - [o] G125 — P0: `view` event가 `background`를 담는 vt-alacritty `^0.0.29`를 요구하는 plugin release terminal 0.0.48을 올린다.
 - [o] G124 — P0: `view` event가 `background`를 담는(S185) sidecar release vt-alacritty 0.0.29를 올린다. plugin terminal 0.0.48이 그것을 요구한다.
 - [o] G123 — P0: core 0.0.43의 darwin-arm64 wailsv3, tauriv2 application zip을 등록한다. 버전 선언과 Cargo.lock 수정 뒤 release가 게시한 파일이다.

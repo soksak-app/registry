@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G126: The registry revokes terminal 0.0.48, whose `plugin.json` core refuses at install.
 - G125: The registry lists terminal 0.0.48.
 - G124: The registry lists vt-alacritty 0.0.29.
 - G121: The registry lists terminal 0.0.47.

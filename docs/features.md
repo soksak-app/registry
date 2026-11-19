@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G126 — P0: Revoke the plugin release terminal 0.0.48: core refuses its `plugin.json` at install, because the params of `terminal.screen.rows` declare `required`, `minimum` and `maximum`, which the manifest reader of core does not accept.
 - [o] G125 — P0: List the plugin release terminal 0.0.48, which requires vt-alacritty `^0.0.29`, whose `view` event carries `background`.
 - [o] G124 — P0: List the sidecar release vt-alacritty 0.0.29, whose `view` event carries `background` (S185), which plugin terminal 0.0.48 requires.
 - [o] G123 — P0: List core 0.0.43 with its darwin-arm64 wailsv3 and tauriv2 application zips, as published by the release of the version declaration and its Cargo.lock fix.

@@ -1,4 +1,10 @@
 {
-  "plugins": [],
+  "plugins": [
+    {
+      "id": "terminal",
+      "version": "0.0.48",
+      "reason": "Core refuses its plugin.json at install: the params of terminal.screen.rows declare required, minimum and maximum, which the manifest reader of core does not accept."
+    }
+  ],
   "sidecars": []
 }

@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G126: registry가 core가 설치할 때 `plugin.json`을 거절하는 terminal 0.0.48을 철회한다.
 - G125: registry가 terminal 0.0.48을 올린다.
 - G124: registry가 vt-alacritty 0.0.29를 올린다.
 - G121: registry가 terminal 0.0.47을 올린다.
