@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G128: The registry lists vt-alacritty 0.0.31 and alacritty 0.0.9 for darwin-arm64.
 - G127: The registry lists terminal 0.0.49.
 - G126: The registry revokes terminal 0.0.48, whose `plugin.json` core refuses at install.
 - G125: The registry lists terminal 0.0.48.

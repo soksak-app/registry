@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G128: registry가 darwin-arm64의 vt-alacritty 0.0.31과 alacritty 0.0.9를 올린다.
 - G127: registry가 terminal 0.0.49를 올린다.
 - G126: registry가 core가 설치할 때 `plugin.json`을 거절하는 terminal 0.0.48을 철회한다.
 - G125: registry가 terminal 0.0.48을 올린다.
