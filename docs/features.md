@@ -2,7 +2,7 @@
 
 [한국어](features.ko.md)
 
-- [~] G128 — P0: List vt-alacritty 0.0.31 and alacritty 0.0.9. Remaining: verify the release files, publish the index, and check both entries in the public registry.
+- [o] G128 — P0: The public registry lists vt-alacritty 0.0.31 and alacritty 0.0.9 for darwin-arm64. The publication check and public index confirm both release digests.
 - [o] G127 — P0: List the plugin release terminal 0.0.49, which replaces the revoked 0.0.48 with a `plugin.json` that the core installer reads, and requires vt-alacritty `^0.0.29`.
 - [o] G126 — P0: Revoke the plugin release terminal 0.0.48: core refuses its `plugin.json` at install, because the params of `terminal.screen.rows` declare `required`, `minimum` and `maximum`, which the manifest reader of core does not accept.
 - [o] G125 — P0: List the plugin release terminal 0.0.48, which requires vt-alacritty `^0.0.29`, whose `view` event carries `background`.
