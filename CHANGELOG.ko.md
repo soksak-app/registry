@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G136: registry가 terminal 0.0.53, agents-clubhouse 0.0.13과 0.0.14, vt-alacritty 0.0.42를 나열한다.
 - G135: registry가 agents 0.0.2와 0.0.3, moai 0.0.3, 0.0.4, 0.0.5, harness 0.0.2와 0.0.3을 나열한다.
 - G134: registry가 agents-clubhouse 0.0.12, superpowers 0.0.2, terminal 0.0.52, vt-alacritty 0.0.41을 나열한다.
 - G133: registry가 agents 0.0.1, moai 0.0.2, harness 0.0.1, vt-alacritty 0.0.33과 0.0.34, files 0.0.12와 0.0.13을 나열한다.
