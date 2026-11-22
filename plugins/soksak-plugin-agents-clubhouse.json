@@ -1,0 +1,21 @@
+{
+  "id": "soksak-plugin-agents-clubhouse",
+  "package": "@soksak/plugin-agents-clubhouse",
+  "name": "에이전트 클럽하우스",
+  "description": "Agents clubhouse plugin: a conversation room whose members are agent definitions of the agents plugin, each running in an owned terminal session.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-agents-clubhouse",
+  "versions": [
+    {
+      "version": "0.0.12",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-agents-clubhouse/releases/download/v0.0.12/soksak-plugin-agents-clubhouse-0.0.12.tgz",
+        "sha256": "3f1f15447eb67c36e42132ff3eb8dfe08917e15f74eb79d502527e648aa037b9"
+      },
+      "engines": {
+        "soksak": "^0.0.47"
+      },
+      "sidecars": {}
+    }
+  ]
+}

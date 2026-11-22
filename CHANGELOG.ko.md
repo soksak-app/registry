@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G134: registry가 agents-clubhouse 0.0.12, superpowers 0.0.2, terminal 0.0.52, vt-alacritty 0.0.41을 나열한다.
 - G133: registry가 agents 0.0.1, moai 0.0.2, harness 0.0.1, vt-alacritty 0.0.33과 0.0.34, files 0.0.12와 0.0.13을 나열한다.
 - G132: index를 core 0.0.47의 `sok`로 `format` 2로 build하고, `add-version.mjs`는 `sidecars`에 sidecar dependency만 기록한다.
 - G130: registry가 editor 0.0.30을 나열한다.

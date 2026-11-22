@@ -1,0 +1,21 @@
+{
+  "id": "superpowers",
+  "package": "@soksak/plugin-superpowers",
+  "name": "Superpowers",
+  "description": "Superpowers plugin: contributes the superpowers maker group to the agents plugin.",
+  "license": "MIT",
+  "repository": "https://github.com/min-0-max/soksak-plugin-superpowers",
+  "versions": [
+    {
+      "version": "0.0.2",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-superpowers/releases/download/v0.0.2/soksak-plugin-superpowers-0.0.2.tgz",
+        "sha256": "04a20012161bfffb9183c476251c8d6a2b6be94d9bed34fd8c25f34ac38c3898"
+      },
+      "engines": {
+        "soksak": "^0.0.46"
+      },
+      "sidecars": {}
+    }
+  ]
+}
