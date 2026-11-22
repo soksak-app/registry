@@ -1,0 +1,21 @@
+{
+  "id": "harness",
+  "package": "@soksak/plugin-harness",
+  "name": "하네스",
+  "description": "Harness plugin: the maker group harness of the agents plugin.",
+  "license": "MIT",
+  "repository": "https://github.com/min-0-max/soksak-plugin-harness",
+  "versions": [
+    {
+      "version": "0.0.1",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-harness/releases/download/v0.0.1/soksak-plugin-harness-0.0.1.tgz",
+        "sha256": "b07ea1b40afea83070927a57a14d03015611c5640ec394aba1df36fdcfe5161a"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {}
+    }
+  ]
+}

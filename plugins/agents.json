@@ -1,0 +1,23 @@
+{
+  "id": "agents",
+  "package": "@soksak/plugin-agents",
+  "name": "에이전트",
+  "description": "Agents plugin: agent accounts, the running agents and the agent definitions of the project.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-agents",
+  "versions": [
+    {
+      "version": "0.0.1",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-agents/releases/download/v0.0.1/soksak-plugin-agents-0.0.1.tgz",
+        "sha256": "885dff0d5a6431be11b5a1a584cf2bde7eb588768fced5b74240a3baa6c2adf4"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.13"
+      }
+    }
+  ]
+}

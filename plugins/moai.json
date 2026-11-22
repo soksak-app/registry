@@ -1,0 +1,23 @@
+{
+  "id": "moai",
+  "package": "@soksak/plugin-moai",
+  "name": "moai",
+  "description": "moai plugin: the moai maker group for the agents plugin and the moai web surface.",
+  "license": "MIT",
+  "repository": "https://github.com/min-0-max/soksak-plugin-moai",
+  "versions": [
+    {
+      "version": "0.0.2",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-moai/releases/download/v0.0.2/soksak-plugin-moai-0.0.2.tgz",
+        "sha256": "284bab789fa0048e3edba6e4515bb5d413bd94af83e580c2a55b7c867e5dac75"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.12"
+      }
+    }
+  ]
+}

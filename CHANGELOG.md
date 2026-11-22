@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G133: The registry lists agents 0.0.1, moai 0.0.2, harness 0.0.1, vt-alacritty 0.0.33 and 0.0.34, and files 0.0.12 and 0.0.13.
 - G132: The index is built in `format` 2 with the `sok` of core 0.0.47, and `add-version.mjs` records only sidecar dependencies in `sidecars`.
 - G130: The registry lists editor 0.0.30.
 - G129: The registry lists core 0.0.46, vt-alacritty 0.0.32, alacritty 0.0.10, term 0.0.18 and terminal 0.0.51.
