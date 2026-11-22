@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G130 — P0: List the editor release 0.0.30, which ships the view context module that the 0.0.29 release lacked (editor E68), with `engines.soksak` `^0.0.41`.
 - [o] G129 — P0: List core 0.0.46, vt-alacritty 0.0.32, alacritty 0.0.10, term 0.0.18 and terminal 0.0.51. term requires alacritty `^0.0.10` and terminal requires vt-alacritty `^0.0.32`; both require core `^0.0.46`.
 - [o] G128 — P0: The public registry lists vt-alacritty 0.0.31 and alacritty 0.0.9 for darwin-arm64. The publication check and public index confirm both release digests.
 - [o] G127 — P0: List the plugin release terminal 0.0.49, which replaces the revoked 0.0.48 with a `plugin.json` that the core installer reads, and requires vt-alacritty `^0.0.29`.

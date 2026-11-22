@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G130: registry가 editor 0.0.30을 나열한다.
 - G129: Registry가 core 0.0.46, vt-alacritty 0.0.32, alacritty 0.0.10, term 0.0.18, terminal 0.0.51을 나열한다.
 - G128: registry가 darwin-arm64의 vt-alacritty 0.0.31과 alacritty 0.0.9를 올린다.
 - G127: registry가 terminal 0.0.49를 올린다.

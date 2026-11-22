@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G130 — P0: 0.0.29 release에 없던 view context module을 배포하는 editor release 0.0.30을 `engines.soksak` `^0.0.41`과 함께 목록에 올린다(editor E68).
 - [o] G129 — P0: core 0.0.46, vt-alacritty 0.0.32, alacritty 0.0.10, term 0.0.18, terminal 0.0.51을 나열한다. term은 alacritty `^0.0.10`을, terminal은 vt-alacritty `^0.0.32`를 요구하고, 둘 다 core `^0.0.46`을 요구한다.
 - [o] G128 — P0: 공개 registry가 darwin-arm64의 vt-alacritty 0.0.31과 alacritty 0.0.9를 등록한다. 게시 검사와 공개 index가 두 release digest를 확인한다.
 - [o] G127 — P0: 철회한 0.0.48 대신 core installer가 읽는 `plugin.json`을 담고 vt-alacritty `^0.0.29`를 요구하는 plugin release terminal 0.0.49를 올린다.
