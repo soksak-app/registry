@@ -31,6 +31,18 @@ test("a plugin release records the sidecar ranges of its plugin.json dependencie
   assert.deepEqual(entry.versions[0].sidecars, { "@soksak/sidecar-vt-alacritty": "^0.0.3" });
 });
 
+test("a plugin release records only its sidecar dependencies, and the package of a listed plugin is a plugin dependency", (t) => {
+  const { root, write } = folder(t);
+  write("registry/plugins/agents.json", { id: "agents", package: "@soksak/plugin-agents", versions: [] });
+  write("plugin/package.json", { name: "@soksak/plugin-agents-clubhouse", version: "0.0.2", description: "Clubhouse.", license: "MIT",
+    repository: { url: "git+https://github.com/soksak-app/plugin-agents-clubhouse.git" }, engines: { soksak: "^0.0.47" } });
+  write("plugin/plugin.json", { id: "agents-clubhouse", name: "Clubhouse",
+    dependencies: { "@soksak/plugin-agents": "^0.0.1", "@soksak/sidecar-files": "^0.0.13" } });
+  write("dist/soksak-plugin-agents-clubhouse-0.0.2.tgz", "release");
+  const entry = JSON.parse(readFileSync(addPlugin(join(root, "registry"), join(root, "plugin"), join(root, "dist/soksak-plugin-agents-clubhouse-0.0.2.tgz")), "utf8"));
+  assert.deepEqual(entry.versions[0].sidecars, { "@soksak/sidecar-files": "^0.0.13" });
+});
+
 test("a plugin release adds its version with the release URL of its repository", (t) => {
   const { root, write } = folder(t);
   write("plugin/package.json", { name: "@soksak/plugin-browser", version: "0.0.3", description: "Browser.", license: "MIT",

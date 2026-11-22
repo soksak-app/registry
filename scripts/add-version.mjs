@@ -7,7 +7,7 @@
 //   node scripts/add-version.mjs plugin --registry <dir> --package <plugin dir> --release <tgz>
 //   node scripts/add-version.mjs sidecar --registry <dir> --package <sidecar dir> --release <platform>=<tgz>...
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { packageFileName } from "./validate.mjs";
@@ -35,6 +35,13 @@ function addVersion(path, created, version) {
   return path;
 }
 
+/** dependencies 에서 registry 의 plugin 항목 package 가 아닌 것, 곧 sidecar dependency 만 돌려준다. */
+function sidecarDependencies(registry, dependencies) {
+  const folder = join(registry, "plugins");
+  const plugins = new Set(existsSync(folder) ? readdirSync(folder).map((file) => read(join(folder, file)).package) : []);
+  return Object.fromEntries(Object.entries(dependencies).filter(([name]) => !plugins.has(name)));
+}
+
 /** plugin 폴더와 그 release 파일로 plugins/<id>.json 에 version 을 더한다. */
 export function addPlugin(registry, folder, release) {
   const pkg = read(join(folder, "package.json"));
@@ -48,8 +55,10 @@ export function addPlugin(registry, folder, release) {
   }, {
     version: pkg.version,
     release: { url: `${repository}/releases/download/v${pkg.version}/${name}`, sha256: sha256(release) },
-    // 기본값: sidecar 를 쓰지 않는 plugin 의 plugin.json 에는 dependencies 가 없고 sidecar 범위도 없다.
-    engines: { soksak: pkg.engines?.soksak }, sidecars: manifest.dependencies ?? {},
+    // 기본값: sidecar 를 쓰지 않는 plugin 의 plugin.json 에는 dependencies 가 없고 sidecar 범위도 없다. registry 의
+    // plugin 항목이 package 로 이름 짓는 dependency 는 plugin dependency 이며, index 의 `plugins` 는 build 가 release 의
+    // plugin.json 에서 쓴다(core docs/spec/installation.md#registry-index).
+    engines: { soksak: pkg.engines?.soksak }, sidecars: sidecarDependencies(registry, manifest.dependencies ?? {}),
   });
 }
 

@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G132 — P0: workflow가 core 0.0.47의 `sok`로 index를 build하고 검사한다. 이 `sok`는 registry index `format` 2를 쓰고 각 plugin version의 plugin dependency를 `plugins`에 기록한다. core 0.0.47은 다른 format의 index를 거부한다(core `docs/spec/installation.md#registry-index`). `add-version.mjs`는 registry의 어떤 plugin entry도 package로 이름 짓지 않는 dependency만 `sidecars`에 쓴다. `sok registry build`가 `sidecars`를 release의 sidecar dependency와 비교하기 때문이다. Red: `a plugin release records only its sidecar dependencies`가 `@soksak/plugin-agents`를 `sidecars`에 기록했다. Green: 이 test가 통과한다.
 - [ ] G131 — P1: `sok registry build`는 publish마다 목록의 모든 release를 내려받는다. 그래서 바뀌지 않은 release 하나의 다운로드가 멈추면 새 release의 게시가 실패한다(G130의 publish: `plugin terminal 0.0.38 package: ... timed out after 600 s`). 기대: publish는 entry가 새로 생기거나 바뀐 release만 읽고, 나머지는 목록 entry의 hash로 판정한다.
 - [o] G130 — P0: 0.0.29 release에 없던 view context module을 배포하는 editor release 0.0.30을 `engines.soksak` `^0.0.41`과 함께 목록에 올린다(editor E68).
 - [o] G129 — P0: core 0.0.46, vt-alacritty 0.0.32, alacritty 0.0.10, term 0.0.18, terminal 0.0.51을 나열한다. term은 alacritty `^0.0.10`을, terminal은 vt-alacritty `^0.0.32`를 요구하고, 둘 다 core `^0.0.46`을 요구한다.

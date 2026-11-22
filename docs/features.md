@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G132 — P0: The workflows build and check the index with the `sok` of core 0.0.47, which writes the registry index `format` 2 with the plugin dependencies of each plugin version in `plugins`; core 0.0.47 refuses an index of another format (core `docs/spec/installation.md#registry-index`). `add-version.mjs` writes into `sidecars` only the dependencies that no plugin entry of the registry names as its package, because `sok registry build` compares `sidecars` with the sidecar dependencies of the release. Red: `a plugin release records only its sidecar dependencies` recorded `@soksak/plugin-agents` in `sidecars`. Green: the test passes.
 - [ ] G131 — P1: `sok registry build` downloads every listed release on each publish, so a stalled download of an unchanged release fails the publication of a new one (publish of G130: `plugin terminal 0.0.38 package: ... timed out after 600 s`). Expected: a publish reads only the releases whose entry is new or changed, and judges the others by the hashes of the listed entries.
 - [o] G130 — P0: List the editor release 0.0.30, which ships the view context module that the 0.0.29 release lacked (editor E68), with `engines.soksak` `^0.0.41`.
 - [o] G129 — P0: List core 0.0.46, vt-alacritty 0.0.32, alacritty 0.0.10, term 0.0.18 and terminal 0.0.51. term requires alacritty `^0.0.10` and terminal requires vt-alacritty `^0.0.32`; both require core `^0.0.46`.
