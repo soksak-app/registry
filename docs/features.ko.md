@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [ ] G131 — P1: `sok registry build`는 publish마다 목록의 모든 release를 내려받는다. 그래서 바뀌지 않은 release 하나의 다운로드가 멈추면 새 release의 게시가 실패한다(G130의 publish: `plugin terminal 0.0.38 package: ... timed out after 600 s`). 기대: publish는 entry가 새로 생기거나 바뀐 release만 읽고, 나머지는 목록 entry의 hash로 판정한다.
 - [o] G130 — P0: 0.0.29 release에 없던 view context module을 배포하는 editor release 0.0.30을 `engines.soksak` `^0.0.41`과 함께 목록에 올린다(editor E68).
 - [o] G129 — P0: core 0.0.46, vt-alacritty 0.0.32, alacritty 0.0.10, term 0.0.18, terminal 0.0.51을 나열한다. term은 alacritty `^0.0.10`을, terminal은 vt-alacritty `^0.0.32`를 요구하고, 둘 다 core `^0.0.46`을 요구한다.
 - [o] G128 — P0: 공개 registry가 darwin-arm64의 vt-alacritty 0.0.31과 alacritty 0.0.9를 등록한다. 게시 검사와 공개 index가 두 release digest를 확인한다.
