@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G138 — P0: 소유 session을 stray `session.ended` event 없이 끝내고 끝난 surface를 error 없이 닫는 release인 vt-alacritty 0.0.44를 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`가 통과한다.
 - [o] G137 — P0: actor가 끝난 surface를 가리키는 요청에도 연결을 유지하는 release인 vt-alacritty 0.0.43을 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`가 통과한다.
 - [o] G136 — P0: terminal 0.0.53, agents-clubhouse 0.0.13과 0.0.14, vt-alacritty 0.0.42를 나열한다. terminal과 agents-clubhouse는 `engines.soksak` `^0.0.47`을 선언한다. `add-version.mjs`가 각 version을 공개 release로 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.47의 `sok`으로 `make build`가 통과한다.
 - [o] G135 — P0: agents 0.0.2와 0.0.3, moai 0.0.3, 0.0.4, 0.0.5, harness 0.0.2와 0.0.3을 나열한다. agents 0.0.2와 0.0.3은 `engines.soksak` `^0.0.47`을 선언하고, moai와 harness는 `^0.0.41`을 선언하며 agents-clubhouse 0.0.12처럼 `@soksak/plugin-agents` `>=0.0.1`을 요구한다. `add-version.mjs`가 각 version을 게시된 release에서 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.47의 `sok`로 `make build`가 통과한다.

@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G138 — P0: List vt-alacritty 0.0.44, the release that ends an owned session without a stray `session.ended` event and closes an ended surface without an error. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` passes.
 - [o] G137 — P0: List vt-alacritty 0.0.43, the release that keeps the connection when a request names a surface whose actor has ended. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` passes.
 - [o] G136 — P0: List terminal 0.0.53, agents-clubhouse 0.0.13 and 0.0.14, and vt-alacritty 0.0.42. terminal and agents-clubhouse declare `engines.soksak` `^0.0.47`. `add-version.mjs` wrote each version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core 0.0.47 passes.
 - [o] G135 — P0: List agents 0.0.2 and 0.0.3, moai 0.0.3, 0.0.4 and 0.0.5, and harness 0.0.2 and 0.0.3. agents 0.0.2 and 0.0.3 declare `engines.soksak` `^0.0.47`; moai and harness declare `^0.0.41` and require `@soksak/plugin-agents` `>=0.0.1`, as agents-clubhouse 0.0.12 does. `add-version.mjs` wrote each version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core 0.0.47 passes.
