@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G137: The registry lists vt-alacritty 0.0.43.
 - G136: The registry lists terminal 0.0.53, agents-clubhouse 0.0.13 and 0.0.14, and vt-alacritty 0.0.42.
 - G135: The registry lists agents 0.0.2 and 0.0.3, moai 0.0.3, 0.0.4 and 0.0.5, and harness 0.0.2 and 0.0.3.
 - G134: The registry lists agents-clubhouse 0.0.12, superpowers 0.0.2, terminal 0.0.52 and vt-alacritty 0.0.41.

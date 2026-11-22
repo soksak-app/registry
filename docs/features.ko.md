@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G137 — P0: actor가 끝난 surface를 가리키는 요청에도 연결을 유지하는 release인 vt-alacritty 0.0.43을 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`가 통과한다.
 - [o] G136 — P0: terminal 0.0.53, agents-clubhouse 0.0.13과 0.0.14, vt-alacritty 0.0.42를 나열한다. terminal과 agents-clubhouse는 `engines.soksak` `^0.0.47`을 선언한다. `add-version.mjs`가 각 version을 공개 release로 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.47의 `sok`으로 `make build`가 통과한다.
 - [o] G135 — P0: agents 0.0.2와 0.0.3, moai 0.0.3, 0.0.4, 0.0.5, harness 0.0.2와 0.0.3을 나열한다. agents 0.0.2와 0.0.3은 `engines.soksak` `^0.0.47`을 선언하고, moai와 harness는 `^0.0.41`을 선언하며 agents-clubhouse 0.0.12처럼 `@soksak/plugin-agents` `>=0.0.1`을 요구한다. `add-version.mjs`가 각 version을 게시된 release에서 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.47의 `sok`로 `make build`가 통과한다.
 - [o] G134 — P1: G133이 나열하지 못한 release를 나열한다: release 0.0.2의 `package.json`에 `license`와 `engines.soksak`이 없고 이름이 scope 없는 `soksak-plugin-agents-clubhouse`인 agents-clubhouse, release 0.0.0의 `package.json`에 `license`가 없는 superpowers, 그리고 terminal 0.0.52. 각각 `sok registry build`가 받아들이는 release를 기다린다. 완료: registry가 agents-clubhouse 0.0.12(`@soksak/plugin-agents-clubhouse`, `license`와 `engines.soksak` `^0.0.47` 포함), superpowers 0.0.2(`license` 포함), terminal 0.0.52, vt-alacritty 0.0.41을 나열한다. `add-version.mjs`가 각 version을 공개 release로 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.47의 `sok`으로 `make build`가 통과한다.
