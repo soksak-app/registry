@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G135: The registry lists agents 0.0.2 and 0.0.3, moai 0.0.3, 0.0.4 and 0.0.5, and harness 0.0.2 and 0.0.3.
 - G134: The registry lists agents-clubhouse 0.0.12, superpowers 0.0.2, terminal 0.0.52 and vt-alacritty 0.0.41.
 - G133: The registry lists agents 0.0.1, moai 0.0.2, harness 0.0.1, vt-alacritty 0.0.33 and 0.0.34, and files 0.0.12 and 0.0.13.
 - G132: The index is built in `format` 2 with the `sok` of core 0.0.47, and `add-version.mjs` records only sidecar dependencies in `sidecars`.

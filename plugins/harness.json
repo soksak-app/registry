@@ -16,6 +16,28 @@
         "soksak": "^0.0.41"
       },
       "sidecars": {}
+    },
+    {
+      "version": "0.0.2",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-harness/releases/download/v0.0.2/soksak-plugin-harness-0.0.2.tgz",
+        "sha256": "bbeb6d78e4da3429777a8581b84366bc9ac10c5d8d17f57250a44fb3bbbf3fd2"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {}
+    },
+    {
+      "version": "0.0.3",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-harness/releases/download/v0.0.3/soksak-plugin-harness-0.0.3.tgz",
+        "sha256": "e688720c9de86c36fa8ab2e3a893e71347903a731f205332b643db0140ad7add"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {}
     }
   ]
 }

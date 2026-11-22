@@ -18,6 +18,45 @@
       "sidecars": {
         "@soksak/sidecar-files": ">=0.0.12"
       }
+    },
+    {
+      "version": "0.0.3",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-moai/releases/download/v0.0.3/soksak-plugin-moai-0.0.3.tgz",
+        "sha256": "4b62e750dd8ff7847dfe506974262c267cd935f867230e532d4bb12cd87d6c21"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.12"
+      }
+    },
+    {
+      "version": "0.0.4",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-moai/releases/download/v0.0.4/soksak-plugin-moai-0.0.4.tgz",
+        "sha256": "b12f61e67b3e41a71e7f0e9a467c7bccc3c617a54118f718e03cc353115baf70"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.12"
+      }
+    },
+    {
+      "version": "0.0.5",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-moai/releases/download/v0.0.5/soksak-plugin-moai-0.0.5.tgz",
+        "sha256": "2bcd3d096e113651a2052935fe900124cbb2c9b87748ae2f5c8af792d34b76f4"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.12"
+      }
     }
   ]
 }
