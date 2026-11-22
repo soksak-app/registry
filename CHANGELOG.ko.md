@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G139: registry가 vt-alacritty 0.0.45를 나열한다.
 - G138: registry가 vt-alacritty 0.0.44를 나열한다.
 - G137: registry가 vt-alacritty 0.0.43을 나열한다.
 - G136: registry가 terminal 0.0.53, agents-clubhouse 0.0.13과 0.0.14, vt-alacritty 0.0.42를 나열한다.

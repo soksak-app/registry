@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G139 — P0: page reload처럼 detach 뒤에 image가 configure되면 terminal view가 program 출력을 다시 그리는 release인 vt-alacritty 0.0.45를 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`가 통과한다.
 - [o] G138 — P0: 소유 session을 stray `session.ended` event 없이 끝내고 끝난 surface를 error 없이 닫는 release인 vt-alacritty 0.0.44를 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`가 통과한다.
 - [o] G137 — P0: actor가 끝난 surface를 가리키는 요청에도 연결을 유지하는 release인 vt-alacritty 0.0.43을 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`가 통과한다.
 - [o] G136 — P0: terminal 0.0.53, agents-clubhouse 0.0.13과 0.0.14, vt-alacritty 0.0.42를 나열한다. terminal과 agents-clubhouse는 `engines.soksak` `^0.0.47`을 선언한다. `add-version.mjs`가 각 version을 공개 release로 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.47의 `sok`으로 `make build`가 통과한다.
