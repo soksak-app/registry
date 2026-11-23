@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G148: registry가 terminal 0.0.56을 나열한다.
 - G147: registry가 agents-clubhouse 0.0.23을 나열한다.
 - G146: registry가 agents-clubhouse 0.0.21과 0.0.22를 나열한다.
 - G145: registry가 agents-clubhouse 0.0.20을 나열한다.

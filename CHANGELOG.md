@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G148: The registry lists terminal 0.0.56.
 - G147: The registry lists agents-clubhouse 0.0.23.
 - G146: The registry lists agents-clubhouse 0.0.21 and 0.0.22.
 - G145: The registry lists agents-clubhouse 0.0.20.

@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G148 — P0: List terminal 0.0.56. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` and `make test` pass.
 - [o] G147 — P0: List agents-clubhouse 0.0.23. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` and `make test` pass.
 - [o] G146 — P0: List agents-clubhouse 0.0.21 and 0.0.22. `add-version.mjs` wrote each version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core 0.0.50, the listed core check and `make test` pass.
 - [o] G145 — P0: List agents-clubhouse 0.0.20. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core 0.0.50, the listed core check and `make test` pass.

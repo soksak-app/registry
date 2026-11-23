@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G148 — P0: terminal 0.0.56을 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`와 `make test`가 통과한다.
 - [o] G147 — P0: agents-clubhouse 0.0.23을 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`와 `make test`가 통과한다.
 - [o] G146 — P0: agents-clubhouse 0.0.21과 0.0.22를 나열한다. `add-version.mjs`가 각 version을 게시된 release에서 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.50의 `sok`으로 `make build`, listed core check, `make test`가 통과한다.
 - [o] G145 — P0: agents-clubhouse 0.0.20을 나열한다. `add-version.mjs`가 version을 게시된 release에서 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.50의 `sok`으로 `make build`, listed core check, `make test`가 통과한다.
