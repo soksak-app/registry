@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G143: registry가 mygo host를 포함한 각 host의 release와 함께 core 0.0.50을 나열한다(G101).
 - G142: registry가 agents-clubhouse 0.0.17을 나열한다.
 - G141: registry가 `core.tab.role`을 자기 탭의 surface에서 watch하는 terminal 0.0.54를 나열한다.
 - G140: registry가 agents-clubhouse 0.0.16을 나열한다.
