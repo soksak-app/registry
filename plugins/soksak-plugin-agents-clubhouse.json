@@ -49,6 +49,17 @@
         "soksak": "^0.0.47"
       },
       "sidecars": {}
+    },
+    {
+      "version": "0.0.17",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-agents-clubhouse/releases/download/v0.0.17/soksak-plugin-agents-clubhouse-0.0.17.tgz",
+        "sha256": "0102eef360dbcb8e55f553176cc2cf0e8eedd7f51b4db506a0f40ba1e185fc4f"
+      },
+      "engines": {
+        "soksak": "^0.0.47"
+      },
+      "sidecars": {}
     }
   ]
 }

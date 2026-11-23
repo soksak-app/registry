@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G142: The registry lists agents-clubhouse 0.0.17.
 - G141: The registry lists terminal 0.0.54, which watches `core.tab.role` on the surface of its tab.
 - G140: The registry lists agents-clubhouse 0.0.16.
 - G139: The registry lists vt-alacritty 0.0.45.
