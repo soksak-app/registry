@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G144 — P0: agents-clubhouse 0.0.18과 0.0.19를 나열한다. `add-version.mjs`가 각 version을 게시된 release에서 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.50의 `sok`으로 `make build`, listed core check, `make test`가 통과한다.
 - [o] G143 — P0: Wails, Tauri, mygo host의 release와 함께 core 0.0.50을 나열한다. 이전에는 `core.json`이 core를 0.0.46까지 나열해서, application이 Go host에서 sync surface의 선언된 program을 읽는 core release(core F1112)로의 update를 제공하지 않았다. `add-version.mjs`가 그 version을 게시된 zip에서 썼고 각 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.50의 `sok`으로 `make build`, listed core check, `make test`가 통과한다.
 - [o] G142 — P0: agents-clubhouse 0.0.17을 나열한다. `add-version.mjs`가 그 version을 게시된 release에서 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core의 `sok`으로 `make build`가 통과한다.
 - [o] G141 — P0: terminal 0.0.54를 나열한다. 이 release의 page는 `core.tab.role`을 자기 탭의 surface에서 watch하므로(terminal P221), role을 가진 terminal 탭이 더 이상 `status.watch for core.tab.role requires a surface`를 읽지 않는다. 이전에 registry는 terminal을 0.0.53까지 나열했고 애플리케이션은 그것을 설치했다. `add-version.mjs`가 게시된 release에서 version을 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core의 `sok`로 `make build`가 통과한다.
