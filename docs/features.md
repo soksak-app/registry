@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G141 — P0: List terminal 0.0.54, the release whose page watches `core.tab.role` on the surface of its tab (terminal P221), so a terminal tab with a role no longer reads `status.watch for core.tab.role requires a surface`; before, the registry listed terminal up to 0.0.53, which applications installed. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core passes.
 - [o] G140 — P0: List agents-clubhouse 0.0.16. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core passes.
 - [o] G139 — P0: List vt-alacritty 0.0.45, the release whose terminal view draws program output again after an image is configured past a detach, such as after a page reload. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` passes.
 - [o] G138 — P0: List vt-alacritty 0.0.44, the release that ends an owned session without a stray `session.ended` event and closes an ended surface without an error. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` passes.

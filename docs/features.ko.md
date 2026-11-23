@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G141 — P0: terminal 0.0.54를 나열한다. 이 release의 page는 `core.tab.role`을 자기 탭의 surface에서 watch하므로(terminal P221), role을 가진 terminal 탭이 더 이상 `status.watch for core.tab.role requires a surface`를 읽지 않는다. 이전에 registry는 terminal을 0.0.53까지 나열했고 애플리케이션은 그것을 설치했다. `add-version.mjs`가 게시된 release에서 version을 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core의 `sok`로 `make build`가 통과한다.
 - [o] G140 — P0: agents-clubhouse 0.0.16을 나열한다. `add-version.mjs`가 그 version을 게시된 release에서 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core의 `sok`으로 `make build`가 통과한다.
 - [o] G139 — P0: page reload처럼 detach 뒤에 image가 configure되면 terminal view가 program 출력을 다시 그리는 release인 vt-alacritty 0.0.45를 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`가 통과한다.
 - [o] G138 — P0: 소유 session을 stray `session.ended` event 없이 끝내고 끝난 surface를 error 없이 닫는 release인 vt-alacritty 0.0.44를 나열한다. `add-version.mjs`가 게시된 release에서 version을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. `make build`가 통과한다.
