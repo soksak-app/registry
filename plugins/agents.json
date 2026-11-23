@@ -44,6 +44,19 @@
       "sidecars": {
         "@soksak/sidecar-files": ">=0.0.13"
       }
+    },
+    {
+      "version": "0.0.4",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-agents/releases/download/v0.0.4/soksak-plugin-agents-0.0.4.tgz",
+        "sha256": "364b3006123d7acfd5e3d5281e16e479fa71e0b2052a8e8495aabaad05efbe57"
+      },
+      "engines": {
+        "soksak": "^0.0.51"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.13"
+      }
     }
   ]
 }

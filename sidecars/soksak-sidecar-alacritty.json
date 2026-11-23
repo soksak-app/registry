@@ -91,6 +91,26 @@
           "sha256": "a201a3eaea9bd8f66114a2c46af68a8c0b25e431024fbc14ba7643171af75cb4"
         }
       }
+    },
+    {
+      "version": "0.0.11",
+      "protocol": 1,
+      "releases": {
+        "darwin-arm64": {
+          "url": "https://github.com/soksak-app/sidecar-alacritty/releases/download/v0.0.11/soksak-sidecar-alacritty-0.0.11-darwin-arm64.tgz",
+          "sha256": "805cd426773f2c0fb665d38728f8c68a5455f268daa3d053a6409b18b3a567dc"
+        }
+      }
+    },
+    {
+      "version": "0.0.12",
+      "protocol": 1,
+      "releases": {
+        "darwin-arm64": {
+          "url": "https://github.com/soksak-app/sidecar-alacritty/releases/download/v0.0.12/soksak-sidecar-alacritty-0.0.12-darwin-arm64.tgz",
+          "sha256": "d9f2d356bbee9655105c9480d737a9cf0ef754a6373c1f006b7be19b2260609a"
+        }
+      }
     }
   ]
 }

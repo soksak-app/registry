@@ -126,6 +126,28 @@
         "soksak": "^0.0.47"
       },
       "sidecars": {}
+    },
+    {
+      "version": "0.0.24",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-agents-clubhouse/releases/download/v0.0.24/soksak-plugin-agents-clubhouse-0.0.24.tgz",
+        "sha256": "05cf4004cc786e18b91eb71afa7cc495c7ebfec2fed53591350039ca170a0d93"
+      },
+      "engines": {
+        "soksak": "^0.0.47"
+      },
+      "sidecars": {}
+    },
+    {
+      "version": "0.0.25",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-agents-clubhouse/releases/download/v0.0.25/soksak-plugin-agents-clubhouse-0.0.25.tgz",
+        "sha256": "bf223819c625fbc891a6c34b09b219b4f4371b7db507a1a5d9e67403c8aae1f3"
+      },
+      "engines": {
+        "soksak": "^0.0.47"
+      },
+      "sidecars": {}
     }
   ]
 }
