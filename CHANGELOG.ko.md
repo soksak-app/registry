@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G140: registry가 agents-clubhouse 0.0.16을 나열한다.
 - G139: registry가 vt-alacritty 0.0.45를 나열한다.
 - G138: registry가 vt-alacritty 0.0.44를 나열한다.
 - G137: registry가 vt-alacritty 0.0.43을 나열한다.

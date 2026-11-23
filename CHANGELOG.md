@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G140: The registry lists agents-clubhouse 0.0.16.
 - G139: The registry lists vt-alacritty 0.0.45.
 - G138: The registry lists vt-alacritty 0.0.44.
 - G137: The registry lists vt-alacritty 0.0.43.
