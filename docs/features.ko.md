@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G146 — P0: agents-clubhouse 0.0.21과 0.0.22를 나열한다. `add-version.mjs`가 각 version을 게시된 release에서 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.50의 `sok`으로 `make build`, listed core check, `make test`가 통과한다.
 - [o] G145 — P0: agents-clubhouse 0.0.20을 나열한다. `add-version.mjs`가 version을 게시된 release에서 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.50의 `sok`으로 `make build`, listed core check, `make test`가 통과한다.
 - [o] G144 — P0: agents-clubhouse 0.0.18과 0.0.19를 나열한다. `add-version.mjs`가 각 version을 게시된 release에서 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.50의 `sok`으로 `make build`, listed core check, `make test`가 통과한다.
 - [o] G143 — P0: Wails, Tauri, mygo host의 release와 함께 core 0.0.50을 나열한다. 이전에는 `core.json`이 core를 0.0.46까지 나열해서, application이 Go host에서 sync surface의 선언된 program을 읽는 core release(core F1112)로의 update를 제공하지 않았다. `add-version.mjs`가 그 version을 게시된 zip에서 썼고 각 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.50의 `sok`으로 `make build`, listed core check, `make test`가 통과한다.

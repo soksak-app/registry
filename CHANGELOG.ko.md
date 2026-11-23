@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G146: registry가 agents-clubhouse 0.0.21과 0.0.22를 나열한다.
 - G145: registry가 agents-clubhouse 0.0.20을 나열한다.
 - G144: registry가 agents-clubhouse 0.0.18과 0.0.19를 나열한다.
 - G143: registry가 mygo host를 포함한 각 host의 release와 함께 core 0.0.50을 나열한다(G101).
