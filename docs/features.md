@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G145 — P0: List agents-clubhouse 0.0.20. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core 0.0.50, the listed core check and `make test` pass.
 - [o] G144 — P0: List agents-clubhouse 0.0.18 and 0.0.19. `add-version.mjs` wrote each version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core 0.0.50, the listed core check and `make test` pass.
 - [o] G143 — P0: List core 0.0.50 with the releases of the Wails, the Tauri and the mygo host. Before, `core.json` listed core up to 0.0.46, so applications offered no update to the core release that reads the declared programs of a sync surface on the Go hosts (core F1112). `add-version.mjs` wrote the version from the published zips, whose `sha256` matches the digest of each GitHub release asset; `make build` with the `sok` of core 0.0.50, the listed core check and `make test` pass.
 - [o] G142 — P0: List agents-clubhouse 0.0.17. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core passes.

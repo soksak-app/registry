@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G145: The registry lists agents-clubhouse 0.0.20.
 - G144: The registry lists agents-clubhouse 0.0.18 and 0.0.19.
 - G143: The registry lists core 0.0.50 with the release of each host, the mygo host included (G101).
 - G142: The registry lists agents-clubhouse 0.0.17.
