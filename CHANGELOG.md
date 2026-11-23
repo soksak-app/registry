@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G147: The registry lists agents-clubhouse 0.0.23.
 - G146: The registry lists agents-clubhouse 0.0.21 and 0.0.22.
 - G145: The registry lists agents-clubhouse 0.0.20.
 - G144: The registry lists agents-clubhouse 0.0.18 and 0.0.19.
