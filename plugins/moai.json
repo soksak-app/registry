@@ -57,6 +57,19 @@
       "sidecars": {
         "@soksak/sidecar-files": ">=0.0.12"
       }
+    },
+    {
+      "version": "0.0.6",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-moai/releases/download/v0.0.6/soksak-plugin-moai-0.0.6.tgz",
+        "sha256": "c1d9e5b221eea0e015b6eb5a613e120f09954216f31885ff5431a3b9a1e422e8"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.12"
+      }
     }
   ]
 }

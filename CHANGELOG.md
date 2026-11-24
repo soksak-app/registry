@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G150: The registry lists core 0.0.52 and 0.0.53, agents 0.0.5, moai 0.0.6 and git 0.0.1.
 - G149: The registry lists core 0.0.51 and the plugin and sidecar releases that require it.
 - G148: The registry lists terminal 0.0.56.
 - G147: The registry lists agents-clubhouse 0.0.23.

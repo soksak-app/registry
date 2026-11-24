@@ -1,0 +1,21 @@
+{
+  "id": "git",
+  "package": "@soksak/plugin-git",
+  "name": "git",
+  "description": "Git plugin: shows whether git is installed and whether the project folder is a git repository, in a sidebar section.",
+  "license": "MIT",
+  "repository": "https://github.com/soksak-app/plugin-git",
+  "versions": [
+    {
+      "version": "0.0.1",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-git/releases/download/v0.0.1/soksak-plugin-git-0.0.1.tgz",
+        "sha256": "7c4d94f66db5062aa5e4ea070a6e58e91b37ce6bb74801f7180efbbf8ae62c50"
+      },
+      "engines": {
+        "soksak": "^0.0.53"
+      },
+      "sidecars": {}
+    }
+  ]
+}
