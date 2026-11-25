@@ -131,6 +131,18 @@ test("the pull request check and the publication take sok and the SDK from core 
 });
 
 
+// deploy-pages finds the artifact by listing the artifacts of the run by name, and that list is empty for an artifact that the
+// upload finalized less than a second earlier and holds two after a re-run of the job (core docs/spec/registry.md#merge-and-publication).
+// The publication deploys the artifact by the id that its upload returns, so no deployment depends on the list.
+test("the publication deploys the uploaded artifact by its id and never by its name", () => {
+  const text = readFileSync(new URL("../.github/workflows/publish.yml", import.meta.url), "utf8");
+  assert.doesNotMatch(text, /actions\/deploy-pages/, "publish.yml deploys through deploy-pages, which looks the artifact up by name");
+  assert.match(text, /- id: upload\n\s+uses: actions\/upload-pages-artifact@/, "publish.yml gives the upload step no id");
+  assert.match(text, /ARTIFACT_ID: \$\{\{ steps\.upload\.outputs\.artifact_id \}\}/, "publish.yml deploys no artifact id of the upload");
+  assert.match(text, /POST \/repos\/\{owner\}\/\{repo\}\/pages\/deployments/, "publish.yml creates no Pages deployment");
+  assert.match(text, /artifact_id: Number\(process\.env\.ARTIFACT_ID\)/, "publish.yml creates the deployment without the artifact id");
+});
+
 // A core version enters core.json without a check of the plugins that it installs (core docs/spec/registry.md#check): a plugin
 // keeps its own compatibility with a new core, and a listed core refuses a plugin that it does not accept alone.
 test("the check of the listed cores reads no plugin release that a listed core installs", () => {

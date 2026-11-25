@@ -45,7 +45,41 @@ jobs:
           cp registry/index.json site/index.json
       - name: Check the listed core versions
         run: node registry/scripts/check-listed-cores.mjs --index registry/index.json --releases https://github.com/soksak-app/core/releases/download
-      - uses: actions/upload-pages-artifact@v3
+      - id: upload
+        uses: actions/upload-pages-artifact@v3
         with:
           path: site
-      - uses: actions/deploy-pages@v4
+      # deploy-pages finds the artifact by listing the artifacts of the run by name; that list is empty for an artifact that the
+      # upload finalized less than a second earlier and holds two after a re-run of the job, and deploy-pages takes no artifact id.
+      # This step deploys the uploaded artifact by the id that the upload returns, with the requests that deploy-pages makes.
+      - name: Deploy the uploaded artifact
+        uses: actions/github-script@v9
+        env:
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
+        with:
+          script: |
+            const { data: deployment } = await github.request("POST /repos/{owner}/{repo}/pages/deployments", {
+              ...context.repo,
+              artifact_id: Number(process.env.ARTIFACT_ID),
+              pages_build_version: context.sha,
+              oidc_token: await core.getIDToken(),
+            });
+            const id = deployment.status_url.split("/").pop();
+            core.info(`Created the Pages deployment ${id} of artifact ${process.env.ARTIFACT_ID}`);
+            const failed = {
+              deployment_failed: "the deployment failed",
+              deployment_content_failed: "the artifact could not be deployed",
+              deployment_cancelled: "the deployment was cancelled",
+              deployment_lost: "the deployment reported no final status",
+            };
+            // The Pages API reports the state of a deployment only on request and sends no event, so the step reads it every
+            // 5 seconds, for at most 10 minutes as deploy-pages does.
+            const end = Date.now() + 600000;
+            for (;;) {
+              await new Promise((resolve) => setTimeout(resolve, 5000));
+              const { data } = await github.request("GET /repos/{owner}/{repo}/pages/deployments/{id}", { ...context.repo, id });
+              core.info(`Pages deployment ${id}: ${data.status}`);
+              if (data.status === "succeed") break;
+              if (failed[data.status]) throw new Error(`Pages deployment ${id}: ${failed[data.status]} (${data.status})`);
+              if (Date.now() > end) throw new Error(`Pages deployment ${id}: no final status after 10 minutes, last ${data.status}`);
+            }
