@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G158 — P0, core 체크리스트 항목 F1199와 plugin 항목 agents A57, clubhouse C164를 위한 항목: core 0.0.58과 0.0.59, agents 0.0.10과 0.0.11, clubhouse 0.0.29, 0.0.30, 0.0.31을 나열한다. 각 core version은 mygo, tauriv2, wailsv3 zip을 GitHub release asset의 digest와 함께 나열하고, `scripts/add-version.mjs`가 각 plugin version을 tag의 source와 release 파일로 썼다. core 0.0.59의 `sok`으로 `make build`와 `make test`가 통과한다.
 - [o] G157 — P0, core 체크리스트 항목 F1188을 위한 항목: core 0.0.57을 나열한다. 이 version은 mygo, tauriv2, wailsv3 zip을 GitHub release asset의 digest와 함께 담는다. core 0.0.57의 `sok`으로 `make build`와 `make test`가 통과한다.
 - [o] G156 — P0, core 체크리스트 항목 F1177을 위한 항목: core 0.0.56을 나열한다. 이 version은 mygo, tauriv2, wailsv3 zip을 GitHub release asset의 digest와 함께 담는다. core 0.0.56의 `sok`으로 `make build`와 `make test`가 통과한다.
 - [o] G155 — P0: VT sidecar 0.0.50과 0.0.51, 그리고 terminal 0.0.59를 나열한다. terminal 0.0.59는 stale drawing state에 답하고 닫힌 client를 오류 없이 끝내는 VT sidecar 0.0.51을 요구한다. `add-version.mjs`가 게시된 release에서 각 version을 썼고, core 0.0.55의 `sok`으로 `make build`와 `make test`가 통과한다.

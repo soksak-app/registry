@@ -112,6 +112,28 @@
         "soksak": "^0.0.54"
       },
       "sidecars": {}
+    },
+    {
+      "version": "0.0.10",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-agents/releases/download/v0.0.10/soksak-plugin-agents-0.0.10.tgz",
+        "sha256": "f172cf0d0c2e306d9642db25d3fcda718b21ecfbc14ffefd10edda09537bd2b7"
+      },
+      "engines": {
+        "soksak": "^0.0.54"
+      },
+      "sidecars": {}
+    },
+    {
+      "version": "0.0.11",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-agents/releases/download/v0.0.11/soksak-plugin-agents-0.0.11.tgz",
+        "sha256": "a68222e4f2b441d26065603bc2cbeea1d3060c3f7e76d20010bbd2f3ad512e35"
+      },
+      "engines": {
+        "soksak": "^0.0.59"
+      },
+      "sidecars": {}
     }
   ]
 }
