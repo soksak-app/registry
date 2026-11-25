@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G155: registry가 VT sidecar 0.0.50과 0.0.51, terminal 0.0.59를 나열한다.
 - G154: registry가 terminal 0.0.58과 term 0.0.19를 등록해요.
 - G153: 게시가 upload한 artifact를 그 id로 배포해요. 그래서 run의 artifact 목록이 아직 갱신되지 않았거나 다시 실행 뒤 둘을 담아도 배포가 실패하지 않아요.
 - G152: registry가 core 0.0.55, agents 0.0.7~0.0.9, agents-clubhouse 0.0.27과 0.0.28, git 0.0.2, VT sidecar 0.0.49, alacritty sidecar 0.0.13을 등록해요.

@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G155: The registry lists the VT sidecar 0.0.50 and 0.0.51 and terminal 0.0.59.
 - G154: The registry lists terminal 0.0.58 and term 0.0.19.
 - G153: The publication deploys the uploaded artifact by its id, so a deployment no longer fails when the artifact list of the run is not yet updated or holds two artifacts after a re-run.
 - G152: The registry lists core 0.0.55, agents 0.0.7 to 0.0.9, agents-clubhouse 0.0.27 and 0.0.28, git 0.0.2, the VT sidecar 0.0.49 and the alacritty sidecar 0.0.13.
