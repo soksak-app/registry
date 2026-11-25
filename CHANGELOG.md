@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G152: The registry lists core 0.0.55, agents 0.0.7 to 0.0.9, agents-clubhouse 0.0.27 and 0.0.28, git 0.0.2, the VT sidecar 0.0.49 and the alacritty sidecar 0.0.13.
 - G151: The registry lists core 0.0.54, agents 0.0.6 and agents-clubhouse 0.0.26.
 - G150: The registry lists core 0.0.52 and 0.0.53, agents 0.0.5, moai 0.0.6 and git 0.0.1.
 - G149: The registry lists core 0.0.51 and the plugin and sidecar releases that require it.

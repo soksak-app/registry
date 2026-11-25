@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G152: registry가 core 0.0.55, agents 0.0.7~0.0.9, agents-clubhouse 0.0.27과 0.0.28, git 0.0.2, VT sidecar 0.0.49, alacritty sidecar 0.0.13을 등록해요.
 - G151: registry가 core 0.0.54, agents 0.0.6, agents-clubhouse 0.0.26을 등록해요.
 - G150: registry는 core 0.0.52와 0.0.53, agents 0.0.5, moai 0.0.6, git 0.0.1을 올린다.
 - G149: registry는 core 0.0.51과 그것을 요구하는 plugin, sidecar release를 올린다.

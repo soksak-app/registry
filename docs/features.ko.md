@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G152 — P0: core 0.0.55, agents 0.0.7~0.0.9, agents-clubhouse 0.0.27과 0.0.28, git 0.0.2, VT sidecar 0.0.49, alacritty sidecar 0.0.13을 나열한다. core version은 mygo, tauriv2, wailsv3 zip을 GitHub release asset의 digest와 함께 담는다. `add-version.mjs`가 각 plugin과 sidecar version을 게시된 release에서 썼고 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.55의 `sok`로 `make build`와 `make test`가 통과한다.
 - [o] G151 — P0: core 0.0.54, agents 0.0.6, agents-clubhouse 0.0.26을 등록한다. core version은 mygo, tauriv2, wailsv3 zip을 GitHub release asset의 digest와 함께 가진다. `add-version.mjs`가 각 plugin version을 게시된 release에서 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.54의 `sok`으로 `make build`, 그리고 `make test`가 통과한다.
 - [o] G150 — P0: core 0.0.52와 0.0.53, agents 0.0.5, moai 0.0.6, 새 plugin git 0.0.1을 올린다. core version은 mygo, tauriv2, wailsv3 zip을 GitHub release asset의 digest와 함께 가진다. `add-version.mjs`가 게시된 release에서 각 plugin version을 썼다. core 0.0.53의 `sok`로 `make build`와 `make test`가 통과한다.
 - [o] G149 — P0: core 0.0.51, browser 0.0.30, terminal 0.0.57, agents 0.0.4, agents-clubhouse 0.0.24와 0.0.25, VT sidecar 0.0.46~0.0.48, alacritty sidecar 0.0.11과 0.0.12를 올린다. `add-version.mjs`가 게시된 release에서 각 version을 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.51의 `sok`로 `make build`와 `make test`가 통과한다.

@@ -16,6 +16,17 @@
         "soksak": "^0.0.53"
       },
       "sidecars": {}
+    },
+    {
+      "version": "0.0.2",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-git/releases/download/v0.0.2/soksak-plugin-git-0.0.2.tgz",
+        "sha256": "10f4c54bf2a257bdd6c51ebc00dafc0660e409877f754dbe225975923ac3d00b"
+      },
+      "engines": {
+        "soksak": "^0.0.53"
+      },
+      "sidecars": {}
     }
   ]
 }
