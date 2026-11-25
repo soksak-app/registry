@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G151: registry가 core 0.0.54, agents 0.0.6, agents-clubhouse 0.0.26을 등록해요.
 - G150: registry는 core 0.0.52와 0.0.53, agents 0.0.5, moai 0.0.6, git 0.0.1을 올린다.
 - G149: registry는 core 0.0.51과 그것을 요구하는 plugin, sidecar release를 올린다.
 - G148: registry가 terminal 0.0.56을 나열한다.

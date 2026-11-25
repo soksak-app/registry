@@ -68,6 +68,17 @@
         "soksak": "^0.0.53"
       },
       "sidecars": {}
+    },
+    {
+      "version": "0.0.6",
+      "release": {
+        "url": "https://github.com/soksak-app/plugin-agents/releases/download/v0.0.6/soksak-plugin-agents-0.0.6.tgz",
+        "sha256": "ceb91b045cfa1d78658f565ed55d520f4c1d4ce5e081ed02e22b11433e25f098"
+      },
+      "engines": {
+        "soksak": "^0.0.54"
+      },
+      "sidecars": {}
     }
   ]
 }

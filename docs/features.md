@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G151 — P0: List core 0.0.54, agents 0.0.6 and agents-clubhouse 0.0.26. The core version holds the zips of mygo, tauriv2 and wailsv3 with the digests of their GitHub release assets; `add-version.mjs` wrote each plugin version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core 0.0.54 and `make test` pass.
 - [o] G150 — P0: List core 0.0.52 and 0.0.53, agents 0.0.5, moai 0.0.6 and the new plugin git 0.0.1. The core versions hold the zips of mygo, tauriv2 and wailsv3 with the digests of their GitHub release assets; `add-version.mjs` wrote each plugin version from its published release; `make build` with the `sok` of core 0.0.53 and `make test` pass.
 - [o] G149 — P0: List core 0.0.51, browser 0.0.30, terminal 0.0.57, agents 0.0.4, agents-clubhouse 0.0.24 and 0.0.25, the VT sidecar 0.0.46 to 0.0.48 and the alacritty sidecar 0.0.11 and 0.0.12. `add-version.mjs` wrote each version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core 0.0.51 and `make test` pass.
 - [o] G148 — P0: List terminal 0.0.56. `add-version.mjs` wrote the version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` and `make test` pass.
