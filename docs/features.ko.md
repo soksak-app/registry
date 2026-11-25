@@ -2,6 +2,7 @@
 
 [English](features.md)
 
+- [o] G156 — P0, core 체크리스트 항목 F1177을 위한 항목: core 0.0.56을 나열한다. 이 version은 mygo, tauriv2, wailsv3 zip을 GitHub release asset의 digest와 함께 담는다. core 0.0.56의 `sok`으로 `make build`와 `make test`가 통과한다.
 - [o] G155 — P0: VT sidecar 0.0.50과 0.0.51, 그리고 terminal 0.0.59를 나열한다. terminal 0.0.59는 stale drawing state에 답하고 닫힌 client를 오류 없이 끝내는 VT sidecar 0.0.51을 요구한다. `add-version.mjs`가 게시된 release에서 각 version을 썼고, core 0.0.55의 `sok`으로 `make build`와 `make test`가 통과한다.
 - [o] G154 — P0: VT sidecar 0.0.49를 요구하는 terminal 0.0.58과 alacritty sidecar 0.0.13을 요구하는 term 0.0.19를 등록한다. `add-version.mjs`가 각 version을 게시된 release에서 썼고, 그 `sha256`은 GitHub release asset의 digest와 같다. core 0.0.55의 `sok`으로 `make build`와 `make test`가 통과한다.
 - [o] G153 — P0, core checklist 항목 F1172를 위한 것: `publish.yml`은 upload한 artifact를 그 id로 배포한다. Input: G152의 publish run. Behavior: `upload-pages-artifact`가 `github-pages`를 finalize하고 1초 뒤 `actions/deploy-pages@v4`가 run의 artifact를 나열했으나 찾지 못해 `No artifacts named "github-pages" were found`로 실패했다. job을 다시 실행하면 같은 이름의 artifact가 둘이 되고 deploy-pages는 이것도 거부한다. Change: upload step의 id는 `upload`이고, `actions/github-script@v9` step이 `steps.upload.outputs.artifact_id`의 `artifact_id`로 Pages deployment를 만들고 `succeed`나 최종 실패까지 최대 10분 동안 그 상태를 읽는다. Red: `test/listed-cores.test.mjs`의 새 test가 deploy-pages step에서 실패했다. Green: 그 file의 test 7개가 통과한다.
