@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G157: The registry lists core 0.0.57.
 - G156: The registry lists core 0.0.56.
 - G155: The registry lists the VT sidecar 0.0.50 and 0.0.51 and terminal 0.0.59.
 - G154: The registry lists terminal 0.0.58 and term 0.0.19.

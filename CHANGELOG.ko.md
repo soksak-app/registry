@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G157: registry가 core 0.0.57을 나열한다.
 - G156: registry가 core 0.0.56을 나열한다.
 - G155: registry가 VT sidecar 0.0.50과 0.0.51, terminal 0.0.59를 나열한다.
 - G154: registry가 terminal 0.0.58과 term 0.0.19를 등록해요.

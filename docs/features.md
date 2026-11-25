@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G157 — P0, for the core checklist item F1188: List core 0.0.57. The version holds the zips of mygo, tauriv2 and wailsv3 with the digests of their GitHub release assets; `make build` with the `sok` of core 0.0.57 and `make test` pass.
 - [o] G156 — P0, for the core checklist item F1177: List core 0.0.56. The version holds the zips of mygo, tauriv2 and wailsv3 with the digests of their GitHub release assets; `make build` with the `sok` of core 0.0.56 and `make test` pass.
 - [o] G155 — P0: List the VT sidecar 0.0.50 and 0.0.51 and terminal 0.0.59, which requires the VT sidecar 0.0.51, the release that answers a stale drawing state and ends a closed client without an error. `add-version.mjs` wrote each version from its published release; `make build` with the `sok` of core 0.0.55 and `make test` pass.
 - [o] G154 — P0: List terminal 0.0.58, which requires the VT sidecar 0.0.49, and term 0.0.19, which requires the alacritty sidecar 0.0.13. `add-version.mjs` wrote each version from its published release, whose `sha256` matches the digest of the GitHub release asset; `make build` with the `sok` of core 0.0.55 and `make test` pass.
