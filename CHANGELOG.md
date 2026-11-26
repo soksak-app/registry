@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- G159: The registry lists core 0.0.60 and clubhouse 0.0.32.
 - G158: The registry lists core 0.0.58 and 0.0.59, agents 0.0.10 and 0.0.11, and clubhouse 0.0.29 to 0.0.31.
 - G157: The registry lists core 0.0.57.
 - G156: The registry lists core 0.0.56.

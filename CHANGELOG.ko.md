@@ -2,6 +2,7 @@
 
 ## 미출시
 
+- G159: registry가 core 0.0.60과 clubhouse 0.0.32를 나열한다.
 - G158: registry가 core 0.0.58과 0.0.59, agents 0.0.10과 0.0.11, clubhouse 0.0.29부터 0.0.31까지를 나열한다.
 - G157: registry가 core 0.0.57을 나열한다.
 - G156: registry가 core 0.0.56을 나열한다.

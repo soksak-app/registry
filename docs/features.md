@@ -2,6 +2,7 @@
 
 [한국어](features.ko.md)
 
+- [o] G159 — P0, for the core checklist items F1200 and F1201 and the clubhouse item C165: List core 0.0.60 and clubhouse 0.0.32. Core 0.0.60 lists the zips of mygo, tauriv2 and wailsv3 with the digests of their GitHub release assets; `make build` with the sok of core 0.0.60 and `make test` pass.
 - [o] G158 — P0, for the core checklist item F1199 and the plugin items agents A57 and clubhouse C164: List core 0.0.58 and 0.0.59, agents 0.0.10 and 0.0.11, and clubhouse 0.0.29, 0.0.30 and 0.0.31. Each core version lists the zips of mygo, tauriv2 and wailsv3 with the digests of their GitHub release assets, and `scripts/add-version.mjs` wrote each plugin version from its tagged sources and release file; `make build` with the `sok` of core 0.0.59 and `make test` pass.
 - [o] G157 — P0, for the core checklist item F1188: List core 0.0.57. The version holds the zips of mygo, tauriv2 and wailsv3 with the digests of their GitHub release assets; `make build` with the `sok` of core 0.0.57 and `make test` pass.
 - [o] G156 — P0, for the core checklist item F1177: List core 0.0.56. The version holds the zips of mygo, tauriv2 and wailsv3 with the digests of their GitHub release assets; `make build` with the `sok` of core 0.0.56 and `make test` pass.
