@@ -1,0 +1,23 @@
+{
+  "id": "jipil",
+  "package": "@soksak/plugin-jipil",
+  "name": "집필박사와 하이볼씨",
+  "description": "「집필박사와 하이볼씨」(Dr. Jipil and Mr. Highball): the writing souls of the agents plugin and the jipil surface.",
+  "license": "MIT",
+  "repository": "https://github.com/min-0-max/soksak-plugin-jipil",
+  "versions": [
+    {
+      "version": "0.0.1",
+      "release": {
+        "url": "https://github.com/min-0-max/soksak-plugin-jipil/releases/download/v0.0.1/soksak-plugin-jipil-0.0.1.tgz",
+        "sha256": "684cc3f039cd238e2bfdcd56ce35db0fba54700f1565b3660277c170cda342f3"
+      },
+      "engines": {
+        "soksak": "^0.0.41"
+      },
+      "sidecars": {
+        "@soksak/sidecar-files": ">=0.0.12"
+      }
+    }
+  ]
+}
